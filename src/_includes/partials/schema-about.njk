@@ -1,0 +1,13 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "@id": "{{ meta.url }}{{ page.url }}#about",
+  "name": "{{ title | jsonEscape }}",
+  "description": "{{ description | jsonEscape }}",
+  "url": "{{ meta.url }}{{ page.url }}",
+  "inLanguage": "{{ lang }}",
+  "isPartOf": { "@id": "{{ meta.url }}/#website" },
+  "about": { "@id": "{{ meta.url }}/#organization" }
+}
+</script>
