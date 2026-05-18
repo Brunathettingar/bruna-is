@@ -1,13 +1,21 @@
+/*
+ * Font URLs are stylesheet-relative (`../fonts/...`) so they resolve
+ * against `/bruna-is/assets/css/` regardless of how the site is mounted.
+ * The matching `<link rel="preload">` in `base.njk` uses an absolute path
+ * that `HtmlBasePlugin` rewrites at build time. The two mechanisms reach
+ * the same URL through different paths — keep them in sync if either
+ * moves.
+ */
 @font-face {
   font-family: "Inter";
-  src: url("/assets/fonts/inter-400.woff2") format("woff2");
+  src: url("../fonts/inter-400.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Inter";
-  src: url("/assets/fonts/inter-600.woff2") format("woff2");
+  src: url("../fonts/inter-600.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
