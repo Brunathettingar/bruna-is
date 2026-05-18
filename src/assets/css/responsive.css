@@ -38,8 +38,8 @@
   .cta-band .row,
   .quoter-intro,
   .principles {
-    grid-template-columns: 1fr !important;
-    gap: var(--space-8) !important;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
   }
 
   .pillar-grid {
@@ -62,9 +62,9 @@
   .statement h2, .story h2, .cta-band h2, .leading h2, .philosophy .head h2,
   .accreds h2, .team h2, .process .head h2, .sectors .head h2, .services-intro h2,
   .sectors-intro h2, .value-band h2, .quoter-intro h2, .articles h2 {
-    font-size: 30px !important;
-    letter-spacing: -0.5px !important;
-    line-height: 1.2 !important;
+    font-size: 30px;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
   }
 
   /* Quote calculator stacks vertically */
@@ -85,7 +85,7 @@
 
   /* Service feature blocks stack */
   .service-feature {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 1fr;
   }
   .service-feature .pic {
     min-height: 240px;
@@ -93,7 +93,7 @@
 
   /* Article featured stacks */
   .article-featured {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 1fr;
   }
   .article-featured .pic {
     min-height: 240px;
@@ -101,8 +101,8 @@
 
   /* Footer collapses to 1-column */
   footer .top {
-    grid-template-columns: 1fr !important;
-    gap: var(--space-6) !important;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
   }
   footer .bottom {
     flex-direction: column;
