@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quote calculator | Brunaþéttingar</title>
+<meta name="description" content="Get an online price estimate for fire sealing — choose opening type, wall type, fire rating and dimensions.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="mockup-note">Mockup — placeholder copy</div>
+
+<!-- Reusable wordmark -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="logo-wordmark" viewBox="0 0 360 60">
+      <text x="0" y="46"
+            font-family="Inter, -apple-system, Helvetica, Arial, sans-serif"
+            font-size="48" font-weight="800"
+            letter-spacing="-1"
+            class="bruna" fill="#ee7c1d">BRUNA</text>
+      <text x="170" y="46"
+            font-family="Inter, -apple-system, Helvetica, Arial, sans-serif"
+            font-size="46" font-weight="600"
+            font-style="italic"
+            letter-spacing="-0.5"
+            class="pett" fill="#1453a8">þéttingar</text>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- Top utility -->
+<div class="utility">
+  <div class="container">
+    <div class="row">
+      <div class="left">
+        <span class="pill">Certified</span>
+        <span>Planning · Project management · Installation · Documentation</span>
+      </div>
+      <div class="right">
+        <a href="tel:+3548504405">(+354) 850-4405</a>
+        <a href="mailto:bruna@bruna.is">bruna@bruna.is</a>
+        <span class="lang">
+          <a href="#">IS</a>
+          <a href="#" class="active">EN</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container">
+    <div class="row">
+      <a href="index.html" class="brand">
+        <svg class="logo" viewBox="0 0 360 60"><use href="#logo-wordmark"/></svg>
+        <small class="tag">Buildings<br>in Iceland</small>
+      </a>
+      <nav class="primary">
+        <ul>
+          <li><a href="index.html">Solutions</a></li>
+          <li><a href="thjonusta.html">Services</a></li>
+          <li><a href="geirar.html">Sectors</a></li>
+          <li><a href="verdreiknir.html" class="active">Quote</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="greinar.html">Articles</a></li>
+          <li><a href="#" class="cta">Contact us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- Page hero -->
+<section class="page-hero">
+  <div class="bg" style="background-image: url('img/documentation.jpg');"></div>
+  <div class="scrim"></div>
+  <div class="container">
+    <div class="crumbs">
+      <a href="index.html">Home</a> &nbsp;/&nbsp; <span>Quote calculator</span>
+    </div>
+    <h1>Quote calculator.</h1>
+    <p class="kicker">Get an online price estimate — choose the opening type, wall type, fire rating and dimensions. We'll send the quote to your email instantly.</p>
+  </div>
+</section>
+
+<!-- Calculator -->
+<section class="quoter-section">
+  <div class="container">
+
+    <div class="quoter-intro">
+      <div>
+        <div class="label">How it works</div>
+        <h2>An estimated price in three minutes.</h2>
+      </div>
+      <div>
+        <p>Add one row for each type of opening in your project. Choose the opening type, wall, fire rating and dimensions — the calculator computes an estimated price automatically.</p>
+        <div class="notice">
+          <strong>Note:</strong> This is an estimated price. The final price is confirmed with an on-site inspection. Prices exclude VAT.
+        </div>
+      </div>
+    </div>
+
+    <form class="quoter" id="quoter" onsubmit="return submitQuote(event)">
+
+      <!-- Header row -->
+      <div class="quoter-header">
+        <span>Opening type</span>
+        <span>Wall type</span>
+        <span>Fire rating</span>
+        <span class="r">Width&nbsp;(cm)</span>
+        <span class="r">Height&nbsp;(cm)</span>
+        <span>From floor</span>
+        <span class="r">Qty</span>
+        <span class="r">Price</span>
+        <span></span>
+      </div>
+
+      <!-- Rows (populated by JS) -->
+      <div class="quoter-rows" id="quoter-rows"></div>
+
+      <!-- Add row button -->
+      <div class="quoter-actions">
+        <button type="button" class="add-row" onclick="addRow()">+ Add a row</button>
+      </div>
+
+      <!-- Total -->
+      <div class="quoter-total">
+        <div>
+          <div class="label-block">Estimated total</div>
+          <div class="small">Excl. VAT · estimated from your selections</div>
+        </div>
+        <div class="total-amount" id="total-amount">0 ISK</div>
+      </div>
+
+      <!-- Customer info -->
+      <div class="quoter-customer">
+        <h3>Send the estimated quote</h3>
+        <div class="grid">
+          <input type="text" name="cust-name" placeholder="Name" required>
+          <input type="text" name="cust-company" placeholder="Company / Project name">
+          <input type="email" name="cust-email" placeholder="Email" required>
+          <input type="tel" name="cust-phone" placeholder="Phone">
+        </div>
+        <textarea name="cust-notes" placeholder="Notes, project location, timeline…"></textarea>
+
+        <div class="submit-row">
+          <span class="note">You'll receive a confirmation by email and a project manager will call within 24 hours.</span>
+          <button type="submit" class="submit-btn">
+            <span>Send quote</span>
+            <span class="arrow">→</span>
+          </button>
+        </div>
+
+        <div class="quoter-confirm" id="quoter-confirm">
+          ✓ Thanks! Your estimated quote has been sent to your email. A project manager will call within 24 hours.
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="container">
+    <div class="row">
+      <h2>Need an on-site inspection? <span class="ul">Let's talk.</span></h2>
+      <div class="actions">
+        <a class="btn primary" href="#">
+          <span>Request an inspection</span>
+          <span class="arrow">→</span>
+        </a>
+        <a class="btn ghost" href="tel:+3548504405">
+          <span>(+354) 850-4405</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="top">
+      <div class="col">
+        <a href="index.html" class="brand" style="margin-bottom: 22px;">
+          <svg class="logo" viewBox="0 0 360 60"><use href="#logo-wordmark"/></svg>
+          <small class="tag">Buildings<br>in Iceland</small>
+        </a>
+        <p>Specialised fire sealing and technical insulation company serving contractors, building owners and operators in Iceland. Since 2011.</p>
+      </div>
+      <div class="col">
+        <h5>Solutions</h5>
+        <ul>
+          <li><a href="thjonusta.html">Fire sealing &amp; solutions</a></li>
+          <li><a href="thjonusta.html">Fireproofing</a></li>
+          <li><a href="thjonusta.html">Pipe insulation (Isogenopak, WrapTec)</a></li>
+          <li><a href="thjonusta.html">Armaflex (cooling pipes)</a></li>
+          <li><a href="thjonusta.html">Aluminium cladding</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="about.html#stefna">Our vision</a></li>
+          <li><a href="geirar.html">Sectors</a></li>
+          <li><a href="greinar.html">Articles</a></li>
+          <li><a href="verdreiknir.html">Quote calculator</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h5>Contact</h5>
+        <ul>
+          <li>(+354) 850-4405</li>
+          <li>bruna@bruna.is</li>
+          <li>[Address]</li>
+          <li>105 Reykjavík, Iceland</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© [Year] Brunaþéttingar ehf. &nbsp;·&nbsp; Reg. 000000-0000</span>
+      <span>
+        <a href="#">Privacy policy</a>
+        <a href="#">Terms</a>
+        <a href="#">Sitemap</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- Calculator logic -->
+<script>
+// Pricing model — placeholder values
+const OPE_TYPES = [
+  { id: "cable",    label: "Cable penetration",                    base: 8500 },
+  { id: "metal",    label: "Metal pipe",                           base: 6800 },
+  { id: "plastic",  label: "Plastic pipe (intumescent collar)",    base: 14500 },
+  { id: "mixed",    label: "Mixed cables and pipes",               base: 12000 },
+  { id: "modular",  label: "Modular cable transit (Roxtec)",       base: 45000 },
+  { id: "linear",   label: "Linear joint (per m)",                 base: 4800 },
+  { id: "vent",     label: "Ventilation duct",                     base: 18500 },
+];
+
+const WALL_TYPES = [
+  { id: "concrete",       label: "Concrete wall",            mult: 1.00 },
+  { id: "block",          label: "Block / brick wall",       mult: 1.05 },
+  { id: "concrete-floor", label: "Concrete floor",           mult: 1.10 },
+  { id: "light",          label: "Lightweight wall (gypsum)", mult: 1.15 },
+  { id: "light-floor",    label: "Lightweight floor",        mult: 1.20 },
+];
+
+const FIRE_RATINGS = [
+  { id: "ei30",  label: "EI 30",  mult: 0.85 },
+  { id: "ei60",  label: "EI 60",  mult: 1.00 },
+  { id: "ei90",  label: "EI 90",  mult: 1.15 },
+  { id: "ei120", label: "EI 120", mult: 1.30 },
+  { id: "ei240", label: "EI 240", mult: 1.65 },
+];
+
+// Distance from floor — affects access difficulty
+//   0–60 cm: hard to reach (low)        → +5%
+//   60–200 cm: standard working height   → no surcharge
+//   200–400 cm: needs ladder / scaffold  → +5%
+//   over 400 cm: significant scaffold    → +10%
+const FLOOR_POSITIONS = [
+  { id: "low",       label: "0–60 cm from floor",   mult: 1.05 },
+  { id: "mid",       label: "60–200 cm (standard)", mult: 1.00 },
+  { id: "high",      label: "200–400 cm",           mult: 1.05 },
+  { id: "very-high", label: "Over 400 cm",          mult: 1.10 },
+];
+
+function sizeMultiplier(width, height) {
+  const max = Math.max(width || 0, height || 0);
+  if (max === 0) return 0;
+  if (max <= 10) return 1.0;
+  if (max <= 25) return 1.4;
+  if (max <= 50) return 2.3;
+  if (max <= 100) return 3.8;
+  return 5.5;
+}
+
+function fmtKr(n) {
+  return Math.round(n).toLocaleString('en-US') + ' ISK';
+}
+
+let rowCount = 0;
+function addRow(preset) {
+  const rowsEl = document.getElementById('quoter-rows');
+  const id = ++rowCount;
+  const row = document.createElement('div');
+  row.className = 'quoter-row';
+  row.dataset.id = id;
+  row.innerHTML = `
+    <select name="opeType">
+      <option value="">— choose —</option>
+      ${OPE_TYPES.map(o => `<option value="${o.id}">${o.label}</option>`).join('')}
+    </select>
+    <select name="wallType">
+      <option value="">— choose —</option>
+      ${WALL_TYPES.map(o => `<option value="${o.id}">${o.label}</option>`).join('')}
+    </select>
+    <select name="fireRating">
+      <option value="">— choose —</option>
+      ${FIRE_RATINGS.map(o => `<option value="${o.id}">${o.label}</option>`).join('')}
+    </select>
+    <input type="number" name="width" placeholder="0" min="0" step="1">
+    <input type="number" name="height" placeholder="0" min="0" step="1">
+    <select name="floorPos">
+      ${FLOOR_POSITIONS.map(o => `<option value="${o.id}"${o.id === 'mid' ? ' selected' : ''}>${o.label}</option>`).join('')}
+    </select>
+    <input type="number" name="qty" value="1" min="1" step="1">
+    <span class="subtotal"><span class="none">—</span></span>
+    <button type="button" class="remove" onclick="removeRow(${id})" aria-label="Remove row">×</button>
+  `;
+  rowsEl.appendChild(row);
+  row.querySelectorAll('select, input').forEach(el => {
+    el.addEventListener('input', recalc);
+    el.addEventListener('change', recalc);
+  });
+  recalc();
+}
+
+function removeRow(id) {
+  const row = document.querySelector(`.quoter-row[data-id="${id}"]`);
+  if (row) row.remove();
+  recalc();
+}
+
+function recalc() {
+  let total = 0;
+  document.querySelectorAll('.quoter-row').forEach(row => {
+    const opeId   = row.querySelector('[name=opeType]').value;
+    const wallId  = row.querySelector('[name=wallType]').value;
+    const fireId  = row.querySelector('[name=fireRating]').value;
+    const floorId = row.querySelector('[name=floorPos]').value || 'mid';
+    const width   = parseFloat(row.querySelector('[name=width]').value) || 0;
+    const height  = parseFloat(row.querySelector('[name=height]').value) || 0;
+    const qty     = parseFloat(row.querySelector('[name=qty]').value)    || 1;
+    const subEl   = row.querySelector('.subtotal');
+
+    const ope   = OPE_TYPES.find(x => x.id === opeId);
+    const wall  = WALL_TYPES.find(x => x.id === wallId);
+    const fire  = FIRE_RATINGS.find(x => x.id === fireId);
+    const floor = FLOOR_POSITIONS.find(x => x.id === floorId) || FLOOR_POSITIONS[1];
+
+    if (!ope || !wall || !fire || (width === 0 && height === 0)) {
+      subEl.innerHTML = '<span class="none">—</span>';
+      return;
+    }
+
+    const sizeMult = sizeMultiplier(width, height);
+    let sub = ope.base * wall.mult * fire.mult * sizeMult * floor.mult * qty;
+    if (opeId === 'linear') {
+      const meters = (width + height) / 100 || 1;
+      sub = ope.base * wall.mult * fire.mult * meters * floor.mult * qty;
+    }
+    subEl.textContent = fmtKr(sub);
+    total += sub;
+  });
+  document.getElementById('total-amount').textContent = fmtKr(total);
+}
+
+function submitQuote(e) {
+  e.preventDefault();
+  const banner = document.getElementById('quoter-confirm');
+  banner.classList.add('show');
+  banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  return false;
+}
+
+// Seed two example rows so the page isn't empty on load
+addRow();
+addRow();
+</script>
+
+</body>
+</html>
