@@ -14,6 +14,8 @@ export default {
   "ui.view_services":   { is: "Skoða þjónustu",     en: "View services" },
   "ui.back_to_top":     { is: "Efst á síðu",        en: "Back to top" },
   "ui.language_switch": { is: "English",            en: "Íslenska" },
+  "lang.label.is":      { is: "IS",                 en: "IS" },
+  "lang.label.en":      { is: "EN",                 en: "EN" },
   "ui.certified":       { is: "Vottað",             en: "Certified" },
   "ui.home":            { is: "Heim",               en: "Home" },
   "brand.tagline":      { is: "Mannvirki<br>á Íslandi", en: "Buildings<br>in Iceland" },
