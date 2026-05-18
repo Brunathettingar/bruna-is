@@ -4,6 +4,20 @@
    =========================================================== */
 
 html { scroll-behavior: smooth; }
+
+/* Off-screen container for the inline SVG <defs> sprite. */
+.svg-defs { position: absolute; width: 0; height: 0; }
+
+/* Brand wordmark — token-driven; classes are referenced from the inline
+   <text> in the SVG defs in `partials/header.njk`. The wordmark used to
+   set font-family / font-style / font-weight as SVG attributes, which
+   bypassed the cascade and asked for an italic + weight-800 face we
+   never ship. Driven through .bruna / .pett classes the wordmark inherits
+   the token chain and only requests faces we actually have (400 / 600). */
+.bruna { font-family: var(--font-body); font-weight: 700; font-size: 48px; letter-spacing: -1px; }
+.pett  { font-family: var(--font-body); font-weight: 600; font-size: 46px; letter-spacing: -0.5px; }
+
+.brand--footer { margin-bottom: 22px; }
 body {
   line-height: 1.55;
   background: var(--bg);
