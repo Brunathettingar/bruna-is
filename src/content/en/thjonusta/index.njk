@@ -1,0 +1,79 @@
+---
+layout: layouts/page.njk
+title: "Services"
+description: "Brunaþéttingar's seven service areas — fire sealing, pipe insulation (Isogenopak, WrapTec, Armaflex), ventilation insulation, water tank insulation, pipe markings, aluminium cladding and advisory."
+eleventyNavigation:
+  key: services-en
+  order: 2
+---
+<section class="page-hero">
+  <div class="bg" style="background-image: url('/img/iceland_svartsengi.jpg');"></div>
+  <div class="scrim"></div>
+  <div class="container">
+    <div class="crumbs"><a href="/en/">Home</a> &nbsp;/&nbsp; <span>Services</span></div>
+    <h1>Seven service areas.</h1>
+    <p class="kicker">From fire sealing and fireproofing to pipe insulation, aluminium cladding and pipe markings — Brunaþéttingar offer complete technical insulation for buildings across Iceland.</p>
+  </div>
+</section>
+
+<section class="services-page">
+  <div class="container">
+    <div class="services-intro">
+      <div>
+        <div class="label">Services in full</div>
+        <h2>One company — seven specialties.</h2>
+      </div>
+      <div>
+        <p>Brunaþéttingar provide <strong>complete technical insulation</strong> for buildings across Iceland. We started in fire sealing in 2011 and have added services as our clients have required — always with the same focus on quality, certification and documentation.</p>
+        <p>These are the seven areas we serve today. Some services overlap (fire protection and acoustic insulation use the same materials) and some require specialised systems from Isogenopak, WrapTec or Armaflex — but they all fall under technical insulation.</p>
+      </div>
+    </div>
+
+    {%- for s in services %}
+    <article class="service-feature{% if loop.index0 % 2 == 1 %} flip{% endif %}">
+      <div class="pic{% if s.imageContain %} contain{% endif %}" style="background-image: url('{{ s.image }}');"></div>
+      <div class="copy">
+        <span class="num-badge">{{ s.number }} / {{ s.category[lang] }}</span>
+        <h2>{{ s.title[lang] | safe }}</h2>
+        <p class="lead">{{ s.lead[lang] | safe }}</p>
+        <div class="insight">
+          <strong>{{ s.insightStrong[lang] }}</strong>
+          {{ s.insight[lang] | safe }}
+        </div>
+        <ul class="bullets">
+          {%- for b in s.bullets[lang] %}
+          <li>{{ b | safe }}</li>
+          {%- endfor %}
+        </ul>
+      </div>
+    </article>
+    {%- endfor %}
+  </div>
+</section>
+
+<section class="value-band">
+  <div class="container">
+    <div class="row">
+      <div>
+        <div class="label">Cost effectiveness</div>
+        <h2>Technical insulation that <span class="ul">pays itself back</span>.</h2>
+      </div>
+      <div>
+        <p>Technical insulation is one of the most cost-effective investments a building owner can make. The <strong>Isogenopak</strong> and <strong>WrapTec</strong> systems we install are particularly economical — they multiply the lifespan of the underlying insulation, reduce maintenance costs and improve energy efficiency over the entire operating life of the building.</p>
+        <p>We provide an annual energy-saving calculation for every project before you accept the quote — so you know exactly when the investment will pay itself back.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="row">
+      <h2>Need an on-site inspection? <span class="ul">Let's talk.</span></h2>
+      <div class="actions">
+        <a class="btn primary" href="/en/verdreiknir/"><span>Get a quote</span> <span class="arrow">→</span></a>
+        <a class="btn ghost" href="tel:+3548504405"><span>(+354) 850-4405</span> <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>

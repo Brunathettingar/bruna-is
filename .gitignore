@@ -38,6 +38,7 @@ bower_components/
 vendor/
 
 # Build output
+_site/
 dist/
 build/
 .cache/

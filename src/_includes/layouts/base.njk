@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="{{ lang or 'is' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if title and title != meta.byLocale[lang].title %}{{ title }} | {{ meta.byLocale[lang].title }}{% else %}{{ meta.byLocale[lang].title }}{% endif %}</title>
+    <meta name="description" content="{{ description or meta.byLocale[lang].description }}">
+    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="canonical" href="{{ meta.url }}{{ page.url }}">
+
+    <link rel="alternate" hreflang="{{ lang }}" href="{{ meta.url }}{{ page.url }}">
+    {%- for link in page.url | locale_links %}
+    <link rel="alternate" hreflang="{{ link.lang }}" href="{{ meta.url }}{{ link.url }}">
+    {%- endfor %}
+    <link rel="alternate" hreflang="x-default" href="{{ meta.url }}{{ page.url | locale_url('is') }}">
+
+    {% include "partials/seo-meta.njk" %}
+
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-400.woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/nav.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    {% block extraStyles %}{% endblock %}
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "{{ meta.url }}/#website",
+      "name": "{{ meta.byLocale[lang].title | jsonEscape }}",
+      "url": "{{ meta.url }}/",
+      "description": "{{ meta.byLocale[lang].description | jsonEscape }}",
+      "inLanguage": "{{ lang }}"
+    }
+    </script>
+  </head>
+  <body>
+    {{ content | safe }}
+    <script type="module" src="/assets/js/main.js"></script>
+  </body>
+</html>

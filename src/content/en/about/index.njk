@@ -1,0 +1,104 @@
+---
+layout: layouts/page.njk
+title: "About"
+description: "A specialised fire sealing company in Iceland serving contractors, building owners and operators since 2011."
+eleventyNavigation:
+  key: about-en
+  order: 5
+---
+<section class="page-hero">
+  <div class="bg" style="background-image: url('/img/iceland_hellisheidi.jpg');"></div>
+  <div class="scrim"></div>
+  <div class="container">
+    <div class="crumbs"><a href="/en/">Home</a> &nbsp;/&nbsp; <span>About</span></div>
+    <h1>About Brunaþéttingar.</h1>
+    <p class="kicker">A specialised fire sealing and technical insulation company serving contractors, building owners and operators in Iceland since 2011.</p>
+  </div>
+</section>
+
+<section class="story">
+  <div class="container">
+    <div class="row">
+      <div class="copy">
+        <div class="label">Our story</div>
+        <h2>Founded to <span class="ul">seal fire properly</span> — and document it.</h2>
+        <p>Brunaþéttingar was founded in 2011 when two industry workers kept seeing the same problem: penetrations sealed without a report, certifications lost in paperwork, and fire authority inspections being repeated because of missing records.</p>
+        <p>Our story is a story of documentation. From day one we have insisted that every single seal be tracked, photographed and delivered to the owner in a digital report. When new buildings rise in Iceland we want someone — 30 years from now — to be able to look up the certification of this exact cable seal without ripping open a wall.</p>
+        <p>Today we are a team of 22, with projects in the capital region, on Reykjanes, the South Coast and the East Fjords, and we serve everything from new commercial buildings to the largest industrial projects in the country.</p>
+        <div class="signature">
+          "Fire sealing is not just the work — it's the report that comes with the work."
+          <small>— Founder, Brunaþéttingar ehf.</small>
+        </div>
+      </div>
+      <div class="timeline">
+        <h4>Timeline</h4>
+        {%- for m in milestones %}
+        <div class="timeline-row">
+          <div class="yr">{{ m.year }}</div>
+          <div class="ev">{{ m.event[lang] }}</div>
+        </div>
+        {%- endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy" id="stefna">
+  <div class="container">
+    <div class="head">
+      <div class="label">Our vision</div>
+      <h2>Six guiding principles for every project.</h2>
+      <p>Our vision is simple: do every project right the first time and document it so the next generation can follow up. These are the rules our crews follow on site and the rules our clients can rely on.</p>
+    </div>
+    <div class="principles">
+      {%- for p in principles %}
+      <div class="principle">
+        <span class="num">{{ p.number }}</span>
+        <h3>{{ p.title[lang] }}</h3>
+        <p>{{ p.description[lang] | safe }}</p>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="team">
+  <div class="container">
+    <div class="head">
+      <div class="label">The team</div>
+      <h2>A small team that knows every project.</h2>
+    </div>
+    <div class="team-grid">
+      {%- for member in team %}
+      <div class="team-card">
+        <div class="avatar{% if member.avatar == 'orange' %} orange{% endif %}">{{ member.initials }}</div>
+        <div class="body">
+          <h4>{{ member.name }}</h4>
+          <div class="role">{{ member.role[lang] }}</div>
+          <div class="meta">{{ member.bio[lang] }}</div>
+        </div>
+      </div>
+      {%- endfor %}
+      <div class="team-card">
+        <div class="avatar orange">+15</div>
+        <div class="body">
+          <h4>15 more team members</h4>
+          <div class="role">Fire-sealing installers</div>
+          <div class="meta">Certified installers across the country — capital region, Reykjanes, South Coast and East Iceland.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="row">
+      <h2>Ready to start your project? <span class="ul">Let's talk.</span></h2>
+      <div class="actions">
+        <a class="btn primary" href="/en/verdreiknir/"><span>Get a quote</span> <span class="arrow">→</span></a>
+        <a class="btn ghost" href="#contact"><span>Send an enquiry</span> <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>

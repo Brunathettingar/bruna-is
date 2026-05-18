@@ -1,0 +1,70 @@
+---
+layout: layouts/page.njk
+title: "Articles"
+description: "Articles on fire sealing, fire protection, fireproofing and documentation for buildings in Iceland."
+eleventyNavigation:
+  key: articles-en
+  order: 6
+---
+{%- set featured = articles | selectattr("featured") | first %}
+{%- set rest = articles | rejectattr("featured") %}
+
+<section class="page-hero">
+  <div class="bg" style="background-image: url('/img/documentation.jpg');"></div>
+  <div class="scrim"></div>
+  <div class="container">
+    <div class="crumbs"><a href="/en/">Home</a> &nbsp;/&nbsp; <span>Articles</span></div>
+    <h1>Articles &amp; guides.</h1>
+    <p class="kicker">Practical advice from our fire-sealing crews — material selection, certifications, documentation and standards for Icelandic buildings.</p>
+  </div>
+</section>
+
+<section class="articles">
+  <div class="container">
+    {%- if featured %}
+    <a class="article-featured" href="/en/greinar/{{ featured.slug }}/">
+      <div class="pic" style="background-image: url('{{ featured.image }}');"></div>
+      <div class="body">
+        <div class="tag">{{ featured.category[lang] }}</div>
+        <h2>{{ featured.title[lang] }}</h2>
+        <p>{{ featured.summary[lang] }}</p>
+        <div class="meta">
+          <span>{{ featured.date | dateDisplay(lang) }}</span>
+          <span><strong>{{ featured.readTimeMinutes }} min</strong> read</span>
+          <span>by {{ featured.author }}</span>
+        </div>
+      </div>
+    </a>
+    {%- endif %}
+
+    <div class="article-grid">
+      {%- for article in rest %}
+      <a class="article-card" href="/en/greinar/{{ article.slug }}/">
+        <div class="pic" style="background-image: url('{{ article.image }}');">
+          <span class="tag">{{ article.category[lang] }}</span>
+        </div>
+        <div class="body">
+          <h3>{{ article.title[lang] }}</h3>
+          <p>{{ article.summary[lang] }}</p>
+          <div class="meta">
+            <span>{{ article.date | dateDisplay(lang) }}</span>
+            <span>{{ article.readTimeMinutes }} min</span>
+          </div>
+        </div>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="row">
+      <h2>Ready to start your project? <span class="ul">Let's talk.</span></h2>
+      <div class="actions">
+        <a class="btn primary" href="/en/verdreiknir/"><span>Get a quote</span> <span class="arrow">→</span></a>
+        <a class="btn ghost" href="#contact"><span>Send an enquiry</span> <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>

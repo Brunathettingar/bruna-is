@@ -1,0 +1,31 @@
+{%- set navCollection = lang == 'is' and collections.navIs or collections.navEn %}
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="logo-wordmark" viewBox="0 0 360 60">
+      <text x="0" y="46" font-family="Inter, -apple-system, Helvetica, Arial, sans-serif" font-size="48" font-weight="800" letter-spacing="-1" class="bruna" fill="#ee7c1d">BRUNA</text>
+      <text x="170" y="46" font-family="Inter, -apple-system, Helvetica, Arial, sans-serif" font-size="46" font-weight="600" font-style="italic" letter-spacing="-0.5" class="pett" fill="#1453a8">þéttingar</text>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="site-header">
+  <div class="container">
+    <div class="row">
+      <a href="{{ '/' | locale_url }}" class="brand">
+        <svg class="logo" viewBox="0 0 360 60" aria-label="{{ meta.byLocale[lang].title }}"><use href="#logo-wordmark"/></svg>
+        <small class="tag">{{ "brand.tagline" | t | safe }}</small>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="{{ 'ui.menu' | t }}">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="primary-nav" class="primary" aria-label="Main">
+        <ul>
+          {%- for entry in navCollection %}
+          <li><a href="{{ entry.url }}"{% if entry.url == page.url %} class="active" aria-current="page"{% endif %}>{{ entry.data.title }}</a></li>
+          {%- endfor %}
+          <li><a href="#contact" class="cta">{{ "nav.contact" | t }}</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

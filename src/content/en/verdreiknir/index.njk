@@ -1,0 +1,97 @@
+---
+layout: layouts/page.njk
+title: "Quote calculator"
+description: "Get an online price estimate for fire sealing — choose opening type, wall type, fire rating and dimensions."
+eleventyNavigation:
+  key: quote-en
+  order: 4
+---
+<section class="page-hero">
+  <div class="bg" style="background-image: url('/img/documentation.jpg');"></div>
+  <div class="scrim"></div>
+  <div class="container">
+    <div class="crumbs"><a href="/en/">Home</a> &nbsp;/&nbsp; <span>Quote calculator</span></div>
+    <h1>Quote calculator.</h1>
+    <p class="kicker">Get an online price estimate — choose the opening type, wall type, fire rating and dimensions. We'll send the quote to your email instantly.</p>
+  </div>
+</section>
+
+<section class="quoter-section">
+  <div class="container">
+    <div class="quoter-intro">
+      <div>
+        <div class="label">How it works</div>
+        <h2>An estimated price in three minutes.</h2>
+      </div>
+      <div>
+        <p>Add one row for each type of opening in your project. Choose the opening type, wall, fire rating and dimensions — the calculator computes an estimated price automatically.</p>
+        <div class="notice">
+          <strong>Note:</strong> This is an estimated price. The final price is confirmed with an on-site inspection. Prices exclude VAT.
+        </div>
+      </div>
+    </div>
+
+    <form class="quoter" id="quoter" data-lang="{{ lang }}">
+      <div class="quoter-header">
+        <span>Opening type</span>
+        <span>Wall type</span>
+        <span>Fire rating</span>
+        <span class="r">Width&nbsp;(cm)</span>
+        <span class="r">Height&nbsp;(cm)</span>
+        <span>From floor</span>
+        <span class="r">Qty</span>
+        <span class="r">Price</span>
+        <span></span>
+      </div>
+
+      <div class="quoter-rows" id="quoter-rows"></div>
+
+      <div class="quoter-actions">
+        <button type="button" class="add-row" data-quoter-add>+ Add a row</button>
+      </div>
+
+      <div class="quoter-total">
+        <div>
+          <div class="label-block">Estimated total</div>
+          <div class="small">Excl. VAT · estimated from your selections</div>
+        </div>
+        <div class="total-amount" id="total-amount">0 ISK</div>
+      </div>
+
+      <div class="quoter-customer">
+        <h3>Send the estimated quote</h3>
+        <div class="grid">
+          <input type="text" name="cust-name" placeholder="Name" required>
+          <input type="text" name="cust-company" placeholder="Company / Project name">
+          <input type="email" name="cust-email" placeholder="Email" required>
+          <input type="tel" name="cust-phone" placeholder="Phone">
+        </div>
+        <textarea name="cust-notes" placeholder="Notes, project location, timeline…"></textarea>
+
+        <div class="submit-row">
+          <span class="note">You'll receive a confirmation by email and a project manager will call within 24 hours.</span>
+          <button type="submit" class="submit-btn">
+            <span>Send quote</span>
+            <span class="arrow">→</span>
+          </button>
+        </div>
+
+        <div class="quoter-confirm" id="quoter-confirm">
+          ✓ Thanks! Your estimated quote has been sent to your email. A project manager will call within 24 hours.
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="row">
+      <h2>Need an on-site inspection? <span class="ul">Let's talk.</span></h2>
+      <div class="actions">
+        <a class="btn primary" href="#contact"><span>Request an inspection</span> <span class="arrow">→</span></a>
+        <a class="btn ghost" href="tel:+3548504405"><span>(+354) 850-4405</span> <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>

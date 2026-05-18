@@ -1,0 +1,77 @@
+---
+layout: layouts/page.njk
+title: "Geirar"
+description: "[TBD — íslensk lýsing] Geirar sem Brunaþéttingar þjóna á Íslandi."
+eleventyNavigation:
+  key: sectors-is
+  order: 3
+---
+<section class="page-hero">
+  <div class="bg" style="background-image: url('/img/iceland_alcoa_reydar.jpg');"></div>
+  <div class="scrim"></div>
+  <div class="container">
+    <div class="crumbs"><a href="/">Heim</a> &nbsp;/&nbsp; <span>Geirar</span></div>
+    <h1>Geirar sem við þjónum.</h1>
+    <p class="kicker">[TBD — íslenska] Brunaþéttingar starfa í öllum helstu atvinnugreinum Íslands.</p>
+  </div>
+</section>
+
+<section class="sectors-page">
+  <div class="container">
+    <div class="sectors-intro">
+      <div>
+        <div class="label">Iðnaður á Íslandi</div>
+        <h2>Frá Hellisheiðarvirkjun til sjúkrahúsa höfuðborgarsvæðisins.</h2>
+      </div>
+      <div>
+        <p>[TBD — íslenska]</p>
+        <p>[TBD — íslenska]</p>
+      </div>
+    </div>
+
+    <div class="sector-grid">
+      {%- for s in sectors %}
+      <a class="sector-card" href="/thjonusta/">
+        <div class="pic" style="background-image: url('{{ s.image }}');">
+          <span class="badge">{{ s.number }}</span>
+        </div>
+        <div class="body">
+          <h3>{{ s.title[lang] }}</h3>
+          <p>{{ s.description[lang] }}</p>
+          <ul class="svc-tags">
+            {%- for t in s.tags[lang] %}
+            <li>{{ t }}</li>
+            {%- endfor %}
+          </ul>
+        </div>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="value-band">
+  <div class="container">
+    <div class="row">
+      <div>
+        <div class="label">Hver geiri hefur sínar kröfur</div>
+        <h2>Eitt fyrirtæki — átta geirar — <span class="ul">sjö þjónustusvið</span>.</h2>
+      </div>
+      <div>
+        <p>[TBD — íslenska]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="row">
+      <h2>Tilbúin að hefja verkefnið? <span class="ul">Hafðu samband.</span></h2>
+      <div class="actions">
+        <a class="btn primary" href="/verdreiknir/"><span>Fá verðmat</span> <span class="arrow">→</span></a>
+        <a class="btn ghost" href="tel:+3548504405"><span>(+354) 850-4405</span> <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>

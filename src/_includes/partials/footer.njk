@@ -1,0 +1,43 @@
+<footer id="contact">
+  <div class="container">
+    <div class="top">
+      <div class="col">
+        <a href="{{ '/' | locale_url }}" class="brand" style="margin-bottom: 22px;">
+          <svg class="logo" viewBox="0 0 360 60" aria-hidden="true"><use href="#logo-wordmark"/></svg>
+          <small class="tag">{{ "brand.tagline" | t | safe }}</small>
+        </a>
+        <p>{{ meta.byLocale[lang].description }}</p>
+      </div>
+      <div class="col">
+        <h5>{{ "footer.solutions_heading" | t }}</h5>
+        <ul>
+          <li><a href="{{ '/thjonusta/' | locale_url }}">{{ "nav.services" | t }}</a></li>
+          <li><a href="{{ '/geirar/' | locale_url }}">{{ "nav.sectors" | t }}</a></li>
+          <li><a href="{{ '/verdreiknir/' | locale_url }}">{{ "nav.quote" | t }}</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h5>{{ "footer.company_heading" | t }}</h5>
+        <ul>
+          <li><a href="{{ '/about/' | locale_url }}">{{ "nav.about" | t }}</a></li>
+          <li><a href="{{ '/about/#stefna' | locale_url }}">{{ "footer.vision" | t }}</a></li>
+          <li><a href="{{ '/greinar/' | locale_url }}">{{ "nav.articles" | t }}</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h5>{{ "footer.contact_heading" | t }}</h5>
+        <ul>
+          <li>(+354) 850-4405</li>
+          <li>bruna@bruna.is</li>
+          <li>105 Reykjavík, Ísland</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 Brunaþéttingar ehf. &nbsp;·&nbsp; {{ "footer.copyright" | t }}</span>
+      <span>
+        <a href="/sitemap.xml">{{ "footer.sitemap" | t }}</a>
+      </span>
+    </div>
+  </div>
+</footer>

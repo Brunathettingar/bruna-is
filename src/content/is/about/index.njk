@@ -1,0 +1,104 @@
+---
+layout: layouts/page.njk
+title: "Um okkur"
+description: "[TBD — íslensk lýsing] Sérhæft brunaþéttingafyrirtæki sem þjónar verktökum og eigendum mannvirkja á Íslandi síðan 2011."
+eleventyNavigation:
+  key: about-is
+  order: 5
+---
+<section class="page-hero">
+  <div class="bg" style="background-image: url('/img/iceland_hellisheidi.jpg');"></div>
+  <div class="scrim"></div>
+  <div class="container">
+    <div class="crumbs"><a href="/">Heim</a> &nbsp;/&nbsp; <span>Um okkur</span></div>
+    <h1>Um Brunaþéttingar.</h1>
+    <p class="kicker">[TBD — íslenska] Sérhæft brunaþéttinga- og tæknieinangrunarfyrirtæki á Íslandi síðan 2011.</p>
+  </div>
+</section>
+
+<section class="story">
+  <div class="container">
+    <div class="row">
+      <div class="copy">
+        <div class="label">Okkar saga</div>
+        <h2>Stofnað til að <span class="ul">brunaþétta rétt</span> — og skrá það.</h2>
+        <p>[TBD — íslenska]</p>
+        <p>[TBD — íslenska]</p>
+        <p>[TBD — íslenska]</p>
+        <div class="signature">
+          [TBD — íslensk tilvitnun]
+          <small>— Stofnandi Brunaþéttinga ehf.</small>
+        </div>
+      </div>
+      <div class="timeline">
+        <h4>Tímalína</h4>
+        {%- for m in milestones %}
+        <div class="timeline-row">
+          <div class="yr">{{ m.year }}</div>
+          <div class="ev">{{ m.event[lang] }}</div>
+        </div>
+        {%- endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy" id="stefna">
+  <div class="container">
+    <div class="head">
+      <div class="label">Okkar stefna</div>
+      <h2>Sex leiðarljós fyrir hvert verkefni.</h2>
+      <p>[TBD — íslenska]</p>
+    </div>
+    <div class="principles">
+      {%- for p in principles %}
+      <div class="principle">
+        <span class="num">{{ p.number }}</span>
+        <h3>{{ p.title[lang] }}</h3>
+        <p>{{ p.description[lang] | safe }}</p>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="team">
+  <div class="container">
+    <div class="head">
+      <div class="label">Teymið</div>
+      <h2>Lítið teymi sem þekkir hvert verkefni.</h2>
+    </div>
+    <div class="team-grid">
+      {%- for member in team %}
+      <div class="team-card">
+        <div class="avatar{% if member.avatar == 'orange' %} orange{% endif %}">{{ member.initials }}</div>
+        <div class="body">
+          <h4>{{ member.name }}</h4>
+          <div class="role">{{ member.role[lang] }}</div>
+          <div class="meta">{{ member.bio[lang] }}</div>
+        </div>
+      </div>
+      {%- endfor %}
+      <div class="team-card">
+        <div class="avatar orange">+15</div>
+        <div class="body">
+          <h4>15 starfsmenn til viðbótar</h4>
+          <div class="role">Brunaþéttingamenn</div>
+          <div class="meta">[TBD — íslenska]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="row">
+      <h2>Tilbúin að hefja verkefnið? <span class="ul">Hafðu samband.</span></h2>
+      <div class="actions">
+        <a class="btn primary" href="/verdreiknir/"><span>Fá verðmat</span> <span class="arrow">→</span></a>
+        <a class="btn ghost" href="#contact"><span>Senda fyrirspurn</span> <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>

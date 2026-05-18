@@ -1,0 +1,78 @@
+---
+layout: layouts/page.njk
+title: "Sectors"
+description: "Brunaþéttingar serve power plants, aluminium smelters, fish processing, hospitals, schools, commercial buildings, hotels and pharma in Iceland."
+eleventyNavigation:
+  key: sectors-en
+  order: 3
+---
+<section class="page-hero">
+  <div class="bg" style="background-image: url('/img/iceland_alcoa_reydar.jpg');"></div>
+  <div class="scrim"></div>
+  <div class="container">
+    <div class="crumbs"><a href="/en/">Home</a> &nbsp;/&nbsp; <span>Sectors</span></div>
+    <h1>Sectors we serve.</h1>
+    <p class="kicker">Brunaþéttingar work across the major industrial sectors of Iceland — from power plants and aluminium smelters to hospitals, schools and pharma.</p>
+  </div>
+</section>
+
+<section class="sectors-page">
+  <div class="container">
+    <div class="sectors-intro">
+      <div>
+        <div class="label">Industry in Iceland</div>
+        <h2>From the Hellisheiði power plant to the hospitals of the capital region.</h2>
+      </div>
+      <div>
+        <p>Technical insulation and fire protection don't look the same in an aluminium smelter as in a hospital. <strong>Each sector has its own requirements</strong> — chemical resistance in heavy industry, hygiene in food processing, acoustic insulation in schools and hospitals, anti-condensation in the cold rooms of fish processing.</p>
+        <p>Below is an overview of the sectors we serve with our full seven service areas.</p>
+      </div>
+    </div>
+
+    <div class="sector-grid">
+      {%- for s in sectors %}
+      <a class="sector-card" href="/en/thjonusta/">
+        <div class="pic" style="background-image: url('{{ s.image }}');">
+          <span class="badge">{{ s.number }}</span>
+        </div>
+        <div class="body">
+          <h3>{{ s.title[lang] }}</h3>
+          <p>{{ s.description[lang] }}</p>
+          <ul class="svc-tags">
+            {%- for t in s.tags[lang] %}
+            <li>{{ t }}</li>
+            {%- endfor %}
+          </ul>
+        </div>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="value-band">
+  <div class="container">
+    <div class="row">
+      <div>
+        <div class="label">Each sector has its own demands</div>
+        <h2>One company — eight sectors — <span class="ul">seven service areas</span>.</h2>
+      </div>
+      <div>
+        <p>Brunaþéttingar know the requirements of each of these eight sectors first hand. Our project managers have worked everything from new geothermal plants to the renovation of older hospitals. We advise on the right solutions for your sector — material selection, fire rating, documentation and project management.</p>
+        <p>Need an inspection of an existing building? Or advice on a new project? <strong>Call or send an email</strong> and we'll get back to you within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="row">
+      <h2>Ready to start your project? <span class="ul">Let's talk.</span></h2>
+      <div class="actions">
+        <a class="btn primary" href="/en/verdreiknir/"><span>Get a quote</span> <span class="arrow">→</span></a>
+        <a class="btn ghost" href="tel:+3548504405"><span>(+354) 850-4405</span> <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>

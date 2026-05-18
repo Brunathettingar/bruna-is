@@ -1,0 +1,15 @@
+<meta property="og:title" content="{{ title or meta.byLocale[lang].title | escape }}">
+<meta property="og:description" content="{{ description or summary or meta.byLocale[lang].description | escape }}">
+<meta property="og:url" content="{{ meta.url }}{{ page.url }}">
+<meta property="og:site_name" content="{{ meta.byLocale[lang].title | escape }}">
+<meta property="og:type" content="{{ ogType or 'website' }}">
+{%- set socialImage = ogImage or meta.ogImage %}
+<meta property="og:image" content="{{ meta.url }}{{ socialImage }}">
+<meta property="og:image:alt" content="{{ ogImageAlt or meta.byLocale[lang].ogImageAlt | escape }}">
+<meta property="og:locale" content="{{ lang == 'is' and 'is_IS' or 'en_US' }}">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ title or meta.byLocale[lang].title | escape }}">
+<meta name="twitter:description" content="{{ description or summary or meta.byLocale[lang].description | escape }}">
+<meta name="twitter:image" content="{{ meta.url }}{{ socialImage }}">
+<meta name="twitter:image:alt" content="{{ ogImageAlt or meta.byLocale[lang].ogImageAlt | escape }}">

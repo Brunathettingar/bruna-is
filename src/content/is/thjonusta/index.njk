@@ -1,0 +1,79 @@
+---
+layout: layouts/page.njk
+title: "Þjónusta"
+description: "[TBD — íslensk lýsing] Sjö þjónustusvið Brunaþéttinga."
+eleventyNavigation:
+  key: services-is
+  order: 2
+---
+<section class="page-hero">
+  <div class="bg" style="background-image: url('/img/iceland_svartsengi.jpg');"></div>
+  <div class="scrim"></div>
+  <div class="container">
+    <div class="crumbs"><a href="/">Heim</a> &nbsp;/&nbsp; <span>Þjónusta</span></div>
+    <h1>Sjö þjónustusvið.</h1>
+    <p class="kicker">[TBD — íslenska] Frá brunaþéttingum og brunavörnum til pípueinangrunar, álklæðninga og pípumerkinga.</p>
+  </div>
+</section>
+
+<section class="services-page">
+  <div class="container">
+    <div class="services-intro">
+      <div>
+        <div class="label">Þjónustan í heild</div>
+        <h2>Eitt fyrirtæki — sjö sérgreinar.</h2>
+      </div>
+      <div>
+        <p>[TBD — íslenska] Brunaþéttingar bjóða <strong>heildaræðar tæknieinangrun</strong> fyrir mannvirki á Íslandi.</p>
+        <p>[TBD — íslenska]</p>
+      </div>
+    </div>
+
+    {%- for s in services %}
+    <article class="service-feature{% if loop.index0 % 2 == 1 %} flip{% endif %}">
+      <div class="pic{% if s.imageContain %} contain{% endif %}" style="background-image: url('{{ s.image }}');"></div>
+      <div class="copy">
+        <span class="num-badge">{{ s.number }} / {{ s.category[lang] }}</span>
+        <h2>{{ s.title[lang] | safe }}</h2>
+        <p class="lead">{{ s.lead[lang] | safe }}</p>
+        <div class="insight">
+          <strong>{{ s.insightStrong[lang] }}</strong>
+          {{ s.insight[lang] | safe }}
+        </div>
+        <ul class="bullets">
+          {%- for b in s.bullets[lang] %}
+          <li>{{ b | safe }}</li>
+          {%- endfor %}
+        </ul>
+      </div>
+    </article>
+    {%- endfor %}
+  </div>
+</section>
+
+<section class="value-band">
+  <div class="container">
+    <div class="row">
+      <div>
+        <div class="label">Hagkvæmni</div>
+        <h2>Tæknieinangrun sem <span class="ul">borgar sig sjálf</span>.</h2>
+      </div>
+      <div>
+        <p>[TBD — íslenska]</p>
+        <p>[TBD — íslenska]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="row">
+      <h2>Þarfu úttekt á staðnum? <span class="ul">Hafðu samband.</span></h2>
+      <div class="actions">
+        <a class="btn primary" href="/verdreiknir/"><span>Fá verðmat</span> <span class="arrow">→</span></a>
+        <a class="btn ghost" href="tel:+3548504405"><span>(+354) 850-4405</span> <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>

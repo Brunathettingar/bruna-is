@@ -1,0 +1,21 @@
+---
+layout: layouts/base.njk
+---
+<a href="#main-content" class="skip-link">{{ "ui.skip_to_content" | t }}</a>
+<div class="page-wrapper">
+  {% include "partials/utility-bar.njk" %}
+  {% include "partials/header.njk" %}
+  <main id="main-content">
+    {%- if eleventyNavigation and eleventyNavigation.parent %}
+    {% include "partials/breadcrumb.njk" %}
+    {%- endif %}
+    {%- if bodyClass %}
+    <div class="{{ bodyClass }}">
+      {{ content | safe }}
+    </div>
+    {%- else %}
+      {{ content | safe }}
+    {%- endif %}
+  </main>
+  {% include "partials/footer.njk" %}
+</div>
