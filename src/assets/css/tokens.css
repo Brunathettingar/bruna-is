@@ -51,6 +51,9 @@
 
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --font-serif: "Iowan Old Style", "Palatino", Georgia, serif;
+  /* Aliases kept for the mockup CSS which references --sans/--serif. */
+  --sans: var(--font-body);
+  --serif: var(--font-serif);
 
   --fw-regular: 400;
   --fw-medium: 500;
