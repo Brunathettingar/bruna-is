@@ -8,11 +8,10 @@
     <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
     <link rel="canonical" href="{{ meta.url }}{{ page.url }}">
 
+    {%- set otherLang = lang == "is" and "en" or "is" %}
     <link rel="alternate" hreflang="{{ lang }}" href="{{ meta.url }}{{ page.url }}">
-    {%- for link in page.url | locale_links %}
-    <link rel="alternate" hreflang="{{ link.lang }}" href="{{ meta.url }}{{ link.url }}">
-    {%- endfor %}
-    <link rel="alternate" hreflang="x-default" href="{{ meta.url }}{{ page.url | locale_url('is') }}">
+    <link rel="alternate" hreflang="{{ otherLang }}" href="{{ meta.url }}{{ page.url | alternateUrl(lang) }}">
+    <link rel="alternate" hreflang="x-default" href="{{ meta.url }}{% if lang == 'is' %}{{ page.url }}{% else %}{{ page.url | alternateUrl(lang) }}{% endif %}">
 
     {% include "partials/seo-meta.njk" %}
 

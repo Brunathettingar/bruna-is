@@ -113,6 +113,19 @@ export default function (eleventyConfig) {
     typeof str === "string" && str.startsWith(prefix)
   );
 
+  // Swap the locale prefix on a URL. The I18nPlugin's `locale_links` filter
+  // mis-matches alternates for paginated pages (returns every page from
+  // the other locale tree, not just the one with the same slug). Slugs are
+  // identical across locales by contract, so a deterministic prefix swap
+  // is correct.
+  eleventyConfig.addFilter("alternateUrl", (url, currentLang) => {
+    if (typeof url !== "string") return url;
+    if (currentLang === "is") {
+      return url === "/" ? "/en/" : `/en${url}`;
+    }
+    return url.replace(/^\/en\//, "/") || "/";
+  });
+
   eleventyConfig.addCollection("navIs", (api) =>
     api
       .getAll()
