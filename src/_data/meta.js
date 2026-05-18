@@ -15,6 +15,9 @@ const byLocale = {
 };
 
 const shared = {
+  // Includes the project-page subpath. HtmlBasePlugin only rewrites
+  // path-style URLs (`/foo/`), not absolute ones — so canonical and og:url
+  // need the prefix included here.
   url: "https://brunathettingar.github.io/bruna-is",
   ogImage: "/assets/img/og-default.jpg",
 };

@@ -1,11 +1,33 @@
 import eleventyNavigationPlugin from "@11ty/eleventy-navigation";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
-import { I18nPlugin } from "@11ty/eleventy";
+import { I18nPlugin, HtmlBasePlugin } from "@11ty/eleventy";
 import i18nPlugin from "eleventy-plugin-i18n";
 import translations from "./src/_data/i18n.js";
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
+
+  // Rewrites every URL starting with `/` in generated HTML to include the
+  // pathPrefix at build time. Needed because the site is served from a
+  // project-page subpath (`/bruna-is/`) rather than the org root.
+  eleventyConfig.addPlugin(HtmlBasePlugin);
+
+  // HtmlBasePlugin only rewrites href/src attributes — it doesn't touch
+  // `url(...)` references inside inline `style` attributes. Many mockup
+  // pages use `<div style="background-image: url('/img/foo.jpg')">`, so
+  // we patch those manually here.
+  eleventyConfig.addTransform("prefixInlineUrls", function (content) {
+    if (!this.page?.outputPath?.endsWith(".html")) return content;
+    const prefix = "/bruna-is";
+    return content.replace(
+      /style="([^"]*url\([^"]+)"/g,
+      (match, styleBody) =>
+        `style="${styleBody
+          .replace(/url\(\s*'\/(?!bruna-is\/)/g, `url('${prefix}/`)
+          .replace(/url\(\s*"\/(?!bruna-is\/)/g, `url("${prefix}/`)
+          .replace(/url\(\s*\/(?!bruna-is\/)/g, `url(${prefix}/`)}"`
+    );
+  });
 
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
     formats: ["avif", "webp", "jpeg"],
@@ -131,6 +153,7 @@ export default function (eleventyConfig) {
 }
 
 export const config = {
+  pathPrefix: "/bruna-is/",
   dir: {
     input: "src",
     output: "_site",
