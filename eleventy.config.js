@@ -3,6 +3,7 @@ import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import { I18nPlugin, HtmlBasePlugin } from "@11ty/eleventy";
 import i18nPlugin from "eleventy-plugin-i18n";
 import translations from "./src/_data/i18n.js";
+import meta from "./src/_data/meta.js";
 import { appendFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 
@@ -15,9 +16,11 @@ try { mkdirSync(dirname(MISS_LOG), { recursive: true }); writeFileSync(MISS_LOG,
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
 
-  // Rewrites every URL starting with `/` in generated HTML to include the
-  // pathPrefix at build time. Needed because the site is served from a
-  // project-page subpath (`/bruna-is/`) rather than the org root.
+  // Registered to rewrite href/src attributes at build time so the site can
+  // serve from the GitHub Pages project subpath (/bruna-is/). Not in the
+  // framework spec's Part A template — remove this plugin and the
+  // matching meta.pathPrefix change if/when the site moves to a custom
+  // domain at the apex.
   eleventyConfig.addPlugin(HtmlBasePlugin);
 
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
@@ -131,17 +134,23 @@ export default function (eleventyConfig) {
     watch: ["_site/assets/**/*.css", "_site/assets/**/*.js"],
   });
 
-  eleventyConfig.addFilter("dateDisplay", (date, lang = "is") =>
-    new Date(date).toLocaleDateString(lang === "is" ? "is-IS" : "en-US", {
+  eleventyConfig.addFilter("dateDisplay", (date, lang = "is") => {
+    if (!date) return "";
+    const d = new Date(date);
+    if (isNaN(d)) return "";
+    return d.toLocaleDateString(lang === "is" ? "is-IS" : "en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
-    })
-  );
+    });
+  });
 
-  eleventyConfig.addFilter("dateIso", (date) =>
-    new Date(date).toISOString().split("T")[0]
-  );
+  eleventyConfig.addFilter("dateIso", (date) => {
+    if (!date) return "";
+    const d = new Date(date);
+    if (isNaN(d)) return "";
+    return d.toISOString().split("T")[0];
+  });
 
   // Build-time guard: every HTML output page must have `lang` set (via
   // is.11tydata.js / en.11tydata.js). Used in base.njk as
@@ -219,7 +228,7 @@ export default function (eleventyConfig) {
 }
 
 export const config = {
-  pathPrefix: "/bruna-is/",
+  pathPrefix: meta.pathPrefix,
   dir: {
     input: "src",
     output: "_site",
