@@ -1,18 +1,83 @@
 ---
 layout: layouts/page.njk
 title: "Solutions"
-description: "Brunaþéttingar plan, manage and execute fire sealing and technical insulation work on Icelandic buildings — with fire engineering by Tensio Architects."
+description: "Brunaþéttingar plans, manages and executes fire sealing and technical insulation work on Icelandic buildings — certified systems from Roxtec, Hilti and Promat."
 eleventyNavigation:
   key: home-en
   order: 1
+heroHeading: "Fire sealing &amp;<br>technical insulation."
+statement:
+  label: "What we do"
+  heading: "Our specialty is <span class=\"ul\">technical insulation and fire protection</span> on buildings — fire sealing, fireproofing, pipe insulation and ventilation insulation."
+  lead: "Brunaþéttingar is a specialist contractor in technical insulation and fire sealing, serving contractors, owners and facility operators across Iceland. <strong>We do not offer fire engineering design</strong> — that's a separate discipline. We specifically recommend <strong>Tensio Architects</strong>."
+explainer:
+  left:
+    heading: "What is technical insulation?"
+    paragraphs:
+      - "<strong>Technical insulation</strong> is the umbrella term for insulation of equipment, building services and structural work."
+      - "Where regular insulation keeps heat in the wall, technical insulation keeps it in the pipe, on the structural steel, around the duct."
+    chips:
+      - { label: "Thermal insulation", style: "blue" }
+      - { label: "Acoustic",            style: "blue" }
+      - { label: "Fire insulation",     style: null }
+      - { label: "Fire sealing",        style: null }
+  right:
+    heading: "Our services"
+    paragraphs:
+      - "We provide <strong>complete technical insulation</strong> for buildings."
+      - "Our work breaks down into four areas:"
+    chips:
+      - { label: "Fire sealing",       style: null }
+      - { label: "Fireproofing",       style: null }
+      - { label: "Pipe insulation",    style: null }
+      - { label: "Ventilation",        style: null }
+    footer: "We use certified systems from Roxtec, Hilti, Promat, 3M, <strong>Isogenopak</strong> and <strong>WrapTec</strong>."
+process:
+  label: "End-to-end workflow"
+  heading: "From first drawing to final inspection — one team, one process."
+  steps:
+    - { num: "01", heading: "Fire engineering design",       body: "We do not offer fire engineering design — we work with certified fire engineers." }
+    - { num: "02", heading: "Planning",                      body: "Material selection, take-off from drawings and project schedule." }
+    - { num: "03", heading: "Project management and install", body: "One crew, one project manager, certified installation." }
+    - { num: "04", heading: "Documentation and reporting",   body: "Photo log, location-on-drawing and certification numbers for every seal." }
+leading:
+  label: "Documentation and reporting"
+  heading: "Documentation is the <span class=\"ul\">heart of the service</span>."
+  paragraphs:
+    - "Every seal we install gets a photo, a location on the drawing and a certification number. The handover report is part of the work, not an afterthought."
+  stats:
+    - { num: "14",       lbl: "years in fire sealing" }
+    - { num: "42,000+",  lbl: "certified seals" }
+    - { num: "600+",     lbl: "documented reports" }
+    - { num: "100%",     lbl: "inspections passed first time" }
+  badgeStrong: "Two report formats"
+  badgeBody: "A short handover summary and a full traceability report — both included in every project."
+  image: "/img/iceland_karahnjukar.jpg"
+sectorsCallout:
+  label: "Sectors"
+  heading: "Where reliability isn't optional."
+  items:
+    - { icon: "sector-commercial", heading: "Commercial buildings",       body: "Offices, retail and service hubs." }
+    - { icon: "sector-industry",   heading: "Industry and factories",     body: "Heavy industry, plants and processing." }
+    - { icon: "sector-hospital",   heading: "Hospitals and public buildings", body: "Strict documentation, no operational downtime." }
+    - { icon: "sector-energy",     heading: "Energy and utilities",       body: "Geothermal, hydropower and distribution." }
+customers:
+  label: "Partners and manufacturers"
+cta:
+  heading: "Ready to start your project? <span class=\"ul\">Get in touch.</span>"
+  primaryHref: "/en/verdreiknir/"
+  primaryLabel: "Get a quote"
+  secondaryHref: "#contact"
+  secondaryLabel: "Send a message"
 ---
+{%- set pillars = collections['featuredServices' + (lang == 'is' and 'Is' or 'En')] %}
+
 <section class="hero">
   <img class="hero__image" src="/img/iceland_svartsengi.jpg" alt="" width="1600" height="900" loading="eager" fetchpriority="high">
   <div class="scrim"></div>
   <div class="container">
-    <div class="crumbs"><a href="/en/">Home</a> &nbsp;/&nbsp; <span>Solutions</span></div>
     <h1>
-      Fire sealing &amp;<br>technical insulation.
+      {{ heroHeading | safe }}
       <span class="accent-bar"></span>
     </h1>
   </div>
@@ -21,10 +86,10 @@ eleventyNavigation:
 <section class="statement">
   <div class="container">
     <div class="row">
-      <div><span class="label">What we do</span></div>
+      <div><span class="label">{{ statement.label }}</span></div>
       <div>
-        <h2>Our specialty is <span class="ul">technical insulation and fire protection</span> for buildings — fire sealing, fireproofing, pipe insulation and ventilation insulation.</h2>
-        <p class="lead">Brunaþéttingar is a specialised technical insulation and fire sealing company serving contractors, building owners and operators across Iceland. <strong>We do not offer fire engineering</strong> — that work belongs to fire engineers. We advise on materials and solutions, and we execute the work. For fire engineering we specifically recommend <strong>Tensio Architects</strong>.</p>
+        <h2>{{ statement.heading | safe }}</h2>
+        <p class="lead">{{ statement.lead | safe }}</p>
       </div>
     </div>
   </div>
@@ -34,27 +99,27 @@ eleventyNavigation:
   <div class="container">
     <div class="row">
       <div>
-        <h3>What is technical insulation?</h3>
-        <p><strong>Technical insulation</strong> is the umbrella discipline that insulates equipment, building services and structural elements — thermal, acoustic and fire-rated insulation on pipes, conduits, ducts, walls and load-bearing structure.</p>
-        <p>Within technical insulation, fire protection is a specialty of its own: it prevents fire and smoke from spreading between rooms where pipes, cables and ducts pass through fire-rated walls and floors.</p>
+        <h3>{{ explainer.left.heading }}</h3>
+        {%- for p in explainer.left.paragraphs %}
+        <p>{{ p | safe }}</p>
+        {%- endfor %}
         <div class="bullet-row">
-          <span class="chip blue">Thermal</span>
-          <span class="chip blue">Acoustic</span>
-          <span class="chip">Fire insulation</span>
-          <span class="chip">Fire sealing</span>
+          {%- for c in explainer.left.chips %}
+          <span class="chip{% if c.style %} {{ c.style }}{% endif %}">{{ c.label }}</span>
+          {%- endfor %}
         </div>
       </div>
       <div>
-        <h3>Our services</h3>
-        <p>We offer <strong>complete technical insulation</strong> for buildings — fire protection, pipe insulation and ventilation insulation, both indoor and outdoor.</p>
-        <p>The work falls into four main areas:</p>
+        <h3>{{ explainer.right.heading }}</h3>
+        {%- for p in explainer.right.paragraphs %}
+        <p>{{ p | safe }}</p>
+        {%- endfor %}
         <div class="bullet-row">
-          <span class="chip">Fire sealing</span>
-          <span class="chip">Fireproofing</span>
-          <span class="chip">Pipe insulation</span>
-          <span class="chip">Ventilation insulation</span>
+          {%- for c in explainer.right.chips %}
+          <span class="chip{% if c.style %} {{ c.style }}{% endif %}">{{ c.label }}</span>
+          {%- endfor %}
         </div>
-        <p>We use certified systems from Roxtec, Hilti, Promat, 3M, <strong>Isogenopak</strong> and <strong>WrapTec</strong> — we plan the job, install it and deliver an inspection report and project handover report to the owner.</p>
+        <p>{{ explainer.right.footer | safe }}</p>
       </div>
     </div>
   </div>
@@ -63,85 +128,26 @@ eleventyNavigation:
 <section class="pillars">
   <div class="container">
     <div class="pillar-grid">
-      <a class="pillar" href="/en/thjonusta/">
-        <div class="pic">
-          <img class="pillar__image" src="/img/server_room.jpg" alt="" width="1200" height="800">
-          <div class="ico">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="4" rx="0.5"/><rect x="3" y="14" width="18" height="4" rx="0.5"/><circle cx="6" cy="8" r="0.6" fill="currentColor"/><circle cx="6" cy="16" r="0.6" fill="currentColor"/><line x1="9" y1="8" x2="18" y2="8"/><line x1="9" y1="16" x2="18" y2="16"/></svg>
-          </div>
+      {%- for s in pillars %}
+      <a class="pillar" href="{{ s.url }}">
+        <div class="pic{% if s.data.imageContain %} pic--contain{% endif %}">
+          <img class="pillar__image{% if s.data.imageContain %} pillar__image--contain{% endif %}" src="{{ s.data.image }}" alt="" width="1200" height="800">
+          <div class="ico">{% include "partials/icons/" + s.data.icon + ".njk" %}</div>
         </div>
         <div class="body">
-          <h3>Fire sealing &amp; solutions</h3>
-          <p>Sealing of penetrations, joints and gaps where pipes, cables and ducts pass through fire-rated building elements — plus pre-engineered systems for complex buildings. Certified to EI 60, EI 120 and EI 240.</p>
+          <h3>{{ s.data.title | safe }}</h3>
+          <p>{{ s.data.summary | safe }}</p>
           <ul>
-            <li>Modular cable transit (Roxtec, Beele, Hilti CFS-T)</li>
-            <li>Fire-rated caulks, foams and pillows</li>
-            <li>Smoke sealing and air-pressure testing</li>
-            <li>Fire-rated doors and compartmentation</li>
+            {%- for b in s.data.bullets %}
+            {%- if loop.index <= 4 %}
+            <li>{{ b | safe }}</li>
+            {%- endif %}
+            {%- endfor %}
           </ul>
-          <span class="more">View services →</span>
+          <span class="more">{{ "ui.view_services" | i18n(lang) }} →</span>
         </div>
       </a>
-
-      <a class="pillar" href="/en/thjonusta/">
-        <div class="pic">
-          <img class="pillar__image" src="/img/engineer_install.jpg" alt="" width="1200" height="800">
-          <div class="ico">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 C 14 6 18 8 18 13 a 6 6 0 0 1 -12 0 C 6 9 9 7 12 2 Z"/><path d="M12 9 C 13 11 15 12 15 14 a 3 3 0 0 1 -6 0 C 9 12 11 11 12 9 Z" fill="currentColor" opacity="0.35" stroke="none"/></svg>
-          </div>
-        </div>
-        <div class="body">
-          <h3>Fireproofing</h3>
-          <p>Structural fire protection for steel and timber, fire-rated insulation on pipes and conduits, and fire boards — certified from R 30 to R 240.</p>
-          <ul>
-            <li>Intumescent paint for structural steel</li>
-            <li>Fire boards and fire-rated insulation</li>
-            <li>Cladding of load-bearing structures</li>
-            <li>Documentation for fire authority inspection</li>
-          </ul>
-          <span class="more">View services →</span>
-        </div>
-      </a>
-
-      <a class="pillar" href="/en/thjonusta/">
-        <div class="pic pic--contain">
-          <img class="pillar__image pillar__image--contain" src="/img/isogenopak_roll.jpg" alt="" width="1200" height="800">
-          <div class="ico">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="6" rx="8" ry="2.4"/><path d="M4 6 L 4 18"/><path d="M20 6 L 20 18"/><ellipse cx="12" cy="18" rx="8" ry="2.4"/><path d="M8 8.4 L 8 16"/><path d="M16 8.4 L 16 16"/></svg>
-          </div>
-        </div>
-        <div class="body">
-          <h3>Pipe insulation</h3>
-          <p>Hot and cold pipe insulation — both indoor and outdoor. We work with engineered systems from <strong>Isogenopak</strong> (PVC cladding for indoor pipes) and <strong>WrapTec</strong> (self-welding jacketing for outdoor pipes and ventilation).</p>
-          <ul>
-            <li>Indoor: mineral wool, Armaflex and refrigeration pipe insulation</li>
-            <li>Outdoor: Isogenopak PVC cladding, watertight</li>
-            <li>WrapTec self-welding jacketing on joints</li>
-            <li>Heat, cooling and frost protection insulation</li>
-          </ul>
-          <span class="more">View services →</span>
-        </div>
-      </a>
-
-      <a class="pillar" href="/en/thjonusta/">
-        <div class="pic">
-          <img class="pillar__image" src="/img/industrial_plant.jpg" alt="" width="1200" height="800">
-          <div class="ico">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="9" width="18" height="6" rx="1"/><line x1="6" y1="9" x2="6" y2="15"/><line x1="10" y1="9" x2="10" y2="15"/><line x1="14" y1="9" x2="14" y2="15"/><line x1="18" y1="9" x2="18" y2="15"/><path d="M3 12 L 1 12"/><path d="M21 12 L 23 12"/></svg>
-          </div>
-        </div>
-        <div class="body">
-          <h3>Ventilation insulation</h3>
-          <p>Insulation on ventilation ducts in buildings — for thermal, acoustic and fire protection. Ensures energy efficiency and reduces sound transmission between rooms.</p>
-          <ul>
-            <li>Heat and cooling insulation on ducts</li>
-            <li>Fire-rated insulation (EI 30 / EI 60 / EI 120)</li>
-            <li>Acoustic insulation on ducts and seals</li>
-            <li>Indoor and outdoor solutions</li>
-          </ul>
-          <span class="more">View services →</span>
-        </div>
-      </a>
+      {%- endfor %}
     </div>
   </div>
 </section>
@@ -149,30 +155,17 @@ eleventyNavigation:
 <section class="process">
   <div class="container">
     <div class="head">
-      <div class="label">End-to-end service</div>
-      <h2>From the first drawing to final inspection — one team, one process.</h2>
+      <div class="label">{{ process.label }}</div>
+      <h2>{{ process.heading | safe }}</h2>
     </div>
     <div class="process-grid">
+      {%- for step in process.steps %}
       <div class="process-step">
-        <div class="num">01</div>
-        <h4>Fire engineering &amp; advice</h4>
-        <p>We do not offer fire engineering design — that is done by fire engineers. We advise on solutions and material selection. We specifically recommend <strong>Tensio Architects</strong> for fire engineering.</p>
+        <div class="num">{{ step.num }}</div>
+        <h4>{{ step.heading }}</h4>
+        <p>{{ step.body | safe }}</p>
       </div>
-      <div class="process-step">
-        <div class="num">02</div>
-        <h4>Planning</h4>
-        <p>Brunaþéttingar plan the job — material selection, quantities, timelines and coordination with other contractors, based on drawings and site conditions.</p>
-      </div>
-      <div class="process-step">
-        <div class="num">03</div>
-        <h4>Project management &amp; installation</h4>
-        <p>Our project manager runs the work on site. Certified fire-sealing installers work with ETA-certified systems from leading manufacturers.</p>
-      </div>
-      <div class="process-step">
-        <div class="num">04</div>
-        <h4>Documentation &amp; reporting</h4>
-        <p>Every seal is tracked in our documentation system with photo, GPS, certification number and date. The final report is delivered to the owner and to the fire authority for inspection.</p>
-      </div>
+      {%- endfor %}
     </div>
   </div>
 </section>
@@ -181,23 +174,22 @@ eleventyNavigation:
   <div class="container">
     <div class="row">
       <div class="copy">
-        <div class="label">Documentation &amp; reporting</div>
-        <h2>Documentation is the <span class="ul">heart of the service</span>.</h2>
-        <p>Documentation and reporting are what set Brunaþéttingar apart. We produce two distinct types of reports for our clients:</p>
-        <p><strong>Inspection reports</strong> — independent assessments of the condition of fire sealing in existing buildings. Suited to owners who need a complete overview ahead of a fire authority inspection or maintenance planning.</p>
-        <p><strong>Project handover reports</strong> — delivered with every single project. They include photos of each seal, location on the drawing, certification numbers of the systems used, and the installation date.</p>
+        <div class="label">{{ leading.label }}</div>
+        <h2>{{ leading.heading | safe }}</h2>
+        {%- for p in leading.paragraphs %}
+        <p>{{ p | safe }}</p>
+        {%- endfor %}
         <div class="stats">
-          <div class="stat"><div class="num">14</div><div class="lbl">years in fire sealing</div></div>
-          <div class="stat"><div class="num">42,000+</div><div class="lbl">certified seals installed</div></div>
-          <div class="stat"><div class="num">600+</div><div class="lbl">documented reports</div></div>
-          <div class="stat"><div class="num">100%</div><div class="lbl">inspections passed first time</div></div>
+          {%- for s in leading.stats %}
+          <div class="stat"><div class="num">{{ s.num }}</div><div class="lbl">{{ s.lbl }}</div></div>
+          {%- endfor %}
         </div>
       </div>
       <div class="pic">
-        <img class="leading__image" src="/img/iceland_karahnjukar.jpg" alt="" width="1200" height="1500">
+        <img class="leading__image" src="{{ leading.image }}" alt="" width="1200" height="900">
         <div class="badge">
-          <strong>Two report types</strong>
-          Inspection reports for existing buildings — handover reports for every new project.
+          <strong>{{ leading.badgeStrong }}</strong>
+          {{ leading.badgeBody | safe }}
         </div>
       </div>
     </div>
@@ -207,58 +199,30 @@ eleventyNavigation:
 <section class="sectors">
   <div class="container">
     <div class="head">
-      <div class="label">Sectors</div>
-      <h2>Where reliability isn't optional.</h2>
+      <div class="label">{{ sectorsCallout.label }}</div>
+      <h2>{{ sectorsCallout.heading | safe }}</h2>
     </div>
     <div class="sectors-grid">
+      {%- for s in sectorsCallout.items %}
       <div class="sector">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="3" width="16" height="18"/><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="13" x2="20" y2="13"/><line x1="4" y1="18" x2="20" y2="18"/><rect x="7" y="5" width="2" height="2"/><rect x="11" y="5" width="2" height="2"/><rect x="15" y="5" width="2" height="2"/><rect x="7" y="10" width="2" height="2"/><rect x="11" y="10" width="2" height="2"/><rect x="15" y="10" width="2" height="2"/></svg></div>
-        <h4>Commercial buildings</h4>
-        <p>Offices, shopping centres and service hubs — from basement service tunnels to top-floor mechanical rooms.</p>
+        <div class="ico">{% include "partials/icons/" + s.icon + ".njk" %}</div>
+        <h4>{{ s.heading }}</h4>
+        <p>{{ s.body | safe }}</p>
       </div>
-      <div class="sector">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 20 L 3 8 L 8 4 L 8 8 L 13 4 L 13 8 L 18 4 L 18 20 Z"/><line x1="3" y1="20" x2="21" y2="20"/><rect x="6" y="14" width="2" height="3"/><rect x="11" y="14" width="2" height="3"/><rect x="16" y="14" width="2" height="3"/></svg></div>
-        <h4>Industry &amp; factories</h4>
-        <p>Aluminium smelters, silicon plants, fish processing, food and dairy — where chemical resistance and noise tolerance matter.</p>
-      </div>
-      <div class="sector">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20 L 4 8 L 12 3 L 20 8 L 20 20 Z"/><path d="M9 20 L 9 13 L 15 13 L 15 20"/><circle cx="12" cy="9" r="1.4"/></svg></div>
-        <h4>Hospitals &amp; public buildings</h4>
-        <p>Hospitals, schools, cultural buildings and sports facilities — where operations cannot stop and the requirements are tightest.</p>
-      </div>
-      <div class="sector">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 L 12 22"/><path d="M6 6 L 18 6"/><path d="M4 14 L 20 14"/><path d="M8 22 C 8 18 10 16 12 16 C 14 16 16 18 16 22"/></svg></div>
-        <h4>Energy &amp; utilities</h4>
-        <p>Substations, power plants, geothermal tunnels and oil storage. Experience from Landsvirkjun, OR and Landsnet.</p>
-      </div>
+      {%- endfor %}
     </div>
   </div>
 </section>
 
 <section class="customers">
   <div class="container">
-    <div class="label">Partners &amp; manufacturers</div>
+    <div class="label">{{ customers.label }}</div>
     <div class="customers-row">
-      <div class="customer-logo sans">Tensio Architects</div>
-      <div class="customer-logo">Roxtec</div>
-      <div class="customer-logo sans">Hilti</div>
-      <div class="customer-logo">Promat</div>
-      <div class="customer-logo sans">Isogenopak</div>
-      <div class="customer-logo">WrapTec</div>
+      {%- for p in partners %}
+      <div class="customer-logo{% if p.style %} {{ p.style }}{% endif %}">{{ p.name }}</div>
+      {%- endfor %}
     </div>
   </div>
 </section>
 
-<section class="cta-band">
-  <div class="container">
-    <div class="row">
-      <h2>Ready to start your project? <span class="ul">Let's talk.</span></h2>
-      <div class="actions">
-        <a class="btn primary" href="/en/verdreiknir/"><span>Get a quote</span> <span class="arrow">→</span></a>
-        <a class="btn ghost" href="#contact"><span>Send an enquiry</span> <span class="arrow">→</span></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-{% include "partials/schema-organization.njk" %}
+{% include "partials/cta-band.njk" %}
