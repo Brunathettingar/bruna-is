@@ -7,35 +7,42 @@ eleventyNavigation:
   key: articles-en
   order: 6
   parent: false
+kicker: "Practical guidance from our fire-sealing team."
+cta:
+  heading: "Ready to start your project? <span class=\"ul\">Get in touch.</span>"
+  primaryHref: "/en/verdreiknir/"
+  primaryLabel: "Get a quote"
+  secondaryHref: "#contact"
+  secondaryLabel: "Send a message"
 ---
-{%- set featured = articles | selectattr("featured") | first %}
-{%- set rest = articles | rejectattr("featured") %}
+{%- set articles = collections['articles-' + lang] | sort(false, true, 'data.date') %}
+{%- set featured = collections['featuredArticle' + (lang == 'is' and 'Is' or 'En')] | first %}
+{%- set rest = articles | rejectattr('data.featured') %}
 
 <section class="page-hero">
   <img class="page-hero__image" src="/img/documentation.jpg" alt="" width="1600" height="900">
   <div class="scrim"></div>
   <div class="container">
-    <div class="crumbs"><a href="/en/">Home</a> &nbsp;/&nbsp; <span>Articles</span></div>
-    <h1>Articles &amp; guides.</h1>
-    <p class="kicker">Practical advice from our fire-sealing crews — material selection, certifications, documentation and standards for Icelandic buildings.</p>
+    <h1>{{ title }}</h1>
+    <p class="kicker">{{ kicker | safe }}</p>
   </div>
 </section>
 
 <section class="articles">
   <div class="container">
     {%- if featured %}
-    <a class="article-featured" href="/en/greinar/{{ featured.slug }}/">
+    <a class="article-featured" href="{{ featured.url }}">
       <div class="pic">
-        <img src="{{ featured.image }}" alt="" width="1200" height="900">
+        <img src="{{ featured.data.image }}" alt="" width="1600" height="900">
       </div>
       <div class="body">
-        <div class="tag">{{ featured.category[lang] }}</div>
-        <h2>{{ featured.title[lang] }}</h2>
-        <p>{{ featured.summary[lang] }}</p>
+        <div class="tag">{{ featured.data.category }}</div>
+        <h2>{{ featured.data.title | safe }}</h2>
+        <p>{{ featured.data.summary | safe }}</p>
         <div class="meta">
-          <span>{{ featured.date | dateDisplay(lang) }}</span>
-          <span><strong>{{ featured.readTimeMinutes }} min</strong> read</span>
-          <span>by {{ featured.author }}</span>
+          <span>{{ featured.data.date | dateDisplay(lang) }}</span>
+          <span><strong>{{ featured.data.readTimeMinutes }} {{ "articles.read_time_minutes" | i18n(lang) }}</strong></span>
+          <span>{{ featured.data.author }}</span>
         </div>
       </div>
     </a>
@@ -43,17 +50,17 @@ eleventyNavigation:
 
     <div class="article-grid">
       {%- for article in rest %}
-      <a class="article-card" href="/en/greinar/{{ article.slug }}/">
+      <a class="article-card" href="{{ article.url }}">
         <div class="pic">
-          <img src="{{ article.image }}" alt="" width="1200" height="900">
-          <span class="tag">{{ article.category[lang] }}</span>
+          <img src="{{ article.data.image }}" alt="" width="1200" height="900">
+          <span class="tag">{{ article.data.category }}</span>
         </div>
         <div class="body">
-          <h3>{{ article.title[lang] }}</h3>
-          <p>{{ article.summary[lang] }}</p>
+          <h3>{{ article.data.title | safe }}</h3>
+          <p>{{ article.data.summary | safe }}</p>
           <div class="meta">
-            <span>{{ article.date | dateDisplay(lang) }}</span>
-            <span>{{ article.readTimeMinutes }} min</span>
+            <span>{{ article.data.date | dateDisplay(lang) }}</span>
+            <span>{{ article.data.readTimeMinutes }} {{ "articles.read_time_minutes" | i18n(lang) }}</span>
           </div>
         </div>
       </a>
@@ -65,10 +72,10 @@ eleventyNavigation:
 <section class="cta-band">
   <div class="container">
     <div class="row">
-      <h2>Ready to start your project? <span class="ul">Let's talk.</span></h2>
+      <h2>{{ cta.heading | safe }}</h2>
       <div class="actions">
-        <a class="btn primary" href="/en/verdreiknir/"><span>Get a quote</span> <span class="arrow">→</span></a>
-        <a class="btn ghost" href="#contact"><span>Send an enquiry</span> <span class="arrow">→</span></a>
+        <a class="btn primary" href="{{ cta.primaryHref }}"><span>{{ cta.primaryLabel }}</span> <span class="arrow">→</span></a>
+        <a class="btn ghost" href="{{ cta.secondaryHref }}"><span>{{ cta.secondaryLabel }}</span> <span class="arrow">→</span></a>
       </div>
     </div>
   </div>
