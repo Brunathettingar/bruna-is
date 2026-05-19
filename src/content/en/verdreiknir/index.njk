@@ -5,6 +5,20 @@ description: "Get an online price estimate for fire sealing — choose opening t
 eleventyNavigation:
   key: quote-en
   order: 4
+kicker: "Get an online price estimate — choose the opening type, wall type, fire rating and dimensions. We'll send the quote to your email instantly."
+howItWorks:
+  label: "How it works"
+  heading: "An estimated price in three minutes."
+  paragraphs:
+    - "Add one row for each type of opening in your project. Choose the opening type, wall, fire rating and dimensions — the calculator computes an estimated price automatically."
+  noticeStrong: "Note:"
+  noticeBody: "This is an estimated price. The final price is confirmed with an on-site inspection. Prices exclude VAT."
+cta:
+  heading: "Need an on-site inspection? <span class=\"ul\">Let's talk.</span>"
+  primaryHref: "#contact"
+  primaryLabel: "Request an inspection"
+  secondaryHref: "tel:+3548504405"
+  secondaryLabel: "(+354) 850-4405"
 ---
 <section class="page-hero">
   <img class="page-hero__image" src="/img/documentation.jpg" alt="" width="1600" height="900">
@@ -12,7 +26,7 @@ eleventyNavigation:
   <div class="container">
     <div class="crumbs"><a href="/en/">Home</a> &nbsp;/&nbsp; <span>Quote calculator</span></div>
     <h1>Quote calculator.</h1>
-    <p class="kicker">Get an online price estimate — choose the opening type, wall type, fire rating and dimensions. We'll send the quote to your email instantly.</p>
+    <p class="kicker">{{ kicker }}</p>
   </div>
 </section>
 
@@ -20,13 +34,15 @@ eleventyNavigation:
   <div class="container">
     <div class="quoter-intro">
       <div>
-        <div class="label">How it works</div>
-        <h2>An estimated price in three minutes.</h2>
+        <div class="label">{{ howItWorks.label }}</div>
+        <h2>{{ howItWorks.heading }}</h2>
       </div>
       <div>
-        <p>Add one row for each type of opening in your project. Choose the opening type, wall, fire rating and dimensions — the calculator computes an estimated price automatically.</p>
+        {%- for p in howItWorks.paragraphs %}
+        <p>{{ p }}</p>
+        {%- endfor %}
         <div class="notice">
-          <strong>Note:</strong> This is an estimated price. The final price is confirmed with an on-site inspection. Prices exclude VAT.
+          <strong>{{ howItWorks.noticeStrong }}</strong> {{ howItWorks.noticeBody }}
         </div>
       </div>
     </div>
@@ -84,14 +100,4 @@ eleventyNavigation:
   </div>
 </section>
 
-<section class="cta-band">
-  <div class="container">
-    <div class="row">
-      <h2>Need an on-site inspection? <span class="ul">Let's talk.</span></h2>
-      <div class="actions">
-        <a class="btn primary" href="#contact"><span>Request an inspection</span> <span class="arrow">→</span></a>
-        <a class="btn ghost" href="tel:+3548504405"><span>(+354) 850-4405</span> <span class="arrow">→</span></a>
-      </div>
-    </div>
-  </div>
-</section>
+{% include "partials/cta-band.njk" %}

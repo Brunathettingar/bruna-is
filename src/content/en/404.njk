@@ -3,6 +3,18 @@ layout: layouts/page.njk
 title: "404 — Page not found"
 permalink: /en/404.html
 eleventyExcludeFromCollections: true
+kicker: "The page you tried to visit doesn't exist or has been moved."
+help:
+  label: "404"
+  heading: "Try the <span class=\"ul\">Icelandic version</span> of this page — or jump straight to the home page."
+  lead: "Common pages:"
+  links:
+    - { href: "/en/thjonusta/", label: "Services" }
+    - { href: "/en/geirar/",    label: "Sectors" }
+    - { href: "/en/verdreiknir/", label: "Quote" }
+    - { href: "/en/about/",     label: "About" }
+    - { href: "/en/greinar/",   label: "Articles" }
+    - { href: "/",              label: "Íslenska" }
 ---
 <section class="page-hero">
   <img class="page-hero__image" src="/img/iceland_volcano.jpg" alt="" width="1600" height="900">
@@ -10,17 +22,20 @@ eleventyExcludeFromCollections: true
   <div class="container">
     <div class="crumbs"><a href="/en/">Home</a> &nbsp;/&nbsp; <span>404</span></div>
     <h1>Page not found.</h1>
-    <p class="kicker">The page you tried to visit doesn't exist or has been moved.</p>
+    <p class="kicker">{{ kicker }}</p>
   </div>
 </section>
 
 <section class="statement">
   <div class="container">
     <div class="row">
-      <div><span class="label">404</span></div>
+      <div><span class="label">{{ help.label }}</span></div>
       <div>
-        <h2>Try the <span class="ul">Icelandic version</span> of this page — or jump straight to the home page.</h2>
-        <p class="lead">Common pages: <a href="/en/thjonusta/">Services</a> · <a href="/en/geirar/">Sectors</a> · <a href="/en/verdreiknir/">Quote</a> · <a href="/en/about/">About</a> · <a href="/en/greinar/">Articles</a> · <a href="/">Íslenska</a>.</p>
+        <h2>{{ help.heading | safe }}</h2>
+        <p class="lead">{{ help.lead }}
+          {%- for l in help.links %}
+          <a href="{{ l.href }}">{{ l.label }}</a>{% if not loop.last %} · {% endif %}
+          {%- endfor %}.</p>
       </div>
     </div>
   </div>

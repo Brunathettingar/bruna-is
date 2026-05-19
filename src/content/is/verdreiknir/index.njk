@@ -5,6 +5,20 @@ description: "[TBD — íslensk lýsing] Fáðu áætlað verð fyrir brunaþét
 eleventyNavigation:
   key: quote-is
   order: 4
+kicker: "Fáðu áætlað verðmat á netinu."
+howItWorks:
+  label: "Hvernig það virkar"
+  heading: "Áætlað verð á þremur mínútum."
+  paragraphs:
+    - "[TBD — íslenska]"
+  noticeStrong: "Athugið:"
+  noticeBody: "Þetta er áætlað verð. Endanlegt verð staðfestist með úttekt á staðnum. Verð án vsk."
+cta:
+  heading: "Þarfu úttekt á staðnum? <span class=\"ul\">Hafðu samband.</span>"
+  primaryHref: "#contact"
+  primaryLabel: "Óska eftir úttekt"
+  secondaryHref: "tel:+3548504405"
+  secondaryLabel: "(+354) 850-4405"
 ---
 <section class="page-hero">
   <img class="page-hero__image" src="/img/documentation.jpg" alt="" width="1600" height="900">
@@ -12,7 +26,7 @@ eleventyNavigation:
   <div class="container">
     <div class="crumbs"><a href="/">Heim</a> &nbsp;/&nbsp; <span>Verðreiknir</span></div>
     <h1>Verðreiknir.</h1>
-    <p class="kicker">[TBD — íslenska] Fáðu áætlað verðmat á netinu.</p>
+    <p class="kicker">{{ kicker }}</p>
   </div>
 </section>
 
@@ -20,13 +34,15 @@ eleventyNavigation:
   <div class="container">
     <div class="quoter-intro">
       <div>
-        <div class="label">Hvernig það virkar</div>
-        <h2>Áætlað verð á þremur mínútum.</h2>
+        <div class="label">{{ howItWorks.label }}</div>
+        <h2>{{ howItWorks.heading }}</h2>
       </div>
       <div>
-        <p>[TBD — íslenska]</p>
+        {%- for p in howItWorks.paragraphs %}
+        <p>{{ p }}</p>
+        {%- endfor %}
         <div class="notice">
-          <strong>Athugið:</strong> Þetta er áætlað verð. Endanlegt verð staðfestist með úttekt á staðnum. Verð án vsk.
+          <strong>{{ howItWorks.noticeStrong }}</strong> {{ howItWorks.noticeBody }}
         </div>
       </div>
     </div>
@@ -84,14 +100,4 @@ eleventyNavigation:
   </div>
 </section>
 
-<section class="cta-band">
-  <div class="container">
-    <div class="row">
-      <h2>Þarfu úttekt á staðnum? <span class="ul">Hafðu samband.</span></h2>
-      <div class="actions">
-        <a class="btn primary" href="#contact"><span>Óska eftir úttekt</span> <span class="arrow">→</span></a>
-        <a class="btn ghost" href="tel:+3548504405"><span>(+354) 850-4405</span> <span class="arrow">→</span></a>
-      </div>
-    </div>
-  </div>
-</section>
+{% include "partials/cta-band.njk" %}

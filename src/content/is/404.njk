@@ -3,6 +3,18 @@ layout: layouts/page.njk
 title: "404 — Síða fannst ekki"
 permalink: /404.html
 eleventyExcludeFromCollections: true
+kicker: "Síðan sem þú reyndir að heimsækja er ekki til, eða hefur verið færð."
+help:
+  label: "404"
+  heading: "Þú getur líka skoðað <span class=\"ul\">English version</span> af þessari síðu — eða farið beint á forsíðuna."
+  lead: "Algengar síður:"
+  links:
+    - { href: "/thjonusta/",   label: "Þjónusta" }
+    - { href: "/geirar/",      label: "Geirar" }
+    - { href: "/verdreiknir/", label: "Verðreiknir" }
+    - { href: "/about/",       label: "Um okkur" }
+    - { href: "/greinar/",     label: "Greinar" }
+    - { href: "/en/",          label: "English" }
 ---
 <section class="page-hero">
   <img class="page-hero__image" src="/img/iceland_volcano.jpg" alt="" width="1600" height="900">
@@ -10,17 +22,20 @@ eleventyExcludeFromCollections: true
   <div class="container">
     <div class="crumbs"><a href="/">Heim</a> &nbsp;/&nbsp; <span>404</span></div>
     <h1>Síða fannst ekki.</h1>
-    <p class="kicker">Síðan sem þú reyndir að heimsækja er ekki til, eða hefur verið færð.</p>
+    <p class="kicker">{{ kicker }}</p>
   </div>
 </section>
 
 <section class="statement">
   <div class="container">
     <div class="row">
-      <div><span class="label">404</span></div>
+      <div><span class="label">{{ help.label }}</span></div>
       <div>
-        <h2>Þú getur líka skoðað <span class="ul">English version</span> af þessari síðu — eða farið beint á forsíðuna.</h2>
-        <p class="lead">Algengar síður: <a href="/thjonusta/">Þjónusta</a> · <a href="/geirar/">Geirar</a> · <a href="/verdreiknir/">Verðreiknir</a> · <a href="/about/">Um okkur</a> · <a href="/greinar/">Greinar</a> · <a href="/en/">English</a>.</p>
+        <h2>{{ help.heading | safe }}</h2>
+        <p class="lead">{{ help.lead }}
+          {%- for l in help.links %}
+          <a href="{{ l.href }}">{{ l.label }}</a>{% if not loop.last %} · {% endif %}
+          {%- endfor %}.</p>
       </div>
     </div>
   </div>
