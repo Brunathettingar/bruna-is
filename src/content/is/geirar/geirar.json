@@ -1,0 +1,8 @@
+{
+  "tags": ["sectors", "sectors-is"],
+  "layout": "layouts/sector.njk",
+  "permalink": "/geirar/{{ page.fileSlug }}/",
+  "eleventyNavigation": {
+    "parent": "sectors-is"
+  }
+}
