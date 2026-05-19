@@ -1,1 +1,17 @@
-<!-- cta-band placeholder; replaced by G2/T19 -->
+{%- if cta %}
+<section class="cta-band">
+  <div class="container">
+    <div class="row">
+      <h2>{{ cta.heading | safe }}</h2>
+      <div class="actions">
+        {%- if cta.primaryHref %}
+        <a class="btn primary" href="{{ cta.primaryHref }}"><span>{{ cta.primaryLabel }}</span> <span class="arrow">→</span></a>
+        {%- endif %}
+        {%- if cta.secondaryHref %}
+        <a class="btn ghost" href="{{ cta.secondaryHref }}"><span>{{ cta.secondaryLabel }}</span> <span class="arrow">→</span></a>
+        {%- endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif %}
