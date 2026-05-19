@@ -1,15 +1,34 @@
-<meta property="og:title" content="{{ title or meta.byLocale[lang].title | escape }}">
-<meta property="og:description" content="{{ description or summary or meta.byLocale[lang].description | escape }}">
-<meta property="og:url" content="{{ meta.url }}{{ page.url }}">
-<meta property="og:site_name" content="{{ meta.byLocale[lang].title | escape }}">
-<meta property="og:type" content="{{ ogType or 'website' }}">
-{%- set socialImage = ogImage or meta.ogImage %}
-<meta property="og:image" content="{{ meta.url }}{{ socialImage }}">
-<meta property="og:image:alt" content="{{ ogImageAlt or meta.byLocale[lang].ogImageAlt | escape }}">
-<meta property="og:locale" content="{{ lang == 'is' and 'is_IS' or 'en_US' }}">
+{#
+  Head metadata for OG + Twitter cards.
 
+  Each reused value is bound once, with `| escape` applied to the entire
+  fallback chain in parens. Nunjucks' `|` binds tighter than `or`, so
+  `{{ a or b | escape }}` parses as `{{ a or (b | escape) }}` and leaves
+  `a` unescaped on the hot path. Do not unfold these named values back
+  into the meta tags inline — keep the parens-around-chain shape.
+
+  Chains match `base.njk` so `<title>` / `<meta name="description">` agree
+  with OG / Twitter descriptions for the same page.
+#}
+{%- set pageTitle       = (title or meta.byLocale[lang].title) | escape %}
+{%- set pageDescription = (description or summary or meta.byLocale[lang].description) | escape %}
+{%- set pageImageAlt    = (ogImageAlt or title or meta.byLocale[lang].ogImageAlt) | escape %}
+{%- set siteName        = meta.byLocale[lang].title | escape %}
+{%- set socialImage     = ogImage or meta.ogImage %}
+
+{# --- Open Graph --- #}
+<meta property="og:title" content="{{ pageTitle }}">
+<meta property="og:description" content="{{ pageDescription }}">
+<meta property="og:url" content="{{ meta.url }}{{ page.url }}">
+<meta property="og:site_name" content="{{ siteName }}">
+<meta property="og:type" content="{{ ogType or 'website' }}">
+<meta property="og:image" content="{{ meta.url }}{{ socialImage }}">
+<meta property="og:image:alt" content="{{ pageImageAlt }}">
+<meta property="og:locale" content="{{ meta.byLocale[lang].ogLocale }}">
+
+{# --- Twitter Card --- #}
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ title or meta.byLocale[lang].title | escape }}">
-<meta name="twitter:description" content="{{ description or summary or meta.byLocale[lang].description | escape }}">
+<meta name="twitter:title" content="{{ pageTitle }}">
+<meta name="twitter:description" content="{{ pageDescription }}">
 <meta name="twitter:image" content="{{ meta.url }}{{ socialImage }}">
-<meta name="twitter:image:alt" content="{{ ogImageAlt or meta.byLocale[lang].ogImageAlt | escape }}">
+<meta name="twitter:image:alt" content="{{ pageImageAlt }}">

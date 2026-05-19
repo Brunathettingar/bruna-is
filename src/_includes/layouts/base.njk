@@ -1,14 +1,22 @@
 <!doctype html>
-<html lang="{{ lang or 'is' }}">
+{#- M8: HTML output requires `lang`. Today every page sets it via
+    is.11tydata.js / en.11tydata.js; the `requireLang` filter throws so a
+    future page added outside the locale tree fails loudly at build instead
+    of rendering `undefined` into meta tags / JSON-LD downstream. #}
+<html lang="{{ lang | requireLang }}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% if title and title != meta.byLocale[lang].title %}{{ title }} | {{ meta.byLocale[lang].title }}{% else %}{{ meta.byLocale[lang].title }}{% endif %}</title>
-    <meta name="description" content="{{ description or meta.byLocale[lang].description }}">
+    {#- Chains match seo-meta.njk so on-page <title>/<meta description>
+        agree with OG/Twitter descriptions. See seo-meta.njk header. #}
+    {%- set pageTitle       = (title or meta.byLocale[lang].title) | escape %}
+    {%- set pageDescription = (description or summary or meta.byLocale[lang].description) | escape %}
+    <title>{% if title and title != meta.byLocale[lang].title %}{{ pageTitle }} | {{ meta.byLocale[lang].title | escape }}{% else %}{{ meta.byLocale[lang].title | escape }}{% endif %}</title>
+    <meta name="description" content="{{ pageDescription }}">
     <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
     <link rel="canonical" href="{{ meta.url }}{{ page.url }}">
 
-    {%- set otherLang = lang == "is" and "en" or "is" %}
+    {%- set otherLang = "en" if lang == "is" else "is" %}
     <link rel="alternate" hreflang="{{ lang }}" href="{{ meta.url }}{{ page.url }}">
     <link rel="alternate" hreflang="{{ otherLang }}" href="{{ meta.url }}{{ page.url | alternateUrl(lang) }}">
     <link rel="alternate" hreflang="x-default" href="{{ meta.url }}{% if lang == 'is' %}{{ page.url }}{% else %}{{ page.url | alternateUrl(lang) }}{% endif %}">

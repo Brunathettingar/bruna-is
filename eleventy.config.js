@@ -151,6 +151,20 @@ export default function (eleventyConfig) {
     new Date(date).toISOString().split("T")[0]
   );
 
+  // Build-time guard: every HTML output page must have `lang` set (via
+  // is.11tydata.js / en.11tydata.js). Used in base.njk as
+  // `<html lang="{{ lang | requireLang }}">`. Converts the silent failure
+  // mode (a page rendered with `undefined` interpolated into meta tags and
+  // JSON-LD) into a loud build error. See G5 / M8.
+  eleventyConfig.addFilter("requireLang", (lang) => {
+    if (!lang) {
+      throw new Error(
+        "base.njk: `lang` must be set on every HTML output page (via is.11tydata.js / en.11tydata.js)."
+      );
+    }
+    return lang;
+  });
+
   eleventyConfig.addFilter("jsonEscape", (str) => {
     if (!str) return "";
     return String(str)
