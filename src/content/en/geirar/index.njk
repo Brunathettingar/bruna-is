@@ -1,20 +1,38 @@
 ---
 layout: layouts/page.njk
 title: "Sectors"
-description: "Brunaþéttingar serve power plants, aluminium smelters, fish processing, hospitals, schools, commercial buildings, hotels and pharma in Iceland."
+description: "Sectors Brunaþéttingar serves across Iceland — energy and utilities, aluminium, fishing, hospitals, schools, commercial, hotels, pharma."
+permalink: /en/geirar/
 eleventyNavigation:
   key: sectors-en
   order: 3
   parent: false
-permalink: /en/geirar/
+kicker: "Brunaþéttingar works across every major Icelandic industry."
+intro:
+  label: "Industry in Iceland"
+  heading: "From the Hellisheiði power plant to the capital region's hospitals."
+  paragraphs:
+    - "We design, install and document technical insulation and fire sealing for the projects that keep the country running."
+    - "Each sector has its own demands — temperature, hygiene, documentation — and we tune the system to each."
+valueBand:
+  label: "Each sector has its requirements"
+  heading: "One company — eight sectors — <span class=\"ul\">seven service lines</span>."
+  paragraphs:
+    - "Our work scales from a single building penetration to a full plant shutdown — same standards, same documentation, same crew."
+cta:
+  heading: "Ready to start your project? <span class=\"ul\">Get in touch.</span>"
+  primaryHref: "/en/verdreiknir/"
+  primaryLabel: "Get a quote"
+  secondaryHref: "tel:+3548504405"
+  secondaryLabel: "(+354) 850-4405"
 ---
+{%- set sectors = collections['sectors-' + lang] | sort(false, false, 'data.order') %}
 <section class="page-hero">
   <img class="page-hero__image" src="/img/iceland_alcoa_reydar.jpg" alt="" width="1600" height="900">
   <div class="scrim"></div>
   <div class="container">
-    <div class="crumbs"><a href="/en/">Home</a> &nbsp;/&nbsp; <span>Sectors</span></div>
-    <h1>Sectors we serve.</h1>
-    <p class="kicker">Brunaþéttingar work across the major industrial sectors of Iceland — from power plants and aluminium smelters to hospitals, schools and pharma.</p>
+    <h1>{{ title }}</h1>
+    <p class="kicker">{{ kicker | safe }}</p>
   </div>
 </section>
 
@@ -22,27 +40,28 @@ permalink: /en/geirar/
   <div class="container">
     <div class="sectors-intro">
       <div>
-        <div class="label">Industry in Iceland</div>
-        <h2>From the Hellisheiði power plant to the hospitals of the capital region.</h2>
+        <div class="label">{{ intro.label }}</div>
+        <h2>{{ intro.heading | safe }}</h2>
       </div>
       <div>
-        <p>Technical insulation and fire protection don't look the same in an aluminium smelter as in a hospital. <strong>Each sector has its own requirements</strong> — chemical resistance in heavy industry, hygiene in food processing, acoustic insulation in schools and hospitals, anti-condensation in the cold rooms of fish processing.</p>
-        <p>Below is an overview of the sectors we serve with our full seven service areas.</p>
+        {%- for p in intro.paragraphs %}
+        <p>{{ p | safe }}</p>
+        {%- endfor %}
       </div>
     </div>
 
     <div class="sector-grid">
       {%- for s in sectors %}
-      <a class="sector-card" href="/en/thjonusta/">
+      <a class="sector-card" href="{{ s.url }}">
         <div class="pic">
-          <img src="{{ s.image }}" alt="" width="1200" height="900">
-          <span class="badge">{{ s.number }}</span>
+          <img src="{{ s.data.image }}" alt="" width="1200" height="900">
+          <span class="badge">{{ s.data.number }}</span>
         </div>
         <div class="body">
-          <h3>{{ s.title[lang] }}</h3>
-          <p>{{ s.description[lang] }}</p>
+          <h3>{{ s.data.title | safe }}</h3>
+          <p>{{ s.data.description | safe }}</p>
           <ul class="svc-tags">
-            {%- for t in s.tags[lang] %}
+            {%- for t in s.data.tagLabels %}
             <li>{{ t }}</li>
             {%- endfor %}
           </ul>
@@ -57,12 +76,13 @@ permalink: /en/geirar/
   <div class="container">
     <div class="row">
       <div>
-        <div class="label">Each sector has its own demands</div>
-        <h2>One company — eight sectors — <span class="ul">seven service areas</span>.</h2>
+        <div class="label">{{ valueBand.label }}</div>
+        <h2>{{ valueBand.heading | safe }}</h2>
       </div>
       <div>
-        <p>Brunaþéttingar know the requirements of each of these eight sectors first hand. Our project managers have worked everything from new geothermal plants to the renovation of older hospitals. We advise on the right solutions for your sector — material selection, fire rating, documentation and project management.</p>
-        <p>Need an inspection of an existing building? Or advice on a new project? <strong>Call or send an email</strong> and we'll get back to you within 24 hours.</p>
+        {%- for p in valueBand.paragraphs %}
+        <p>{{ p | safe }}</p>
+        {%- endfor %}
       </div>
     </div>
   </div>
@@ -71,10 +91,10 @@ permalink: /en/geirar/
 <section class="cta-band">
   <div class="container">
     <div class="row">
-      <h2>Ready to start your project? <span class="ul">Let's talk.</span></h2>
+      <h2>{{ cta.heading | safe }}</h2>
       <div class="actions">
-        <a class="btn primary" href="/en/verdreiknir/"><span>Get a quote</span> <span class="arrow">→</span></a>
-        <a class="btn ghost" href="tel:+3548504405"><span>(+354) 850-4405</span> <span class="arrow">→</span></a>
+        <a class="btn primary" href="{{ cta.primaryHref }}"><span>{{ cta.primaryLabel }}</span> <span class="arrow">→</span></a>
+        <a class="btn ghost" href="{{ cta.secondaryHref }}"><span>{{ cta.secondaryLabel }}</span> <span class="arrow">→</span></a>
       </div>
     </div>
   </div>

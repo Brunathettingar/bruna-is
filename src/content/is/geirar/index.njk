@@ -1,20 +1,38 @@
 ---
 layout: layouts/page.njk
 title: "Geirar"
-description: "[TBD — íslensk lýsing] Geirar sem Brunaþéttingar þjóna á Íslandi."
+description: "Geirar sem Brunaþéttingar þjóna á Íslandi — orka, ál, sjávarútvegur, sjúkrahús, skólar, verslun, hótel, lyfjaiðnaður."
+permalink: /geirar/
 eleventyNavigation:
   key: sectors-is
   order: 3
   parent: false
-permalink: /geirar/
+kicker: "Brunaþéttingar starfa í öllum helstu atvinnugreinum Íslands."
+intro:
+  label: "Iðnaður á Íslandi"
+  heading: "Frá Hellisheiðarvirkjun til sjúkrahúsa höfuðborgarsvæðisins."
+  paragraphs:
+    - "[TBD — íslenska]"
+    - "[TBD — íslenska]"
+valueBand:
+  label: "Hver geiri hefur sínar kröfur"
+  heading: "Eitt fyrirtæki — átta geirar — <span class=\"ul\">sjö þjónustusvið</span>."
+  paragraphs:
+    - "[TBD — íslenska]"
+cta:
+  heading: "Tilbúin að hefja verkefnið? <span class=\"ul\">Hafðu samband.</span>"
+  primaryHref: "/verdreiknir/"
+  primaryLabel: "Fá verðmat"
+  secondaryHref: "tel:+3548504405"
+  secondaryLabel: "(+354) 850-4405"
 ---
+{%- set sectors = collections['sectors-' + lang] | sort(false, false, 'data.order') %}
 <section class="page-hero">
   <img class="page-hero__image" src="/img/iceland_alcoa_reydar.jpg" alt="" width="1600" height="900">
   <div class="scrim"></div>
   <div class="container">
-    <div class="crumbs"><a href="/">Heim</a> &nbsp;/&nbsp; <span>Geirar</span></div>
-    <h1>Geirar sem við þjónum.</h1>
-    <p class="kicker">[TBD — íslenska] Brunaþéttingar starfa í öllum helstu atvinnugreinum Íslands.</p>
+    <h1>{{ title }}</h1>
+    <p class="kicker">{{ kicker | safe }}</p>
   </div>
 </section>
 
@@ -22,27 +40,28 @@ permalink: /geirar/
   <div class="container">
     <div class="sectors-intro">
       <div>
-        <div class="label">Iðnaður á Íslandi</div>
-        <h2>Frá Hellisheiðarvirkjun til sjúkrahúsa höfuðborgarsvæðisins.</h2>
+        <div class="label">{{ intro.label }}</div>
+        <h2>{{ intro.heading | safe }}</h2>
       </div>
       <div>
-        <p>[TBD — íslenska]</p>
-        <p>[TBD — íslenska]</p>
+        {%- for p in intro.paragraphs %}
+        <p>{{ p | safe }}</p>
+        {%- endfor %}
       </div>
     </div>
 
     <div class="sector-grid">
       {%- for s in sectors %}
-      <a class="sector-card" href="/thjonusta/">
+      <a class="sector-card" href="{{ s.url }}">
         <div class="pic">
-          <img src="{{ s.image }}" alt="" width="1200" height="900">
-          <span class="badge">{{ s.number }}</span>
+          <img src="{{ s.data.image }}" alt="" width="1200" height="900">
+          <span class="badge">{{ s.data.number }}</span>
         </div>
         <div class="body">
-          <h3>{{ s.title[lang] }}</h3>
-          <p>{{ s.description[lang] }}</p>
+          <h3>{{ s.data.title | safe }}</h3>
+          <p>{{ s.data.description | safe }}</p>
           <ul class="svc-tags">
-            {%- for t in s.tags[lang] %}
+            {%- for t in s.data.tagLabels %}
             <li>{{ t }}</li>
             {%- endfor %}
           </ul>
@@ -57,11 +76,13 @@ permalink: /geirar/
   <div class="container">
     <div class="row">
       <div>
-        <div class="label">Hver geiri hefur sínar kröfur</div>
-        <h2>Eitt fyrirtæki — átta geirar — <span class="ul">sjö þjónustusvið</span>.</h2>
+        <div class="label">{{ valueBand.label }}</div>
+        <h2>{{ valueBand.heading | safe }}</h2>
       </div>
       <div>
-        <p>[TBD — íslenska]</p>
+        {%- for p in valueBand.paragraphs %}
+        <p>{{ p | safe }}</p>
+        {%- endfor %}
       </div>
     </div>
   </div>
@@ -70,10 +91,10 @@ permalink: /geirar/
 <section class="cta-band">
   <div class="container">
     <div class="row">
-      <h2>Tilbúin að hefja verkefnið? <span class="ul">Hafðu samband.</span></h2>
+      <h2>{{ cta.heading | safe }}</h2>
       <div class="actions">
-        <a class="btn primary" href="/verdreiknir/"><span>Fá verðmat</span> <span class="arrow">→</span></a>
-        <a class="btn ghost" href="tel:+3548504405"><span>(+354) 850-4405</span> <span class="arrow">→</span></a>
+        <a class="btn primary" href="{{ cta.primaryHref }}"><span>{{ cta.primaryLabel }}</span> <span class="arrow">→</span></a>
+        <a class="btn ghost" href="{{ cta.secondaryHref }}"><span>{{ cta.secondaryLabel }}</span> <span class="arrow">→</span></a>
       </div>
     </div>
   </div>
