@@ -175,22 +175,6 @@ export default function (eleventyConfig) {
       .replace(/\t/g, "\\t");
   });
 
-  eleventyConfig.addFilter("where", (items, key, value) =>
-    (items || []).filter((item) => (item.data ? item.data[key] : item[key]) === value)
-  );
-
-  eleventyConfig.addFilter("sortBy", (items, key) =>
-    [...(items || [])].sort((a, b) => {
-      const av = a.data ? a.data[key] : a[key];
-      const bv = b.data ? b.data[key] : b[key];
-      return (av ?? 0) - (bv ?? 0);
-    })
-  );
-
-  eleventyConfig.addFilter("startsWith", (str, prefix) =>
-    typeof str === "string" && str.startsWith(prefix)
-  );
-
   // Swap the locale prefix on a URL. The I18nPlugin's `locale_links` filter
   // mis-matches alternates for paginated pages (returns every page from
   // the other locale tree, not just the one with the same slug). Slugs are
@@ -204,6 +188,11 @@ export default function (eleventyConfig) {
     return url.replace(/^\/en\//, "/") || "/";
   });
 
+  // Nav membership is selected by URL prefix below — the per-page
+  // `eleventyNavigation.key` language suffix (e.g. `home-is` / `home-en`)
+  // exists for plugin key uniqueness across locales and is consumed by
+  // `src/_includes/partials/breadcrumb.njk` via `eleventyNavigationBreadcrumb`,
+  // not for nav selection.
   eleventyConfig.addCollection("navIs", (api) =>
     api
       .getAll()
@@ -225,22 +214,6 @@ export default function (eleventyConfig) {
           (a.data.eleventyNavigation.order || 0) - (b.data.eleventyNavigation.order || 0)
       )
   );
-
-  for (const lang of ["is", "en"]) {
-    eleventyConfig.addCollection(`featuredServices${lang === "is" ? "Is" : "En"}`, (api) =>
-      api
-        .getFilteredByTag(`services-${lang}`)
-        .filter((item) => item.data.featured === true)
-        .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
-    );
-
-    eleventyConfig.addCollection(`featuredSectors${lang === "is" ? "Is" : "En"}`, (api) =>
-      api
-        .getFilteredByTag(`sectors-${lang}`)
-        .filter((item) => item.data.featured === true)
-        .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
-    );
-  }
 }
 
 export const config = {
