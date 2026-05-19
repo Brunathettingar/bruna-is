@@ -1,0 +1,45 @@
+---
+layout: layouts/page.njk
+eleventyComputed:
+  ogImage: "{{ image }}"
+ogType: "article"
+---
+<section class="page-hero page-hero--article">
+  <img class="page-hero__image" src="{{ image }}" alt="" width="1600" height="900">
+  <div class="scrim"></div>
+  <div class="container">
+    <h1>{{ title | safe }}</h1>
+    <p class="kicker">{{ summary | safe }}</p>
+  </div>
+</section>
+
+<section class="article-body">
+  <div class="container">
+    <div class="content-prose">
+      <div class="article-meta">
+        <span>{{ date | dateDisplay(lang) }}</span>
+        <span>{{ readTimeMinutes }} {{ "articles.read_time_minutes" | i18n(lang) }}</span>
+        <span>{{ author }}</span>
+      </div>
+      {{ content | safe }}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ title | jsonEscape }}",
+  "description": "{{ summary | jsonEscape }}",
+  "datePublished": "{{ date | dateIso }}",
+  "dateModified": "{{ date | dateIso }}",
+  "author": { "@type": "Person", "name": "{{ author | jsonEscape }}" },
+  "publisher": { "@type": "Organization", "name": "{{ meta.byLocale[lang].title | jsonEscape }}" },
+  "image": "{{ meta.url }}{{ image | jsonEscape }}",
+  "mainEntityOfPage": "{{ meta.url }}{{ page.url }}",
+  "inLanguage": "{{ lang }}"
+}
+</script>
+
+{% include "partials/cta-band.njk" %}

@@ -1,0 +1,8 @@
+{
+  "tags": ["articles", "articles-is"],
+  "layout": "layouts/article.njk",
+  "permalink": "/greinar/{{ page.fileSlug }}/",
+  "eleventyNavigation": {
+    "parent": "articles-is"
+  }
+}

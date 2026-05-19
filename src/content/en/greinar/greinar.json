@@ -1,0 +1,8 @@
+{
+  "tags": ["articles", "articles-en"],
+  "layout": "layouts/article.njk",
+  "permalink": "/en/greinar/{{ page.fileSlug }}/",
+  "eleventyNavigation": {
+    "parent": "articles-en"
+  }
+}
