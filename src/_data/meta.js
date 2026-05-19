@@ -1,7 +1,7 @@
 const byLocale = {
   is: {
     title: "Brunaþéttingar",
-    description: "[TBD — íslensk lýsing] Vottuð brunaþéttingar og tæknieinangrun á Íslandi.",
+    description: "Brunaþéttingar skipuleggur, stjórnar og framkvæmir brunaþéttingar og tæknieinangrun á íslenskum mannvirkjum — vottuð kerfi frá Roxtec, Hilti og Promat.",
     author: "Brunaþéttingar ehf.",
     ogImageAlt: "Brunaþéttingar — vottuð brunaþéttingar fyrir íslensk mannvirki",
     ogLocale: "is_IS",
