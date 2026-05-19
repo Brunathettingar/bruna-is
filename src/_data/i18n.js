@@ -58,7 +58,7 @@ export default {
   "quote.phone":            { is: "Sími",             en: "Phone" },
   "quote.notes":            { is: "Athugasemdir",     en: "Notes" },
   "quote.submit":           { is: "Senda fyrirspurn", en: "Send request" },
-  "quote.success":          { is: "Takk! Fyrirspurn send. Við svörum innan eins virks dags.", en: "Thanks! Quote sent. We'll reply within one business day." },
+  "quote.success":          { is: "✓ Tölvupóstforritið þitt ætti að opnast. Smelltu á Senda þar til að klára. Ef ekkert gerist, hringdu í (+354) 850-4405.", en: "✓ Your mail client should now open. Press Send there to deliver the quote. If nothing happened, call (+354) 850-4405." },
   "quote.mail_subject":     { is: "Verðmat",          en: "Quote request" },
   "quote.mail_intro":       { is: "Fyrirspurn um verðmat", en: "Quote request" },
 

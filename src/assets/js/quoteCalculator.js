@@ -1,61 +1,28 @@
 // Quote calculator — port of the inline JS in mockup/verdreiknir.html (lines 240–376).
-// Constants verbatim; submit handler now also produces a mailto: with the row breakdown.
+// Pricing constants live in quote-config.js; submit handler now caps mailto body and
+// uses an anchor-based open so form state is preserved.
 
-const OPE_TYPES = [
-  { id: "cable",    base: 8500,
-    label: { is: "Kapalgegnumtak",                       en: "Cable penetration" } },
-  { id: "metal",    base: 6800,
-    label: { is: "Málmrör",                              en: "Metal pipe" } },
-  { id: "plastic",  base: 14500,
-    label: { is: "Plaströr (þrýstihringur)",             en: "Plastic pipe (intumescent collar)" } },
-  { id: "mixed",    base: 12000,
-    label: { is: "Blanda af köplum og rörum",            en: "Mixed cables and pipes" } },
-  { id: "modular",  base: 45000,
-    label: { is: "Einingakapaltak (Roxtec)",             en: "Modular cable transit (Roxtec)" } },
-  { id: "linear",   base: 4800,
-    label: { is: "Línuleg samskeyti (á metra)",          en: "Linear joint (per m)" } },
-  { id: "vent",     base: 18500,
-    label: { is: "Loftræsistokkur",                      en: "Ventilation duct" } },
-];
+import {
+  OPE_TYPES, WALL_TYPES, FIRE_RATINGS, FLOOR_POSITIONS,
+  SIZE_BRACKETS, SIZE_BRACKET_OVERFLOW,
+} from "./quote-config.js";
 
-const WALL_TYPES = [
-  { id: "concrete",       mult: 1.00,
-    label: { is: "Steyptur veggur",       en: "Concrete wall" } },
-  { id: "block",          mult: 1.05,
-    label: { is: "Holsteinn / múrsteinn", en: "Block / brick wall" } },
-  { id: "concrete-floor", mult: 1.10,
-    label: { is: "Steyptur botn",         en: "Concrete floor" } },
-  { id: "light",          mult: 1.15,
-    label: { is: "Léttveggur (gips)",     en: "Lightweight wall (gypsum)" } },
-  { id: "light-floor",    mult: 1.20,
-    label: { is: "Léttur botn",           en: "Lightweight floor" } },
-];
+const MAILTO_MAX_ROWS = 20;
+const MAILTO_MAX_NOTES = 1500;
 
-const FIRE_RATINGS = [
-  { id: "ei30",  mult: 0.85, label: { is: "EI 30",  en: "EI 30" } },
-  { id: "ei60",  mult: 1.00, label: { is: "EI 60",  en: "EI 60" } },
-  { id: "ei90",  mult: 1.15, label: { is: "EI 90",  en: "EI 90" } },
-  { id: "ei120", mult: 1.30, label: { is: "EI 120", en: "EI 120" } },
-  { id: "ei240", mult: 1.65, label: { is: "EI 240", en: "EI 240" } },
-];
-
-const FLOOR_POSITIONS = [
-  { id: "low",       mult: 1.05,
-    label: { is: "0–60 cm frá gólfi",         en: "0–60 cm from floor" } },
-  { id: "mid",       mult: 1.00,
-    label: { is: "60–200 cm (staðlað)",       en: "60–200 cm (standard)" } },
-  { id: "high",      mult: 1.05,
-    label: { is: "200–400 cm",                en: "200–400 cm" } },
-  { id: "very-high", mult: 1.10,
-    label: { is: "Yfir 400 cm",               en: "Over 400 cm" } },
-];
+function truncateNotes(notes, lang) {
+  if (!notes) return "";
+  const s = notes.toString();
+  if (s.length <= MAILTO_MAX_NOTES) return s;
+  const marker = lang === "is" ? "\n… [stytt]" : "\n… [truncated]";
+  return s.slice(0, MAILTO_MAX_NOTES) + marker;
+}
 
 const COPY = {
   is: {
     chooseOption: "— veldu —",
     removeRow:    "Fjarlægja línu",
     noPrice:      "—",
-    successText:  "✓ Takk! Áætluð verðhugmynd hefur verið send. Verkefnastjóri hringir innan 24 klst.",
     mailSubject:  "Verðmat — Brunaþéttingar",
     mailHello:    "Sæl/sæll,",
     mailIntro:    "Fyrirspurn um áætlað verðmat fyrir brunaþéttingar:",
@@ -81,7 +48,6 @@ const COPY = {
     chooseOption: "— choose —",
     removeRow:    "Remove row",
     noPrice:      "—",
-    successText:  "✓ Thanks! Your estimated quote has been sent. A project manager will call within 24 hours.",
     mailSubject:  "Quote request — Brunaþéttingar",
     mailHello:    "Hello,",
     mailIntro:    "Request for an estimated quote for fire sealing work:",
@@ -108,11 +74,8 @@ const COPY = {
 function sizeMultiplier(width, height) {
   const max = Math.max(width || 0, height || 0);
   if (max === 0) return 0;
-  if (max <= 10) return 1.0;
-  if (max <= 25) return 1.4;
-  if (max <= 50) return 2.3;
-  if (max <= 100) return 3.8;
-  return 5.5;
+  for (const b of SIZE_BRACKETS) if (max <= b.maxCm) return b.mult;
+  return SIZE_BRACKET_OVERFLOW;
 }
 
 function formatPrice(amount, lang) {
@@ -221,8 +184,14 @@ function buildMailBody(form, lang) {
   lines.push("");
   lines.push(c.mailRows + ":");
 
+  // Cap body rows at MAILTO_MAX_ROWS; total still reflects all rows.
+  const visibleRows = rows.slice(0, MAILTO_MAX_ROWS);
+  const hiddenCount = rows.length - visibleRows.length;
+
   let total = 0;
-  rows.forEach((row, i) => {
+
+  // Body: only the first MAILTO_MAX_ROWS rows.
+  visibleRows.forEach((row, i) => {
     const d = collectRowData(row);
     const { sub, ope, wall, fire, floor } = computeSubtotal(d);
     lines.push(`  ${c.mailLineNum} ${i + 1}:`);
@@ -237,6 +206,25 @@ function buildMailBody(form, lang) {
     if (sub !== null) total += sub;
   });
 
+  // Hidden-row summary line.
+  if (hiddenCount > 0) {
+    lines.push(
+      lang === "is"
+        ? `  (+ ${hiddenCount} fleiri línur — hringdu í (+354) 850-4405)`
+        : `  (+ ${hiddenCount} more rows — call (+354) 850-4405)`
+    );
+    lines.push("");
+  }
+
+  // Total must reflect ALL rows, including any hidden ones.
+  if (hiddenCount > 0) {
+    rows.slice(MAILTO_MAX_ROWS).forEach((row) => {
+      const d = collectRowData(row);
+      const { sub } = computeSubtotal(d);
+      if (sub !== null) total += sub;
+    });
+  }
+
   const fd = new FormData(form);
   lines.push("");
   lines.push(c.mailCustomer + ":");
@@ -244,10 +232,10 @@ function buildMailBody(form, lang) {
   lines.push(`  ${c.mailCompany}: ${fd.get("cust-company") || ""}`);
   lines.push(`  ${c.mailEmail}:   ${fd.get("cust-email") || ""}`);
   lines.push(`  ${c.mailPhone}:   ${fd.get("cust-phone") || ""}`);
-  const notes = fd.get("cust-notes");
+  const notes = truncateNotes(fd.get("cust-notes"), lang);
   if (notes) {
     lines.push(`  ${c.mailNotes}:`);
-    notes.toString().split("\n").forEach((n) => lines.push("    " + n));
+    notes.split("\n").forEach((n) => lines.push("    " + n));
   }
   lines.push("");
   lines.push(`${c.mailTotal}: ${formatPrice(total, lang)}`);
@@ -264,7 +252,7 @@ export function initQuoteCalculator() {
   const addBtn = form.querySelector("[data-quoter-add]");
   let counter = 0;
 
-  const addRow = () => {
+  const addRow = ({ skipRecalc = false } = {}) => {
     counter += 1;
     const row = buildRow(counter, lang);
     rowsEl.appendChild(row);
@@ -272,7 +260,7 @@ export function initQuoteCalculator() {
       el.addEventListener("input", () => recalc(form, lang));
       el.addEventListener("change", () => recalc(form, lang));
     });
-    recalc(form, lang);
+    if (!skipRecalc) recalc(form, lang);
   };
 
   if (addBtn) addBtn.addEventListener("click", addRow);
@@ -287,10 +275,35 @@ export function initQuoteCalculator() {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    // JS-side gate: at least one row must have the three required selects filled.
+    const rows = [...form.querySelectorAll(".quoter-row")];
+    const firstValidRow = rows.find((r) => {
+      const d = collectRowData(r);
+      return d.opeId && d.wallId && d.fireId;
+    });
+    if (!firstValidRow) {
+      const firstEmptySelect =
+        form.querySelector(".quoter-row select:invalid") ||
+        form.querySelector(".quoter-row [name=opeType]");
+      if (firstEmptySelect) firstEmptySelect.focus();
+      return; // honest no-op — no banner, no mailto attempt
+    }
+
     const body = buildMailBody(form, lang);
     const subject = COPY[lang].mailSubject;
-    const mailto = `mailto:bruna@bruna.is?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
+    const href = `mailto:bruna@bruna.is?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // Anchor-based open: more predictable than window.location.href across browsers,
+    // preserves form state, and gives the user a real link if the click is blocked.
+    const a = document.createElement("a");
+    a.href = href;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
 
     const banner = form.querySelector("#quoter-confirm");
     if (banner) {
@@ -299,7 +312,8 @@ export function initQuoteCalculator() {
     }
   });
 
-  // Seed two rows so the form isn't empty on load.
-  addRow();
-  addRow();
+  // Seed two rows so the form isn't empty on load — batch the recalc.
+  addRow({ skipRecalc: true });
+  addRow({ skipRecalc: true });
+  recalc(form, lang);
 }
