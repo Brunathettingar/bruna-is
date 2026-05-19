@@ -2,7 +2,7 @@
 {%- if crumbs.length %}
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <ol class="breadcrumb__list" role="list">
-    <li class="breadcrumb__item"><a href="{{ '/' | locale_url }}" class="breadcrumb__link">{{ "ui.home" | t }}</a></li>
+    <li class="breadcrumb__item"><a href="{{ '/' | locale_url }}" class="breadcrumb__link">{{ "ui.home" | i18n(lang) }}</a></li>
     {%- for crumb in crumbs %}
     <li class="breadcrumb__item"><a href="{{ crumb.url }}" class="breadcrumb__link">{{ crumb.title }}</a></li>
     {%- endfor %}

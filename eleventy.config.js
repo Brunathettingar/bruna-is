@@ -48,33 +48,86 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addPlugin(I18nPlugin, {
     defaultLanguage: "is",
-    errorMode: "never",
+    errorMode: "allow-fallback",
   });
 
+  // UI string dictionary. The plugin's `i18n` filter auto-detects locale
+  // from `url.split('/')[1]`, which returns `'about'` (not `'is'`) for an
+  // Icelandic-at-root page like `/about/`. Every callsite therefore passes
+  // `lang` as the explicit `localeOverride` argument:
+  //
+  //     {{ "key" | i18n(lang) }}            ← no interpolation data
+  //     {{ "key" | i18n({ name }, lang) }}  ← with interpolation data
+  //
+  // Missing keys log to stderr (chalk-red console.warn). Missing IS strings
+  // on IS pages render the raw key — that is intentional. Add the key to
+  // src/_data/i18n.js.
   eleventyConfig.addPlugin(i18nPlugin, {
     translations,
-    fallbackLocales: { en: "is", is: "en", "*": "is" },
+    fallbackLocales: { en: "is" },
   });
 
-  // Wrapper that uses the cascade `lang` variable instead of inferring
-  // from URL segments. The plugin's URL-prefix detection breaks for the
-  // Icelandic-at-root tree and for layout/partial render contexts where
-  // `this.page.url` doesn't reflect the current page.
-  eleventyConfig.addFilter("t", function (key, data) {
-    const lang = this.ctx?.lang || this.page?.lang || "is";
-    const entry = translations[key];
-    if (!entry) { recordMiss(key, lang); return key; }
-    if (entry[lang] !== undefined) {
-      return data ? interpolate(entry[lang], data) : entry[lang];
-    }
-    recordMiss(key, lang);
-    // Fallback: try Icelandic, then English, then the key itself.
-    return entry.is ?? entry.en ?? key;
+  // Override the plugin's `i18n` filter. Two reasons we replace it rather
+  // than rely on the upstream callable directly:
+  //
+  // 1. The plugin's lookup is `lodash.get(translations, '[${key}][${locale}]')`,
+  //    which interprets dots inside the key as path separators. Every key in
+  //    our dictionary is dotted (`"ui.skip_to_content"`, etc.), so the
+  //    plugin's lookup never resolves — it always misses and returns the raw
+  //    key, regardless of what the dictionary contains.
+  // 2. The plugin's URL-prefix auto-detect (`url.split('/')[1]`) returns
+  //    `'about'` (not `'is'`) for an Icelandic-at-root page like `/about/`.
+  //    Templates therefore pass `lang` as a `localeOverride` argument.
+  //
+  // We register inside an inline plugin so this `addFilter` runs *after*
+  // the upstream i18n plugin's own `addFilter('i18n', ...)` during plugin
+  // execution (plugin order = registration order). A top-level `addFilter`
+  // would be overwritten by the upstream plugin's later execution.
+  //
+  // Behavior:
+  //   - Direct bracket-property lookup against the same `translations`
+  //     dictionary the upstream plugin holds.
+  //   - One-way fallback: `en → is` only. A missing IS string on an IS page
+  //     renders the raw key and warns red. Per FRAMEWORK-I18N.md §"Config
+  //     additions".
+  //   - Every miss routed through `recordMiss` to populate G15's sidecar
+  //     log at `_site/.translation-misses.log`.
+  //   - Interpolation of `{{name}}` tokens via a tiny inline replacer when
+  //     a data object is passed. No callsite uses interpolation today, but
+  //     the surface is preserved for parity with the upstream plugin's
+  //     `templite` semantics.
+  eleventyConfig.addPlugin(function i18nOverride(ec) {
+    ec.addFilter("i18n", function (key, ...rest) {
+      // Signature mirrors upstream: `| i18n(data, lang)` or `| i18n(lang)`.
+      // Templates pass `lang` as a single string arg.
+      let data = {};
+      let localeOverride;
+      if (rest.length === 1) {
+        if (typeof rest[0] === "string") localeOverride = rest[0];
+        else if (rest[0] && typeof rest[0] === "object") data = rest[0];
+      } else if (rest.length >= 2) {
+        [data, localeOverride] = rest;
+      }
+      const lang = localeOverride || this.ctx?.lang || this.page?.lang || "is";
+      const entry = translations[key];
+      const hasData = data && Object.keys(data).length > 0;
+      const interpolate = (s) =>
+        String(s).replace(/\{\{\s*(\w+)\s*\}\}/g, (m, k) => data?.[k] ?? m);
+      if (entry && entry[lang] !== undefined) {
+        return hasData ? interpolate(entry[lang]) : entry[lang];
+      }
+      // Miss in the requested locale. One-way fallback: EN → IS only.
+      if (lang === "en" && entry && entry.is !== undefined) {
+        recordMiss(key, lang);
+        console.warn(`[i18n] Missing 'en' for '${key}'. Using 'is' fallback.`);
+        return hasData ? interpolate(entry.is) : entry.is;
+      }
+      // Hard miss — IS missing on an IS page, or key absent entirely.
+      recordMiss(key, lang);
+      console.warn(`[i18n] Translation for '${key}' in '${lang}' not found.`);
+      return key;
+    });
   });
-
-  function interpolate(str, data) {
-    return String(str).replace(/\{\{\s*(\w+)\s*\}\}/g, (m, k) => data?.[k] ?? m);
-  }
 
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy({ ".nojekyll": ".nojekyll" });

@@ -13,9 +13,9 @@
     <div class="row">
       <a href="{{ '/' | locale_url }}" class="brand">
         <svg class="logo" viewBox="0 0 360 60" aria-label="{{ meta.byLocale[lang].title }}"><use href="#logo-wordmark"/></svg>
-        <small class="tag">{{ "brand.tagline" | t | safe }}</small>
+        <small class="tag">{{ "brand.tagline" | i18n(lang) | safe }}</small>
       </a>
-      <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="{{ 'ui.menu' | t }}">
+      <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="{{ 'ui.menu' | i18n(lang) }}">
         <span></span><span></span><span></span>
       </button>
       <nav id="primary-nav" class="primary" aria-label="Main">
@@ -23,7 +23,7 @@
           {%- for entry in navCollection %}
           <li><a href="{{ entry.url }}"{% if entry.url == page.url %} class="active" aria-current="page"{% endif %}>{{ entry.data.title }}</a></li>
           {%- endfor %}
-          <li><a href="#contact" class="cta">{{ "nav.contact" | t }}</a></li>
+          <li><a href="#contact" class="cta">{{ "nav.contact" | i18n(lang) }}</a></li>
         </ul>
       </nav>
     </div>
