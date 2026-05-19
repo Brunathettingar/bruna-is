@@ -27,8 +27,8 @@
       <div class="col">
         <h5>{{ "footer.contact_heading" | i18n(lang) }}</h5>
         <ul>
-          <li><a href="tel:+3548504405">(+354) 850-4405</a></li>
-          <li><a href="mailto:bruna@bruna.is">bruna@bruna.is</a></li>
+          <li><a href="tel:{{ meta.contact.phone.e164 }}">{{ meta.contact.phone.display }}</a></li>
+          <li><a href="mailto:{{ meta.contact.email }}">{{ meta.contact.email }}</a></li>
           <li>105 Reykjavík, {{ meta.byLocale[lang].addressCountry }}</li>
         </ul>
       </div>
