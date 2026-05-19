@@ -2,6 +2,7 @@
 layout: layouts/page.njk
 title: "Um okkur"
 description: "Sérhæft brunaþéttinga- og tæknieinangrunarfyrirtæki sem þjónar verktökum og eigendum mannvirkja á Íslandi síðan 2011."
+bodyClass: about-page
 eleventyNavigation:
   key: about-is
   order: 5
@@ -50,24 +51,24 @@ cta:
 
 <section class="story">
   <div class="container">
-    <div class="row">
-      <div class="copy">
-        <div class="label">{{ story.label }}</div>
+    <div class="story__row">
+      <div class="story__copy">
+        <div class="story__label">{{ story.label }}</div>
         <h2>{{ story.heading | safe }}</h2>
         {%- for p in story.paragraphs %}
         <p>{{ p | safe }}</p>
         {%- endfor %}
-        <div class="signature">
+        <div class="story__signature">
           {{ story.signatureQuote | safe }}
-          <small>{{ story.signatureAttribution }}</small>
+          <small class="story__signature-meta">{{ story.signatureAttribution }}</small>
         </div>
       </div>
-      <div class="timeline">
-        <h4>{{ story.timelineHeading }}</h4>
+      <div class="story__timeline">
+        <h4 class="story__timeline-title">{{ story.timelineHeading }}</h4>
         {%- for m in milestones %}
-        <div class="timeline-row">
-          <div class="yr">{{ m.data.year }}</div>
-          <div class="ev">{{ m.data.event | safe }}</div>
+        <div class="story__timeline-row">
+          <div class="story__timeline-year">{{ m.data.year }}</div>
+          <div class="story__timeline-event">{{ m.data.event | safe }}</div>
         </div>
         {%- endfor %}
       </div>
@@ -77,15 +78,15 @@ cta:
 
 <section class="philosophy" id="stefna">
   <div class="container">
-    <div class="head">
-      <div class="label">{{ philosophy.label }}</div>
-      <h2>{{ philosophy.heading | safe }}</h2>
-      <p>{{ philosophy.lead | safe }}</p>
+    <div class="philosophy__head">
+      <div class="philosophy__label">{{ philosophy.label }}</div>
+      <h2 class="philosophy__title">{{ philosophy.heading | safe }}</h2>
+      <p class="philosophy__lead">{{ philosophy.lead | safe }}</p>
     </div>
     <div class="principles">
       {%- for p in principles %}
       <div class="principle">
-        <span class="num">{{ p.data.number }}</span>
+        <span class="principle__num">{{ p.data.number }}</span>
         <h3>{{ p.data.title | safe }}</h3>
         <p>{{ p.data.description | safe }}</p>
       </div>
@@ -96,27 +97,27 @@ cta:
 
 <section class="team">
   <div class="container">
-    <div class="head">
-      <div class="label">{{ team.label }}</div>
-      <h2>{{ team.heading | safe }}</h2>
+    <div class="team__head">
+      <div class="team__label">{{ team.label }}</div>
+      <h2 class="team__title">{{ team.heading | safe }}</h2>
     </div>
     <div class="team-grid">
       {%- for member in teamMembers %}
       <div class="team-card">
-        <div class="avatar{% if member.data.avatar == 'orange' %} orange{% endif %}">{{ member.data.initials }}</div>
-        <div class="body">
+        <div class="team-card__avatar{% if member.data.avatar == 'orange' %} team-card__avatar--orange{% endif %}">{{ member.data.initials }}</div>
+        <div class="team-card__body">
           <h4>{{ member.data.name }}</h4>
-          <div class="role">{{ member.data.role }}</div>
-          <div class="meta">{{ member.data.bio | safe }}</div>
+          <div class="team-card__role">{{ member.data.role }}</div>
+          <div class="team-card__meta">{{ member.data.bio | safe }}</div>
         </div>
       </div>
       {%- endfor %}
       <div class="team-card">
-        <div class="avatar orange">{{ team.extraTile.initials }}</div>
-        <div class="body">
+        <div class="team-card__avatar team-card__avatar--orange">{{ team.extraTile.initials }}</div>
+        <div class="team-card__body">
           <h4>{{ team.extraTile.name }}</h4>
-          <div class="role">{{ team.extraTile.role }}</div>
-          <div class="meta">{{ team.extraTile.bio | safe }}</div>
+          <div class="team-card__role">{{ team.extraTile.role }}</div>
+          <div class="team-card__meta">{{ team.extraTile.bio | safe }}</div>
         </div>
       </div>
     </div>

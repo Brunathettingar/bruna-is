@@ -22,7 +22,7 @@
   .page-hero h1 { font-size: 36px; letter-spacing: -1px; }
 
   /* All section paddings shrink */
-  .statement, .leading, .process, .accreds, .sectors, .customers, .team, .philosophy, .story, .services-page, .sectors-page, .value-band, .cta-band, .articles {
+  .statement, .leading, .process, .accreds, .sectors, .customers, .services-page, .sectors-page, .value-band, .cta-band, .articles {
     padding: 56px 0;
   }
 
@@ -30,13 +30,11 @@
   .statement .row,
   .explainer .row,
   .leading .row,
-  .story .row,
   .accreds .row,
   .services-intro,
   .sectors-intro,
   .value-band .row,
-  .cta-band .row,
-  .principles {
+  .cta-band .row {
     grid-template-columns: 1fr;
     gap: var(--space-8);
   }
@@ -49,7 +47,6 @@
   .sectors-grid,
   .accreds-grid,
   .sector-grid,
-  .team-grid,
   .article-grid,
   .customers-row,
   .stats {
@@ -58,8 +55,8 @@
   }
 
   /* Headings shrink */
-  .statement h2, .story h2, .cta-band h2, .leading h2, .philosophy .head h2,
-  .accreds h2, .team h2, .process .head h2, .sectors .head h2, .services-intro h2,
+  .statement h2, .cta-band h2, .leading h2,
+  .accreds h2, .process .head h2, .sectors .head h2, .services-intro h2,
   .sectors-intro h2, .value-band h2, .articles h2 {
     font-size: 30px;
     letter-spacing: -0.5px;
@@ -93,10 +90,6 @@
     align-items: flex-start;
   }
 
-  /* Timeline stays single-column */
-  .timeline {
-    margin-top: var(--space-6);
-  }
 }
 
 @media (max-width: 30em) {
@@ -104,7 +97,6 @@
   .sectors-grid,
   .accreds-grid,
   .sector-grid,
-  .team-grid,
   .article-grid,
   .customers-row,
   .stats {
