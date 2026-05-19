@@ -2,6 +2,7 @@
   "tags": ["sectors", "sectors-is"],
   "layout": "layouts/sector.njk",
   "permalink": "/geirar/{{ page.fileSlug }}/",
+  "bodyClass": "sectors-page",
   "eleventyNavigation": {
     "parent": "sectors-is"
   }

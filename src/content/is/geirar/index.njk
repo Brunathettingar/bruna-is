@@ -3,6 +3,7 @@ layout: layouts/page.njk
 title: "Geirar"
 description: "Geirar sem Brunaþéttingar þjóna á Íslandi — orka, ál, sjávarútvegur, sjúkrahús, skólar, verslun, hótel, lyfjaiðnaður."
 permalink: /geirar/
+bodyClass: sectors-page
 eleventyNavigation:
   key: sectors-is
   order: 3
@@ -40,7 +41,7 @@ cta:
   <div class="container">
     <div class="sectors-intro">
       <div>
-        <div class="label">{{ intro.label }}</div>
+        <div class="sectors-intro__label">{{ intro.label }}</div>
         <h2>{{ intro.heading | safe }}</h2>
       </div>
       <div>
@@ -53,16 +54,16 @@ cta:
     <div class="sector-grid">
       {%- for s in sectors %}
       <a class="sector-card" href="{{ s.url }}">
-        <div class="pic">
-          <img src="{{ s.data.image }}" alt="" width="1200" height="900">
-          <span class="badge">{{ s.data.number }}</span>
+        <div class="sector-card__media">
+          <img class="sector-card__media-img" src="{{ s.data.image }}" alt="" width="1200" height="900">
+          <span class="sector-card__badge">{{ s.data.number }}</span>
         </div>
-        <div class="body">
+        <div class="sector-card__body">
           <h3>{{ s.data.title | safe }}</h3>
           <p>{{ s.data.description | safe }}</p>
-          <ul class="svc-tags">
+          <ul class="sector-card__tags">
             {%- for t in s.data.tagLabels %}
-            <li>{{ t }}</li>
+            <li class="sector-card__tag">{{ t }}</li>
             {%- endfor %}
           </ul>
         </div>
