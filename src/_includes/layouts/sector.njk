@@ -1,0 +1,32 @@
+---
+layout: layouts/page.njk
+eleventyComputed:
+  ogImage: "{{ image }}"
+ogType: "article"
+---
+<section class="page-hero">
+  <img class="page-hero__image" src="{{ image }}" alt="" width="1600" height="900">
+  <div class="scrim"></div>
+  <div class="container">
+    <h1>{{ title | safe }}</h1>
+    <p class="kicker">{{ description | safe }}</p>
+  </div>
+</section>
+
+<section class="sector-detail">
+  <div class="container">
+    <div class="content-prose">
+      {{ content | safe }}
+    </div>
+
+    {%- if tagLabels and tagLabels.length %}
+    <ul class="svc-tags">
+      {%- for t in tagLabels %}
+      <li>{{ t }}</li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+  </div>
+</section>
+
+{% include "partials/cta-band.njk" %}
