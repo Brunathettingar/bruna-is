@@ -20,23 +20,6 @@ export default function (eleventyConfig) {
   // project-page subpath (`/bruna-is/`) rather than the org root.
   eleventyConfig.addPlugin(HtmlBasePlugin);
 
-  // HtmlBasePlugin only rewrites href/src attributes — it doesn't touch
-  // `url(...)` references inside inline `style` attributes. Many mockup
-  // pages use `<div style="background-image: url('/img/foo.jpg')">`, so
-  // we patch those manually here.
-  eleventyConfig.addTransform("prefixInlineUrls", function (content) {
-    if (!this.page?.outputPath?.endsWith(".html")) return content;
-    const prefix = "/bruna-is";
-    return content.replace(
-      /style="([^"]*url\([^"]+)"/g,
-      (match, styleBody) =>
-        `style="${styleBody
-          .replace(/url\(\s*'\/(?!bruna-is\/)/g, `url('${prefix}/`)
-          .replace(/url\(\s*"\/(?!bruna-is\/)/g, `url("${prefix}/`)
-          .replace(/url\(\s*\/(?!bruna-is\/)/g, `url(${prefix}/`)}"`
-    );
-  });
-
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
     formats: ["avif", "webp", "jpeg"],
     widths: [400, 800, 1200, "auto"],
@@ -133,6 +116,15 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy({ ".nojekyll": ".nojekyll" });
+  // Keep raw originals available at `/img/<name>.jpg`. Although every
+  // `<img src="/img/...">` in templates is transformed into a hashed
+  // `<picture>` by eleventy-img, the same logical assets are still
+  // referenced as raw URLs by `og:image` / `twitter:image` meta tags
+  // and the `Article.image` JSON-LD field on paginated greinar pages
+  // (computed from `article.image` in `_data/articles.js`). Social
+  // crawlers and structured-data consumers need a stable, unhashed
+  // URL — the build-time `check-build.js` asset-resolution assertion
+  // guards this contract.
   eleventyConfig.addPassthroughCopy("src/img");
 
   eleventyConfig.setServerOptions({

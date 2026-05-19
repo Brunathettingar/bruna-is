@@ -7,7 +7,7 @@ eleventyNavigation:
   order: 3
 ---
 <section class="page-hero">
-  <div class="bg" style="background-image: url('/img/iceland_alcoa_reydar.jpg');"></div>
+  <img class="page-hero__image" src="/img/iceland_alcoa_reydar.jpg" alt="" width="1600" height="900">
   <div class="scrim"></div>
   <div class="container">
     <div class="crumbs"><a href="/en/">Home</a> &nbsp;/&nbsp; <span>Sectors</span></div>
@@ -32,7 +32,8 @@ eleventyNavigation:
     <div class="sector-grid">
       {%- for s in sectors %}
       <a class="sector-card" href="/en/thjonusta/">
-        <div class="pic" style="background-image: url('{{ s.image }}');">
+        <div class="pic">
+          <img src="{{ s.image }}" alt="" width="1200" height="900">
           <span class="badge">{{ s.number }}</span>
         </div>
         <div class="body">

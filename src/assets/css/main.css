@@ -147,13 +147,16 @@ nav.primary .cta::after { display: none; }
   overflow: hidden;
   display: flex; align-items: flex-end;
 }
-.hero .bg {
+.hero__image {
   position: absolute; inset: 0;
-  background-size: cover; background-position: center;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
   opacity: 0.5;
+  z-index: 0;
 }
 .hero .scrim {
   position: absolute; inset: 0;
+  z-index: 1;
   background: linear-gradient(180deg,
     rgba(10,13,18,0.4) 0%,
     rgba(10,13,18,0.2) 40%,
@@ -286,11 +289,26 @@ nav.primary .cta::after { display: none; }
 }
 .pillar .pic {
   height: 260px; position: relative;
-  background-size: cover; background-position: center;
   overflow: hidden;
+}
+.pillar__image {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  z-index: 0;
+}
+.pillar .pic--contain {
+  background-color: #f1f3f6;
+}
+.pillar__image--contain {
+  object-fit: contain;
+}
+.pillar .pic--contain::after {
+  display: none;
 }
 .pillar .pic::after {
   content: ""; position: absolute; inset: 0;
+  z-index: 1;
   background: linear-gradient(180deg, var(--alpha-scrim-soft) 0%, var(--alpha-scrim-med) 100%);
 }
 .pillar .pic .ico {
@@ -449,10 +467,17 @@ nav.primary .cta::after { display: none; }
 .leading .pic {
   position: relative;
   aspect-ratio: 4 / 5;
-  background-size: cover; background-position: center;
+  overflow: hidden;
+}
+.leading__image {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  z-index: 0;
 }
 .leading .pic .badge {
   position: absolute; left: -32px; bottom: 36px;
+  z-index: 2;
   background: var(--accent); color: #fff;
   padding: 22px 28px;
   font-family: var(--serif);
@@ -717,13 +742,16 @@ footer .bottom a:hover { color: #fff; }
   overflow: hidden;
   border-bottom: 6px solid var(--accent);
 }
-.page-hero .bg {
+.page-hero__image {
   position: absolute; inset: 0;
-  background-size: cover; background-position: center;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
   opacity: 0.35;
+  z-index: 0;
 }
 .page-hero .scrim {
   position: absolute; inset: 0;
+  z-index: 1;
   background: linear-gradient(180deg,
     rgba(10,13,18,0.7) 0%,
     rgba(10,13,18,0.55) 50%,
@@ -974,8 +1002,14 @@ footer .bottom a:hover { color: #fff; }
   margin-bottom: 56px;
 }
 .article-featured .pic {
+  position: relative;
+  overflow: hidden;
   height: 100%; min-height: 360px;
-  background-size: cover; background-position: center;
+}
+.article-featured .pic > img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
 }
 .article-featured .body {
   padding: 48px 56px;
@@ -1023,11 +1057,17 @@ footer .bottom a:hover { color: #fff; }
 .article-card:hover { border-color: var(--accent); }
 .article-card .pic {
   height: 200px;
-  background-size: cover; background-position: center;
   position: relative;
+  overflow: hidden;
+}
+.article-card .pic > img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
 }
 .article-card .pic .tag {
   position: absolute; left: 16px; top: 16px;
+  z-index: 2;
   background: var(--accent); color: #fff;
   font-size: 10.5px; letter-spacing: 1.5px;
   padding: 5px 10px; text-transform: uppercase;
@@ -1102,11 +1142,17 @@ footer .bottom a:hover { color: #fff; }
 }
 .sector-card .pic {
   height: 180px;
-  background-size: cover; background-position: center;
   position: relative;
+  overflow: hidden;
+}
+.sector-card .pic > img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
 }
 .sector-card .pic .badge {
   position: absolute; bottom: 12px; left: 12px;
+  z-index: 2;
   background: var(--accent); color: #fff;
   font-size: 10px; letter-spacing: 1.5px;
   padding: 4px 10px; text-transform: uppercase;
@@ -1185,14 +1231,19 @@ footer .bottom a:hover { color: #fff; }
 }
 .service-feature .pic {
   aspect-ratio: 4 / 3;
-  background-size: cover; background-position: center;
   position: relative;
+  overflow: hidden;
+}
+.service-feature .pic > img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
 }
 .service-feature .pic.contain {
-  background-size: contain;
   background-color: #f1f3f6;
-  background-repeat: no-repeat;
-  background-position: center;
+}
+.service-feature .pic.contain > img {
+  object-fit: contain;
 }
 .service-feature .num-badge {
   display: inline-block;

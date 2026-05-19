@@ -1,25 +1,8 @@
 # Architecture deviations
 
-Three places where the current Eleventy port diverges from the framework specs at `docs/instructions/`. Each was either an explicit, pre-approved deviation (recorded in commit history and the approved plan at `.planning/`/`~/.claude/plans/`) or surfaced by the comb consistency audit in `docs/combs/reviews/`. This file records the deviation, why it was accepted, and the criteria that would justify the work of removing it.
+Two places where the current Eleventy port diverges from the framework specs at `docs/instructions/`. Each was either an explicit, pre-approved deviation (recorded in commit history and the approved plan at `.planning/`/`~/.claude/plans/`) or surfaced by the comb consistency audit in `docs/combs/reviews/`. This file records the deviation, why it was accepted, and the criteria that would justify the work of removing it.
 
-## 1. `<picture>` pipeline bypassed for hero / pillar / sector backgrounds
-
-**Spec:** `FRAMEWORK-PORT-PROMPT.md` mandates `@11ty/eleventy-img` transform every `<img>` into responsive `<picture>` with AVIF/WebP/JPEG sources at multiple widths, and forbids hand-written `<picture>` markup.
-
-**Current state:** The framework plugin is installed and configured, but most large images on the site are decorative backgrounds set via inline `style="background-image: url('/img/...')"` on the hero, page-hero, pillar `.pic`, sector card, service-feature `.pic`, leading `.pic`, and article-card `.pic`. CSS backgrounds can't be transformed by `eleventy-img`. There are roughly 34 such occurrences across the page templates. There are no `<img>` elements on the singleton pages today.
-
-**Why it was accepted:** The mockup itself uses CSS backgrounds for these decorative slots. Porting them to `<img>` requires reshaping every section's HTML and CSS — the hero's `.bg` + `.scrim` overlay structure, for instance, is built around a background-image rather than a foreground `<img>`. This is a multi-day visual restructuring.
-
-**Cost of remediation:** Multi-day. Touches every section template, every section's CSS rules, and re-tests visual fidelity at desktop and mobile.
-
-**Criteria that would trigger doing the work:**
-- Image bandwidth becomes a measurable issue on slow connections (track via `largestContentfulPaint` in field data).
-- Lighthouse Performance score on `/` or `/en/` drops below a target (e.g., 90 mobile).
-- Mobile-first redesign reshapes the hero/pillar/sector grids anyway.
-
-Until any of those trip, the current background-image setup ships acceptable visual quality and the file size of the hero JPEGs (200-400KB) is tolerable for a marketing site.
-
-## 2. `main.css` is the mockup CSS verbatim — many raw values
+## 1. `main.css` is the mockup CSS verbatim — many raw values
 
 **Spec:** `FRAMEWORK-PORT-PROMPT.md` rule: "Downstream CSS **must** reference tokens — no raw hex codes, no magic px values, outside `tokens.css`."
 
@@ -37,7 +20,7 @@ Until any of those trip, the current background-image setup ships acceptable vis
 - A second designer or developer needs to edit the CSS — token names communicate intent (`--text-3xl`) better than raw values (`38px`).
 - Lighthouse Best Practices flags accidental inconsistencies the tokens would have caught.
 
-## 3. `services` / `sectors` / `team` / `milestones` / `principles` ship as `_data/` files, not Markdown collections
+## 2. `services` / `sectors` / `team` / `milestones` / `principles` ship as `_data/` files, not Markdown collections
 
 **Spec:** `FRAMEWORK-PORT-PROMPT.md` Part B Collections section: each repeating content shape becomes a directory under `src/content/<collection>/` with one `.md` per entry plus a `<collection>.json` directory data file.
 

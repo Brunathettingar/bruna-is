@@ -10,7 +10,7 @@ eleventyNavigation:
 {%- set rest = articles | rejectattr("featured") %}
 
 <section class="page-hero">
-  <div class="bg" style="background-image: url('/img/documentation.jpg');"></div>
+  <img class="page-hero__image" src="/img/documentation.jpg" alt="" width="1600" height="900">
   <div class="scrim"></div>
   <div class="container">
     <div class="crumbs"><a href="/">Heim</a> &nbsp;/&nbsp; <span>Greinar</span></div>
@@ -23,7 +23,9 @@ eleventyNavigation:
   <div class="container">
     {%- if featured %}
     <a class="article-featured" href="/greinar/{{ featured.slug }}/">
-      <div class="pic" style="background-image: url('{{ featured.image }}');"></div>
+      <div class="pic">
+        <img src="{{ featured.image }}" alt="" width="1200" height="900">
+      </div>
       <div class="body">
         <div class="tag">{{ featured.category[lang] }}</div>
         <h2>{{ featured.title[lang] }}</h2>
@@ -40,7 +42,8 @@ eleventyNavigation:
     <div class="article-grid">
       {%- for article in rest %}
       <a class="article-card" href="/greinar/{{ article.slug }}/">
-        <div class="pic" style="background-image: url('{{ article.image }}');">
+        <div class="pic">
+          <img src="{{ article.image }}" alt="" width="1200" height="900">
           <span class="tag">{{ article.category[lang] }}</span>
         </div>
         <div class="body">

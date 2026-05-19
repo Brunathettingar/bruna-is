@@ -7,7 +7,7 @@ eleventyNavigation:
   order: 2
 ---
 <section class="page-hero">
-  <div class="bg" style="background-image: url('/img/iceland_svartsengi.jpg');"></div>
+  <img class="page-hero__image" src="/img/iceland_svartsengi.jpg" alt="" width="1600" height="900">
   <div class="scrim"></div>
   <div class="container">
     <div class="crumbs"><a href="/">Heim</a> &nbsp;/&nbsp; <span>Þjónusta</span></div>
@@ -31,7 +31,9 @@ eleventyNavigation:
 
     {%- for s in services %}
     <article class="service-feature{% if loop.index0 % 2 == 1 %} flip{% endif %}">
-      <div class="pic{% if s.imageContain %} contain{% endif %}" style="background-image: url('{{ s.image }}');"></div>
+      <div class="pic{% if s.imageContain %} contain{% endif %}">
+        <img src="{{ s.image }}" alt="" width="1200" height="900">
+      </div>
       <div class="copy">
         <span class="num-badge">{{ s.number }} / {{ s.category[lang] }}</span>
         <h2>{{ s.title[lang] | safe }}</h2>
