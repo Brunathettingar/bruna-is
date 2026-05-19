@@ -1,4 +1,4 @@
-{%- set otherLang = lang == "is" and "en" or "is" %}
+{%- set alternates = page.url | locale_links %}
 <div class="utility">
   <div class="container">
     <div class="row">
@@ -10,7 +10,9 @@
         <a href="tel:{{ meta.contact.phone.e164 }}">{{ meta.contact.phone.display }}</a>
         <a href="mailto:{{ meta.contact.email }}">{{ meta.contact.email }}</a>
         <span class="lang">
-          <a href="{{ page.url | alternateUrl(lang) }}" lang="{{ otherLang }}" hreflang="{{ otherLang }}">{{ ("lang.label." + otherLang) | i18n(lang) }}</a>
+          {%- for link in alternates %}
+          <a href="{{ link.url }}" lang="{{ link.lang }}" hreflang="{{ link.lang }}">{{ ("lang.label." + link.lang) | i18n(lang) }}</a>
+          {%- endfor %}
           <a href="{{ page.url }}" class="active" lang="{{ lang }}">{{ ("lang.label." + lang) | i18n(lang) }}</a>
         </span>
       </div>

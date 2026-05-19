@@ -16,10 +16,17 @@
     <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
     <link rel="canonical" href="{{ meta.url }}{{ page.url }}">
 
-    {%- set otherLang = "en" if lang == "is" else "is" %}
     <link rel="alternate" hreflang="{{ lang }}" href="{{ meta.url }}{{ page.url }}">
-    <link rel="alternate" hreflang="{{ otherLang }}" href="{{ meta.url }}{{ page.url | alternateUrl(lang) }}">
-    <link rel="alternate" hreflang="x-default" href="{{ meta.url }}{% if lang == 'is' %}{{ page.url }}{% else %}{{ page.url | alternateUrl(lang) }}{% endif %}">
+    {%- for link in page.url | locale_links %}
+    <link rel="alternate" hreflang="{{ link.lang }}" href="{{ meta.url }}{{ link.url }}">
+    {%- endfor %}
+    {%- if lang == "is" %}
+    <link rel="alternate" hreflang="x-default" href="{{ meta.url }}{{ page.url }}">
+    {%- else %}
+    {%- for link in page.url | locale_links %}{% if link.lang == "is" %}
+    <link rel="alternate" hreflang="x-default" href="{{ meta.url }}{{ link.url }}">
+    {%- endif %}{% endfor %}
+    {%- endif %}
 
     {% include "partials/seo-meta.njk" %}
 
