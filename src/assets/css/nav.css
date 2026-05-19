@@ -1,7 +1,7 @@
 /* Hamburger toggle — desktop nav uses the mockup's `nav.primary` styles in main.css.
    This file only adds the mobile disclosure pattern that the mockup is missing. */
 
-.nav-toggle {
+.site-header__toggle {
   display: none;
   flex-direction: column;
   gap: 4px;
@@ -9,19 +9,19 @@
   border: 0;
   background: transparent;
 }
-.nav-toggle span {
+.site-header__toggle span {
   display: block;
   width: 22px;
   height: 2px;
   background: var(--text);
   transition: transform var(--transition-fast), opacity var(--transition-fast);
 }
-.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.site-header__toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.site-header__toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.site-header__toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
 @media (max-width: 63.999em) {
-  .nav-toggle { display: inline-flex; }
+  .site-header__toggle { display: inline-flex; }
 
   /* Override mockup nav for mobile drawer */
   nav.primary {
