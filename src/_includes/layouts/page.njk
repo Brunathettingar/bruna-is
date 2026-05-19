@@ -9,13 +9,7 @@ layout: layouts/base.njk
     {%- if eleventyNavigation and eleventyNavigation.parent %}
     {% include "partials/breadcrumb.njk" %}
     {%- endif %}
-    {%- if bodyClass %}
-    <div class="{{ bodyClass }}">
-      {{ content | safe }}
-    </div>
-    {%- else %}
-      {{ content | safe }}
-    {%- endif %}
+    {{ content | safe }}
   </main>
   {% include "partials/footer.njk" %}
 </div>
