@@ -20,7 +20,7 @@
   position: relative;
   min-height: 540px;
   background: var(--bg-dark);
-  color: #fff;
+  color: var(--bg);
   overflow: hidden;
   display: flex; align-items: flex-end;
 }
@@ -191,13 +191,13 @@
 .pillar .pic .ico {
   position: absolute; left: 32px; top: 32px;
   width: 56px; height: 56px;
-  background: var(--accent); color: #fff;
+  background: var(--accent); color: var(--bg);
   display: grid; place-items: center;
   z-index: 2;
 }
 .pillar .pic .ico svg {
   width: 28px; height: 28px;
-  stroke: #fff; fill: none; stroke-width: 1.6;
+  stroke: var(--bg); fill: none; stroke-width: 1.6;
 }
 .pillar .body {
   padding: 30px 28px 32px;
@@ -237,7 +237,7 @@
   font-size: 13px; letter-spacing: 1.5px;
   text-transform: uppercase; font-weight: 600;
   color: var(--accent);
-  display: inline-flex; align-items: center; gap: 8px;
+  display: inline-flex; align-items: center; gap: var(--space-2);
 }
 .pillar .more::after { content: "→"; }
 
@@ -279,7 +279,7 @@
   font-size: 14px; color: var(--accent);
   font-weight: 600; letter-spacing: 1px;
   margin-bottom: 18px;
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; gap: var(--space-2);
 }
 .process-step .num::after {
   content: ""; flex: 1; height: 1px; background: var(--line);
@@ -355,7 +355,7 @@
 .leading .pic .badge {
   position: absolute; left: -32px; bottom: 36px;
   z-index: 2;
-  background: var(--accent); color: #fff;
+  background: var(--accent); color: var(--bg);
   padding: 22px 28px;
   font-family: var(--serif);
   font-size: 18px; font-weight: 500;
@@ -376,7 +376,7 @@
 .sectors {
   padding: 90px 0;
   background: var(--bg-dark);
-  color: #fff;
+  color: var(--bg);
 }
 .sectors .head {
   text-align: center; margin-bottom: 56px;
@@ -390,7 +390,7 @@
 .sectors .head h2 {
   font-size: 36px; font-weight: 600;
   letter-spacing: -0.5px;
-  color: #fff;
+  color: var(--bg);
 }
 .sectors-grid {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
@@ -412,7 +412,7 @@
 }
 .sector h4 {
   font-size: 18px; font-weight: 600;
-  color: #fff;
+  color: var(--bg);
 }
 .sector p {
   font-size: 13.5px;
@@ -549,7 +549,7 @@
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 .btn.primary {
-  background: var(--accent); color: #fff;
+  background: var(--accent); color: var(--bg);
 }
 .btn.primary:hover { background: var(--accent-dark); }
 .btn.ghost {
@@ -735,7 +735,7 @@
   height: 220px;
   background: linear-gradient(135deg, var(--brand-blue) 0%, #0f3a78 100%);
   display: grid; place-items: center;
-  color: #fff;
+  color: var(--bg);
   font-family: var(--serif);
   font-size: 56px; font-weight: 600;
   letter-spacing: -2px;
@@ -803,7 +803,7 @@
 }
 .article-featured .tag::before {
   content: "Útgefin grein";
-  background: var(--accent); color: #fff;
+  background: var(--accent); color: var(--bg);
   padding: 4px 10px; font-size: 10px;
 }
 .article-featured h2 {
@@ -847,7 +847,7 @@
 .article-card .pic .tag {
   position: absolute; left: 16px; top: 16px;
   z-index: 2;
-  background: var(--accent); color: #fff;
+  background: var(--accent); color: var(--bg);
   font-size: 10.5px; letter-spacing: 1.5px;
   padding: 5px 10px; text-transform: uppercase;
   font-weight: 600;
@@ -932,7 +932,7 @@
 .sector-card .pic .badge {
   position: absolute; bottom: 12px; left: 12px;
   z-index: 2;
-  background: var(--accent); color: #fff;
+  background: var(--accent); color: var(--bg);
   font-size: 10px; letter-spacing: 1.5px;
   padding: 4px 10px; text-transform: uppercase;
   font-weight: 600;
@@ -1067,7 +1067,7 @@
   background: var(--brand-blue-soft);
   border-left: 3px solid var(--brand-blue);
   padding: 16px 22px;
-  margin: 8px 0 0;
+  margin: var(--space-2) 0 0;
   font-size: 14.5px;
   color: var(--brand-blue);
   line-height: 1.6;
@@ -1142,7 +1142,7 @@
 .quoter-intro .notice {
   border-left: 3px solid var(--brand-blue);
   background: var(--brand-blue-soft);
-  padding: 16px 20px;
+  padding: var(--space-4) var(--space-5);
   font-size: 13.5px; color: var(--brand-blue);
   margin-top: 14px;
 }
@@ -1157,7 +1157,7 @@
   display: grid;
   grid-template-columns: 1.7fr 1.3fr 1fr 0.7fr 0.7fr 1.2fr 0.6fr 1.1fr 36px;
   gap: 12px;
-  padding: 16px 24px;
+  padding: var(--space-4) var(--space-6);
   background: var(--bg-soft);
   border-bottom: 1px solid var(--line);
   font-size: 11px; letter-spacing: 1.2px;
@@ -1239,14 +1239,14 @@
   border-color: var(--accent);
   border-style: solid;
   color: var(--accent);
-  background: #fff;
+  background: var(--bg);
 }
 
 .quoter-total {
   padding: 28px 24px;
   display: flex; justify-content: space-between; align-items: center;
   background: var(--bg-dark);
-  color: #fff;
+  color: var(--bg);
 }
 .quoter-total .label-block {
   font-size: 11px; letter-spacing: 2px;
@@ -1274,7 +1274,7 @@
   padding: 36px 24px 32px;
   border-top: 1px solid var(--line-dark);
   background: var(--bg-dark);
-  color: #fff;
+  color: var(--bg);
 }
 .quoter-customer h3 {
   font-size: 18px; font-weight: 600;
@@ -1289,7 +1289,7 @@
 .quoter-customer textarea {
   background: var(--bg-dark-soft);
   border: 1px solid var(--line-dark);
-  color: #fff;
+  color: var(--bg);
   padding: 12px 14px;
   font-size: 14px;
   font-family: var(--sans);
@@ -1320,9 +1320,9 @@
 }
 .quoter-customer .submit-btn {
   background: var(--accent);
-  color: #fff;
+  color: var(--bg);
   border: none;
-  padding: 16px 32px;
+  padding: var(--space-4) var(--space-8);
   font-size: 14px; font-weight: 600;
   letter-spacing: 0.5px;
   cursor: pointer;
@@ -1338,7 +1338,7 @@
 .quoter-confirm {
   display: none;
   margin-top: 16px;
-  padding: 16px 20px;
+  padding: var(--space-4) var(--space-5);
   background: rgba(94, 187, 122, 0.12);
   border-left: 3px solid #5fb37a;
   color: #c8efd4;
@@ -1364,6 +1364,6 @@
   border-color: var(--accent); color: var(--accent);
 }
 .pagination a.active {
-  background: var(--accent); color: #fff;
+  background: var(--accent); color: var(--bg);
   border-color: var(--accent);
 }
