@@ -1,20 +1,39 @@
 ---
 layout: layouts/page.njk
 title: "Services"
-description: "Brunaþéttingar's seven service areas — fire sealing, pipe insulation (Isogenopak, WrapTec, Armaflex), ventilation insulation, water tank insulation, pipe markings, aluminium cladding and advisory."
+description: "Seven service lines — fire sealing, passive fire protection, pipe insulation, ventilation insulation, water tank insulation, pipe markings, and aluminium cladding."
 permalink: /en/thjonusta/
 eleventyNavigation:
   key: services-en
   order: 2
   parent: false
+kicker: "From fire sealing and fireproofing to pipe insulation, aluminium cladding and pipe markings."
+intro:
+  label: "All services"
+  heading: "One company — seven specialties."
+  paragraphs:
+    - "Brunaþéttingar provides <strong>complete technical insulation</strong> for buildings across Iceland."
+    - "Our work spans fire protection, thermal and acoustic insulation, and finish work to industrial standards."
+valueBand:
+  label: "Economics"
+  heading: "Technical insulation that <span class=\"ul\">pays for itself</span>."
+  paragraphs:
+    - "Most of our work pays back in months: heat loss eliminated, condensation prevented, fire compartments documented."
+    - "We provide an annual energy-saving calculation with every project."
+cta:
+  heading: "Need an on-site survey? <span class=\"ul\">Get in touch.</span>"
+  primaryHref: "/en/verdreiknir/"
+  primaryLabel: "Get a quote"
+  secondaryHref: "tel:+3548504405"
+  secondaryLabel: "(+354) 850-4405"
 ---
+{%- set services = collections['services-' + lang] | sort(false, false, 'data.order') %}
 <section class="page-hero">
   <img class="page-hero__image" src="/img/iceland_svartsengi.jpg" alt="" width="1600" height="900">
   <div class="scrim"></div>
   <div class="container">
-    <div class="crumbs"><a href="/en/">Home</a> &nbsp;/&nbsp; <span>Services</span></div>
-    <h1>Seven service areas.</h1>
-    <p class="kicker">From fire sealing and fireproofing to pipe insulation, aluminium cladding and pipe markings — Brunaþéttingar offer complete technical insulation for buildings across Iceland.</p>
+    <h1>{{ title }}</h1>
+    <p class="kicker">{{ kicker | safe }}</p>
   </div>
 </section>
 
@@ -22,30 +41,31 @@ eleventyNavigation:
   <div class="container">
     <div class="services-intro">
       <div>
-        <div class="label">Services in full</div>
-        <h2>One company — seven specialties.</h2>
+        <div class="label">{{ intro.label }}</div>
+        <h2>{{ intro.heading | safe }}</h2>
       </div>
       <div>
-        <p>Brunaþéttingar provide <strong>complete technical insulation</strong> for buildings across Iceland. We started in fire sealing in 2011 and have added services as our clients have required — always with the same focus on quality, certification and documentation.</p>
-        <p>These are the seven areas we serve today. Some services overlap (fire protection and acoustic insulation use the same materials) and some require specialised systems from Isogenopak, WrapTec or Armaflex — but they all fall under technical insulation.</p>
+        {%- for p in intro.paragraphs %}
+        <p>{{ p | safe }}</p>
+        {%- endfor %}
       </div>
     </div>
 
     {%- for s in services %}
     <article class="service-feature{% if loop.index0 % 2 == 1 %} flip{% endif %}">
-      <div class="pic{% if s.imageContain %} contain{% endif %}">
-        <img src="{{ s.image }}" alt="" width="1200" height="900">
+      <div class="pic{% if s.data.imageContain %} contain{% endif %}">
+        <img src="{{ s.data.image }}" alt="" width="1200" height="900">
       </div>
       <div class="copy">
-        <span class="num-badge">{{ s.number }} / {{ s.category[lang] }}</span>
-        <h2>{{ s.title[lang] | safe }}</h2>
-        <p class="lead">{{ s.lead[lang] | safe }}</p>
+        <span class="num-badge">{{ s.data.number }} / {{ s.data.category }}</span>
+        <h2><a href="{{ s.url }}">{{ s.data.title | safe }}</a></h2>
+        <p class="lead">{{ s.data.summary | safe }}</p>
         <div class="insight">
-          <strong>{{ s.insightStrong[lang] }}</strong>
-          {{ s.insight[lang] | safe }}
+          <strong>{{ s.data.insightStrong }}</strong>
+          {{ s.data.insight | safe }}
         </div>
         <ul class="bullets">
-          {%- for b in s.bullets[lang] %}
+          {%- for b in s.data.bullets %}
           <li>{{ b | safe }}</li>
           {%- endfor %}
         </ul>
@@ -59,12 +79,13 @@ eleventyNavigation:
   <div class="container">
     <div class="row">
       <div>
-        <div class="label">Cost effectiveness</div>
-        <h2>Technical insulation that <span class="ul">pays itself back</span>.</h2>
+        <div class="label">{{ valueBand.label }}</div>
+        <h2>{{ valueBand.heading | safe }}</h2>
       </div>
       <div>
-        <p>Technical insulation is one of the most cost-effective investments a building owner can make. The <strong>Isogenopak</strong> and <strong>WrapTec</strong> systems we install are particularly economical — they multiply the lifespan of the underlying insulation, reduce maintenance costs and improve energy efficiency over the entire operating life of the building.</p>
-        <p>We provide an annual energy-saving calculation for every project before you accept the quote — so you know exactly when the investment will pay itself back.</p>
+        {%- for p in valueBand.paragraphs %}
+        <p>{{ p | safe }}</p>
+        {%- endfor %}
       </div>
     </div>
   </div>
@@ -73,10 +94,10 @@ eleventyNavigation:
 <section class="cta-band">
   <div class="container">
     <div class="row">
-      <h2>Need an on-site inspection? <span class="ul">Let's talk.</span></h2>
+      <h2>{{ cta.heading | safe }}</h2>
       <div class="actions">
-        <a class="btn primary" href="/en/verdreiknir/"><span>Get a quote</span> <span class="arrow">→</span></a>
-        <a class="btn ghost" href="tel:+3548504405"><span>(+354) 850-4405</span> <span class="arrow">→</span></a>
+        <a class="btn primary" href="{{ cta.primaryHref }}"><span>{{ cta.primaryLabel }}</span> <span class="arrow">→</span></a>
+        <a class="btn ghost" href="{{ cta.secondaryHref }}"><span>{{ cta.secondaryLabel }}</span> <span class="arrow">→</span></a>
       </div>
     </div>
   </div>

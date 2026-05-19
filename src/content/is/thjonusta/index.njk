@@ -1,20 +1,39 @@
 ---
 layout: layouts/page.njk
 title: "Þjónusta"
-description: "[TBD — íslensk lýsing] Sjö þjónustusvið Brunaþéttinga."
+description: "Sjö þjónustusvið Brunaþéttinga — brunaþéttingar, brunavarnir, pípueinangrun, loftræsing, vatnstankar, merkingar, álklæðningar og ráðgjöf."
 permalink: /thjonusta/
 eleventyNavigation:
   key: services-is
   order: 2
   parent: false
+kicker: "Frá brunaþéttingum og brunavörnum til pípueinangrunar, álklæðninga og pípumerkinga."
+intro:
+  label: "Þjónustan í heild"
+  heading: "Eitt fyrirtæki — sjö sérgreinar."
+  paragraphs:
+    - "Brunaþéttingar bjóða <strong>heildaræðar tæknieinangrun</strong> fyrir mannvirki á Íslandi."
+    - "[TBD — annað íslenskt inngangsmálsgrein]"
+valueBand:
+  label: "Hagkvæmni"
+  heading: "Tæknieinangrun sem <span class=\"ul\">borgar sig sjálf</span>."
+  paragraphs:
+    - "[TBD — íslenska]"
+    - "[TBD — íslenska]"
+cta:
+  heading: "Þarfu úttekt á staðnum? <span class=\"ul\">Hafðu samband.</span>"
+  primaryHref: "/verdreiknir/"
+  primaryLabel: "Fá verðmat"
+  secondaryHref: "tel:+3548504405"
+  secondaryLabel: "(+354) 850-4405"
 ---
+{%- set services = collections['services-' + lang] | sort(false, false, 'data.order') %}
 <section class="page-hero">
   <img class="page-hero__image" src="/img/iceland_svartsengi.jpg" alt="" width="1600" height="900">
   <div class="scrim"></div>
   <div class="container">
-    <div class="crumbs"><a href="/">Heim</a> &nbsp;/&nbsp; <span>Þjónusta</span></div>
-    <h1>Sjö þjónustusvið.</h1>
-    <p class="kicker">[TBD — íslenska] Frá brunaþéttingum og brunavörnum til pípueinangrunar, álklæðninga og pípumerkinga.</p>
+    <h1>{{ title }}</h1>
+    <p class="kicker">{{ kicker | safe }}</p>
   </div>
 </section>
 
@@ -22,30 +41,31 @@ eleventyNavigation:
   <div class="container">
     <div class="services-intro">
       <div>
-        <div class="label">Þjónustan í heild</div>
-        <h2>Eitt fyrirtæki — sjö sérgreinar.</h2>
+        <div class="label">{{ intro.label }}</div>
+        <h2>{{ intro.heading | safe }}</h2>
       </div>
       <div>
-        <p>[TBD — íslenska] Brunaþéttingar bjóða <strong>heildaræðar tæknieinangrun</strong> fyrir mannvirki á Íslandi.</p>
-        <p>[TBD — íslenska]</p>
+        {%- for p in intro.paragraphs %}
+        <p>{{ p | safe }}</p>
+        {%- endfor %}
       </div>
     </div>
 
     {%- for s in services %}
     <article class="service-feature{% if loop.index0 % 2 == 1 %} flip{% endif %}">
-      <div class="pic{% if s.imageContain %} contain{% endif %}">
-        <img src="{{ s.image }}" alt="" width="1200" height="900">
+      <div class="pic{% if s.data.imageContain %} contain{% endif %}">
+        <img src="{{ s.data.image }}" alt="" width="1200" height="900">
       </div>
       <div class="copy">
-        <span class="num-badge">{{ s.number }} / {{ s.category[lang] }}</span>
-        <h2>{{ s.title[lang] | safe }}</h2>
-        <p class="lead">{{ s.lead[lang] | safe }}</p>
+        <span class="num-badge">{{ s.data.number }} / {{ s.data.category }}</span>
+        <h2><a href="{{ s.url }}">{{ s.data.title | safe }}</a></h2>
+        <p class="lead">{{ s.data.summary | safe }}</p>
         <div class="insight">
-          <strong>{{ s.insightStrong[lang] }}</strong>
-          {{ s.insight[lang] | safe }}
+          <strong>{{ s.data.insightStrong }}</strong>
+          {{ s.data.insight | safe }}
         </div>
         <ul class="bullets">
-          {%- for b in s.bullets[lang] %}
+          {%- for b in s.data.bullets %}
           <li>{{ b | safe }}</li>
           {%- endfor %}
         </ul>
@@ -59,12 +79,13 @@ eleventyNavigation:
   <div class="container">
     <div class="row">
       <div>
-        <div class="label">Hagkvæmni</div>
-        <h2>Tæknieinangrun sem <span class="ul">borgar sig sjálf</span>.</h2>
+        <div class="label">{{ valueBand.label }}</div>
+        <h2>{{ valueBand.heading | safe }}</h2>
       </div>
       <div>
-        <p>[TBD — íslenska]</p>
-        <p>[TBD — íslenska]</p>
+        {%- for p in valueBand.paragraphs %}
+        <p>{{ p | safe }}</p>
+        {%- endfor %}
       </div>
     </div>
   </div>
@@ -73,10 +94,10 @@ eleventyNavigation:
 <section class="cta-band">
   <div class="container">
     <div class="row">
-      <h2>Þarfu úttekt á staðnum? <span class="ul">Hafðu samband.</span></h2>
+      <h2>{{ cta.heading | safe }}</h2>
       <div class="actions">
-        <a class="btn primary" href="/verdreiknir/"><span>Fá verðmat</span> <span class="arrow">→</span></a>
-        <a class="btn ghost" href="tel:+3548504405"><span>(+354) 850-4405</span> <span class="arrow">→</span></a>
+        <a class="btn primary" href="{{ cta.primaryHref }}"><span>{{ cta.primaryLabel }}</span> <span class="arrow">→</span></a>
+        <a class="btn ghost" href="{{ cta.secondaryHref }}"><span>{{ cta.secondaryLabel }}</span> <span class="arrow">→</span></a>
       </div>
     </div>
   </div>
