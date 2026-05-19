@@ -18,13 +18,6 @@ html { scroll-behavior: smooth; }
 .pett  { font-family: var(--font-body); font-weight: 600; font-size: 46px; letter-spacing: -0.5px; }
 
 .brand--footer { margin-bottom: 22px; }
-body {
-  line-height: 1.55;
-  background: var(--bg);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-button { font-family: inherit; cursor: pointer; }
 
 .container {
   max-width: 1280px; margin: 0 auto;

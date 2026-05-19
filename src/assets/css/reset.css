@@ -9,6 +9,7 @@ body {
   color: var(--text);
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 h1, h2, h3, h4 { text-wrap: balance; line-height: var(--lh-tight); }
 p, li, figcaption { text-wrap: pretty; }
