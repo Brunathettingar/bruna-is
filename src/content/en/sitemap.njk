@@ -5,27 +5,12 @@ layout: null
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-{%- set urlCount = 0 %}
-{#- Singletons + listings under /en/. Exclude the paginated article source template. -#}
-{%- for item in collections.all %}
-  {%- if item.url
-      and item.url.startsWith("/en/")
-      and not item.url.endsWith(".xml")
-      and not (item.url.startsWith("/en/greinar/") and item.url | length > "/en/greinar/".length + 1) %}
+{%- for page in collections.all %}
+  {%- if page.url and page.data.lang == "en" and not page.url.endsWith(".xml") and not page.url.endsWith(".txt") %}
   <url>
-    <loc>{{ meta.url }}{{ item.url }}</loc>
-    <lastmod>{{ item.date | dateIso }}</lastmod>
+    <loc>{{ meta.url }}{{ page.url }}</loc>
+    <lastmod>{{ page.date | dateIso }}</lastmod>
   </url>
-  {%- set urlCount = urlCount + 1 %}
   {%- endif %}
 {%- endfor %}
-{#- Articles: enumerate from the data source (see IS sitemap for rationale). -#}
-{%- for article in articles %}
-  <url>
-    <loc>{{ meta.url }}/en/greinar/{{ article.slug }}/</loc>
-    <lastmod>{{ article.date | dateIso }}</lastmod>
-  </url>
-  {%- set urlCount = urlCount + 1 %}
-{%- endfor %}
-<!-- url-count: {{ urlCount }} -->
 </urlset>
