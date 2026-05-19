@@ -1,6 +1,7 @@
 ---
 layout: layouts/page.njk
 title: "Verðreiknir"
+bodyClass: "quoter-page"
 description: "[TBD — íslensk lýsing] Fáðu áætlað verð fyrir brunaþéttingar á netinu."
 eleventyNavigation:
   key: quote-is
@@ -33,14 +34,14 @@ cta:
   <div class="container">
     <div class="quoter-intro">
       <div>
-        <div class="label">{{ howItWorks.label }}</div>
+        <div class="quoter-intro__label">{{ howItWorks.label }}</div>
         <h2>{{ howItWorks.heading }}</h2>
       </div>
       <div>
         {%- for p in howItWorks.paragraphs %}
         <p>{{ p }}</p>
         {%- endfor %}
-        <div class="notice">
+        <div class="quoter-intro__notice">
           <strong>{{ howItWorks.noticeStrong }}</strong> {{ howItWorks.noticeBody }}
         </div>
       </div>
@@ -51,31 +52,31 @@ cta:
         <span>Tegund opnunar</span>
         <span>Veggur</span>
         <span>Brunaflokkur</span>
-        <span class="r">Breidd&nbsp;(cm)</span>
-        <span class="r">Hæð&nbsp;(cm)</span>
+        <span class="quoter-header__col--right">Breidd&nbsp;(cm)</span>
+        <span class="quoter-header__col--right">Hæð&nbsp;(cm)</span>
         <span>Frá gólfi</span>
-        <span class="r">Fjöldi</span>
-        <span class="r">Verð</span>
+        <span class="quoter-header__col--right">Fjöldi</span>
+        <span class="quoter-header__col--right">Verð</span>
         <span></span>
       </div>
 
       <div class="quoter-rows" id="quoter-rows"></div>
 
       <div class="quoter-actions">
-        <button type="button" class="add-row" data-quoter-add>+ Bæta við línu</button>
+        <button type="button" class="quoter-actions__add" data-quoter-add>+ Bæta við línu</button>
       </div>
 
       <div class="quoter-total">
         <div>
-          <div class="label-block">Áætluð heildarsamtala</div>
-          <div class="small">Án vsk · áætlað út frá vali þínu</div>
+          <div class="quoter-total__label">Áætluð heildarsamtala</div>
+          <div class="quoter-total__hint">Án vsk · áætlað út frá vali þínu</div>
         </div>
-        <div class="total-amount" id="total-amount">0 kr</div>
+        <div class="quoter-total__amount" id="total-amount">0 kr</div>
       </div>
 
       <div class="quoter-customer">
         <h3>Senda áætlað verðmat</h3>
-        <div class="grid">
+        <div class="quoter-customer__grid">
           <input type="text" name="cust-name" placeholder="Nafn" required>
           <input type="text" name="cust-company" placeholder="Fyrirtæki / Verkefni">
           <input type="email" name="cust-email" placeholder="Tölvupóstur" required>
@@ -83,11 +84,11 @@ cta:
         </div>
         <textarea name="cust-notes" placeholder="Athugasemdir, staðsetning, tímalína…"></textarea>
 
-        <div class="submit-row">
-          <span class="note">Þú færð staðfestingu í tölvupósti og verkefnastjóri hringir innan 24 klst.</span>
-          <button type="submit" class="submit-btn">
+        <div class="quoter-customer__submit-row">
+          <span class="quoter-customer__note">Þú færð staðfestingu í tölvupósti og verkefnastjóri hringir innan 24 klst.</span>
+          <button type="submit" class="quoter-customer__submit">
             <span>Senda fyrirspurn</span>
-            <span class="arrow">→</span>
+            <span class="quoter-customer__submit-arrow">→</span>
           </button>
         </div>
 

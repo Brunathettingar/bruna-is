@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="/assets/css/nav.css">
     <link rel="stylesheet" href="/assets/css/blocks.css">
     <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/quoter.css">
     <link rel="stylesheet" href="/assets/css/responsive.css">
     {% block extraStyles %}{% endblock %}
 
@@ -53,7 +54,7 @@
     }
     </script>
   </head>
-  <body>
+  <body class="{{ bodyClass | default('') }}">
     {%- include "partials/svg-defs.njk" %}
     {{ content | safe }}
     <script type="module" src="/assets/js/main.js"></script>

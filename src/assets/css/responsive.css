@@ -22,7 +22,7 @@
   .page-hero h1 { font-size: 36px; letter-spacing: -1px; }
 
   /* All section paddings shrink */
-  .statement, .leading, .process, .accreds, .sectors, .customers, .team, .philosophy, .story, .services-page, .sectors-page, .value-band, .cta-band, .quoter-section, .articles {
+  .statement, .leading, .process, .accreds, .sectors, .customers, .team, .philosophy, .story, .services-page, .sectors-page, .value-band, .cta-band, .articles {
     padding: 56px 0;
   }
 
@@ -36,7 +36,6 @@
   .sectors-intro,
   .value-band .row,
   .cta-band .row,
-  .quoter-intro,
   .principles {
     grid-template-columns: 1fr;
     gap: var(--space-8);
@@ -61,27 +60,11 @@
   /* Headings shrink */
   .statement h2, .story h2, .cta-band h2, .leading h2, .philosophy .head h2,
   .accreds h2, .team h2, .process .head h2, .sectors .head h2, .services-intro h2,
-  .sectors-intro h2, .value-band h2, .quoter-intro h2, .articles h2 {
+  .sectors-intro h2, .value-band h2, .articles h2 {
     font-size: 30px;
     letter-spacing: -0.5px;
     line-height: 1.2;
   }
-
-  /* Quote calculator stacks vertically */
-  .quoter-header { display: none; }
-  .quoter-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-2);
-    padding: var(--space-4);
-    border: 1px solid var(--line);
-    margin-bottom: var(--space-3);
-  }
-  .quoter-row select,
-  .quoter-row input { width: 100%; }
-  .quoter-customer .grid { grid-template-columns: 1fr; }
-  .quoter-total { flex-direction: column; align-items: flex-start; gap: var(--space-2); }
-  .submit-row { flex-direction: column; align-items: stretch; gap: var(--space-3); }
 
   /* Service feature blocks stack */
   .service-feature {

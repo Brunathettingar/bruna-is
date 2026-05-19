@@ -118,8 +118,8 @@ function buildRow(rowId, lang) {
       ${optionsHtml(FLOOR_POSITIONS, "mid")}
     </select>
     <input type="number" name="qty" value="1" min="1" step="1">
-    <span class="subtotal"><span class="none">${c.noPrice}</span></span>
-    <button type="button" class="remove" data-quoter-remove aria-label="${c.removeRow}">×</button>
+    <span class="quoter-row__subtotal"><span class="quoter-row__subtotal-empty">${c.noPrice}</span></span>
+    <button type="button" class="quoter-row__remove" data-quoter-remove aria-label="${c.removeRow}">×</button>
   `;
   return row;
 }
@@ -163,9 +163,9 @@ function recalc(form, lang) {
   form.querySelectorAll(".quoter-row").forEach((row) => {
     const d = collectRowData(row);
     const { sub } = computeSubtotal(d);
-    const subEl = row.querySelector(".subtotal");
+    const subEl = row.querySelector(".quoter-row__subtotal");
     if (sub === null) {
-      subEl.innerHTML = `<span class="none">${COPY[lang].noPrice}</span>`;
+      subEl.innerHTML = `<span class="quoter-row__subtotal-empty">${COPY[lang].noPrice}</span>`;
       return;
     }
     subEl.textContent = formatPrice(sub, lang);
@@ -307,7 +307,7 @@ export function initQuoteCalculator() {
 
     const banner = form.querySelector("#quoter-confirm");
     if (banner) {
-      banner.classList.add("show");
+      banner.dataset.visible = "true";
       banner.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   });

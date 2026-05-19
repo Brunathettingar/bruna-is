@@ -1,6 +1,7 @@
 ---
 layout: layouts/page.njk
 title: "Quote calculator"
+bodyClass: "quoter-page"
 description: "Get an online price estimate for fire sealing — choose opening type, wall type, fire rating and dimensions."
 eleventyNavigation:
   key: quote-en
@@ -33,14 +34,14 @@ cta:
   <div class="container">
     <div class="quoter-intro">
       <div>
-        <div class="label">{{ howItWorks.label }}</div>
+        <div class="quoter-intro__label">{{ howItWorks.label }}</div>
         <h2>{{ howItWorks.heading }}</h2>
       </div>
       <div>
         {%- for p in howItWorks.paragraphs %}
         <p>{{ p }}</p>
         {%- endfor %}
-        <div class="notice">
+        <div class="quoter-intro__notice">
           <strong>{{ howItWorks.noticeStrong }}</strong> {{ howItWorks.noticeBody }}
         </div>
       </div>
@@ -51,31 +52,31 @@ cta:
         <span>Opening type</span>
         <span>Wall type</span>
         <span>Fire rating</span>
-        <span class="r">Width&nbsp;(cm)</span>
-        <span class="r">Height&nbsp;(cm)</span>
+        <span class="quoter-header__col--right">Width&nbsp;(cm)</span>
+        <span class="quoter-header__col--right">Height&nbsp;(cm)</span>
         <span>From floor</span>
-        <span class="r">Qty</span>
-        <span class="r">Price</span>
+        <span class="quoter-header__col--right">Qty</span>
+        <span class="quoter-header__col--right">Price</span>
         <span></span>
       </div>
 
       <div class="quoter-rows" id="quoter-rows"></div>
 
       <div class="quoter-actions">
-        <button type="button" class="add-row" data-quoter-add>+ Add a row</button>
+        <button type="button" class="quoter-actions__add" data-quoter-add>+ Add a row</button>
       </div>
 
       <div class="quoter-total">
         <div>
-          <div class="label-block">Estimated total</div>
-          <div class="small">Excl. VAT · estimated from your selections</div>
+          <div class="quoter-total__label">Estimated total</div>
+          <div class="quoter-total__hint">Excl. VAT · estimated from your selections</div>
         </div>
-        <div class="total-amount" id="total-amount">0 ISK</div>
+        <div class="quoter-total__amount" id="total-amount">0 ISK</div>
       </div>
 
       <div class="quoter-customer">
         <h3>Send the estimated quote</h3>
-        <div class="grid">
+        <div class="quoter-customer__grid">
           <input type="text" name="cust-name" placeholder="Name" required>
           <input type="text" name="cust-company" placeholder="Company / Project name">
           <input type="email" name="cust-email" placeholder="Email" required>
@@ -83,11 +84,11 @@ cta:
         </div>
         <textarea name="cust-notes" placeholder="Notes, project location, timeline…"></textarea>
 
-        <div class="submit-row">
-          <span class="note">You'll receive a confirmation by email and a project manager will call within 24 hours.</span>
-          <button type="submit" class="submit-btn">
+        <div class="quoter-customer__submit-row">
+          <span class="quoter-customer__note">You'll receive a confirmation by email and a project manager will call within 24 hours.</span>
+          <button type="submit" class="quoter-customer__submit">
             <span>Send quote</span>
-            <span class="arrow">→</span>
+            <span class="quoter-customer__submit-arrow">→</span>
           </button>
         </div>
 
