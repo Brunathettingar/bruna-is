@@ -206,6 +206,29 @@ export default function (eleventyConfig) {
           (a.data.eleventyNavigation.order || 0) - (b.data.eleventyNavigation.order || 0)
       )
   );
+
+  // Featured entries per locale, sourced from the per-locale tag set
+  // by each collection's directory data file. Returns entries marked
+  // `featured: true` in frontmatter, sorted by `order` ascending.
+  for (const lang of ["is", "en"]) {
+    const suffix = lang === "is" ? "Is" : "En";
+    eleventyConfig.addCollection(`featuredServices${suffix}`, (api) =>
+      api.getFilteredByTag(`services-${lang}`)
+        .filter((item) => item.data.featured === true)
+        .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
+    );
+    eleventyConfig.addCollection(`featuredSectors${suffix}`, (api) =>
+      api.getFilteredByTag(`sectors-${lang}`)
+        .filter((item) => item.data.featured === true)
+        .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
+    );
+    eleventyConfig.addCollection(`featuredArticle${suffix}`, (api) =>
+      api.getFilteredByTag(`articles-${lang}`)
+        .filter((item) => item.data.featured === true)
+        .sort((a, b) => new Date(b.data.date) - new Date(a.data.date))
+        .slice(0, 1)
+    );
+  }
 }
 
 export const config = {
