@@ -1,0 +1,8 @@
+{
+  "tags": ["services", "services-is"],
+  "layout": "layouts/service.njk",
+  "permalink": "/thjonusta/{{ page.fileSlug }}/",
+  "eleventyNavigation": {
+    "parent": "services-is"
+  }
+}
