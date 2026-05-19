@@ -1,0 +1,169 @@
+/* ============================================================
+   blocks.css — cross-page reusable CSS
+   Atoms: single-purpose, no inherent layout
+   Composed blocks: laid-out reusable sections used on >1 page family
+   See docs/directives/css-architecture.md §1 and §2.
+   ============================================================ */
+
+/* === Atoms ================================================== */
+
+/* Reusable: highlight-underline (mimicking DAS Fire's effect) */
+.hl-underline {
+  display: inline;
+  background-image: linear-gradient(180deg, transparent 60%, var(--accent-soft) 60%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 0 2px;
+}
+
+.btn {
+  display: inline-flex; justify-content: space-between; align-items: center;
+  font-size: 14px; font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 18px 26px;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.btn.primary {
+  background: var(--accent); color: var(--bg);
+}
+.btn.primary:hover { background: var(--accent-dark); }
+.btn.ghost {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+.btn.ghost:hover { border-color: var(--accent); color: var(--accent); }
+.btn span.arrow { color: inherit; opacity: 0.8; }
+
+/* Pagination */
+.pagination {
+  margin-top: 56px;
+  display: flex; justify-content: center; gap: 6px;
+}
+.pagination a {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border: 1px solid var(--line);
+  font-size: 13px; font-weight: 600;
+  color: var(--text-soft);
+  transition: border-color 0.15s, color 0.15s;
+}
+.pagination a:hover {
+  border-color: var(--accent); color: var(--accent);
+}
+.pagination a.active {
+  background: var(--accent); color: var(--bg);
+  border-color: var(--accent);
+}
+
+/* === Composed blocks ======================================== */
+
+/* ===========================================================
+   CTA band
+   =========================================================== */
+.cta-band {
+  padding: 100px 0;
+  background: var(--bg-soft);
+  border-top: 1px solid var(--line);
+}
+.cta-band .row {
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px;
+  align-items: center;
+}
+.cta-band h2 {
+  font-size: 44px; font-weight: 600;
+  letter-spacing: -0.8px; line-height: 1.1;
+}
+.cta-band h2 .ul {
+  position: relative; display: inline;
+  background-image: linear-gradient(180deg, transparent 65%, var(--alpha-hl-blue) 65%);
+  background-repeat: no-repeat;
+}
+.cta-band p {
+  margin-top: 18px;
+  font-size: 16px; color: var(--text-soft);
+  line-height: 1.65;
+}
+.cta-band .actions {
+  display: flex; flex-direction: column; gap: 14px;
+}
+
+.article-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  display: flex; flex-direction: column;
+  transition: border-color 0.2s;
+}
+.article-card:hover { border-color: var(--accent); }
+.article-card .pic {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+.article-card .pic > img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+}
+.article-card .pic .tag {
+  position: absolute; left: 16px; top: 16px;
+  z-index: 2;
+  background: var(--accent); color: var(--bg);
+  font-size: 10.5px; letter-spacing: 1.5px;
+  padding: 5px 10px; text-transform: uppercase;
+  font-weight: 600;
+}
+.article-card .body {
+  padding: 22px 22px 24px;
+  flex: 1; display: flex; flex-direction: column;
+}
+.article-card h3 {
+  font-size: 18px; font-weight: 600;
+  letter-spacing: -0.2px; line-height: 1.3;
+  margin-bottom: 10px;
+}
+.article-card p {
+  font-size: 13.5px; color: var(--muted);
+  line-height: 1.55; margin-bottom: 18px;
+}
+.article-card .meta {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 11.5px; color: var(--muted-2);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex; justify-content: space-between;
+}
+
+/* Cost-effectiveness callout band before CTA */
+.value-band {
+  background: var(--bg-soft);
+  padding: 72px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.value-band .row {
+  display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px;
+  align-items: center;
+}
+.value-band .label {
+  font-size: 12px; letter-spacing: 3px;
+  color: var(--accent); font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.value-band h2 {
+  font-size: 36px; font-weight: 600;
+  letter-spacing: -0.5px; line-height: 1.15;
+}
+.value-band h2 .ul {
+  position: relative; display: inline;
+  background-image: linear-gradient(180deg, transparent 65%, var(--alpha-hl-blue) 65%);
+  background-repeat: no-repeat;
+}
+.value-band p {
+  font-size: 16px; color: var(--text-soft);
+  line-height: 1.7;
+}
+.value-band p strong { color: var(--text); }
