@@ -4,6 +4,7 @@ const byLocale = {
     description: "[TBD — íslensk lýsing] Vottuð brunaþéttingar og tæknieinangrun á Íslandi.",
     author: "Brunaþéttingar ehf.",
     ogImageAlt: "Brunaþéttingar — vottuð brunaþéttingar fyrir íslensk mannvirki",
+    addressCountry: "Ísland",
   },
   en: {
     title: "Brunaþéttingar",
@@ -11,6 +12,7 @@ const byLocale = {
       "Brunaþéttingar plan, manage and execute fire sealing and technical insulation work on Icelandic buildings.",
     author: "Brunaþéttingar ehf.",
     ogImageAlt: "Brunaþéttingar — certified fire sealing for buildings",
+    addressCountry: "Iceland",
   },
 };
 

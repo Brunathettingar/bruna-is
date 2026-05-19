@@ -129,6 +129,8 @@ export default function (eleventyConfig) {
     });
   });
 
+  eleventyConfig.addGlobalData("buildYear", () => new Date().getFullYear());
+
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy({ ".nojekyll": ".nojekyll" });
   eleventyConfig.addPassthroughCopy("src/img");

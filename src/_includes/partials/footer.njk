@@ -20,21 +20,21 @@
         <h5>{{ "footer.company_heading" | i18n(lang) }}</h5>
         <ul>
           <li><a href="{{ '/about/' | locale_url }}">{{ "nav.about" | i18n(lang) }}</a></li>
-          <li><a href="{{ '/about/#stefna' | locale_url }}">{{ "footer.vision" | i18n(lang) }}</a></li>
+          <li><a href="{{ '/about/' | locale_url }}#stefna">{{ "footer.vision" | i18n(lang) }}</a></li>
           <li><a href="{{ '/greinar/' | locale_url }}">{{ "nav.articles" | i18n(lang) }}</a></li>
         </ul>
       </div>
       <div class="col">
         <h5>{{ "footer.contact_heading" | i18n(lang) }}</h5>
         <ul>
-          <li>(+354) 850-4405</li>
-          <li>bruna@bruna.is</li>
-          <li>105 Reykjavík, Ísland</li>
+          <li><a href="tel:+3548504405">(+354) 850-4405</a></li>
+          <li><a href="mailto:bruna@bruna.is">bruna@bruna.is</a></li>
+          <li>105 Reykjavík, {{ meta.byLocale[lang].addressCountry }}</li>
         </ul>
       </div>
     </div>
     <div class="bottom">
-      <span>© 2026 Brunaþéttingar ehf. &nbsp;·&nbsp; {{ "footer.copyright" | i18n(lang) }}</span>
+      <span>© {{ buildYear }} Brunaþéttingar ehf. &nbsp;·&nbsp; {{ "footer.copyright" | i18n(lang) }}</span>
       <span>
         <a href="/sitemap.xml">{{ "footer.sitemap" | i18n(lang) }}</a>
       </span>
