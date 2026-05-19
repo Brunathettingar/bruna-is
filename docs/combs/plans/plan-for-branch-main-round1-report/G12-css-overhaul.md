@@ -699,3 +699,15 @@ After each stage:
 - [ ] No descendant chain selectors on generic class names (`.row`, `.col`, `.pic`, `.ico`, `.bg`, `.scrim`, `.crumbs`, `.label`, `.lead`, `.tag`, `.body`) survive — all converted to BEM elements scoped by their block.
 - [ ] Visual diff against Stage 0 baseline: pixel-identical at all four viewports across all six pages.
 - [ ] `docs/architecture-deviations.md` §2 deleted; reference to G12 added.
+
+---
+
+## Status (post desert-sweep)
+
+- Stage 0/2 (delete duplicate :root): DONE — no duplicate `:root` block existed in main.css at sweep time; pre-existing clean state
+- Stage 3 (delete .mockup-note): DONE — removed 9 lines from main.css; zero template references confirmed
+- Stage 9 (dedup reset rules): DONE — removed duplicate body/button declarations from main.css; moved `-moz-osx-font-smoothing` to reset.css
+- Stage 1 (extract layout.css): DONE — created `src/assets/css/layout.css` with page-chrome rules (utility bar, site-header, brand, footer, page-hero); moved desktop `nav.primary` rules to nav.css; updated base.njk CSS chain to `tokens → reset → layout → nav → main → responsive`
+- Stage 8 (SVG fills via class): DONE — merged into Stage 1 commit; removed `fill="#ee7c1d"` and `fill="#1453a8"` from svg-defs.njk; `.bruna` now has `fill:var(--accent)`, `.pett` has `fill:var(--brand-blue)`; footer override uses `var(--bg)` instead of `#ffffff`
+- Stage 4 (token migration): partial — `#fff`/`#ffffff` → `var(--bg)` across main.css and layout.css; obvious standalone spacing values (8px, 16px, 32px) → spacing tokens where both sides of the value pair are on the grid; skipped off-grid mixed-value padding, font-size, line-height substitutions
+- Stages 5–7 (per-section split, mobile-first refactor, BEM rename): DEFERRED to a focused frontend redesign pass; left in main.css as monolithic
