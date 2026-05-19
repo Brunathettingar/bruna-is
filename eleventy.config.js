@@ -184,7 +184,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("navIs", (api) =>
     api
       .getAll()
-      .filter((item) => item.data.eleventyNavigation)
+      .filter((item) => item.data.eleventyNavigation && item.data.eleventyNavigation.order != null)
       .filter((item) => item.url && !item.url.startsWith("/en/"))
       .sort(
         (a, b) =>
@@ -195,7 +195,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("navEn", (api) =>
     api
       .getAll()
-      .filter((item) => item.data.eleventyNavigation)
+      .filter((item) => item.data.eleventyNavigation && item.data.eleventyNavigation.order != null)
       .filter((item) => item.url && item.url.startsWith("/en/"))
       .sort(
         (a, b) =>
