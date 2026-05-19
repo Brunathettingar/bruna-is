@@ -64,4 +64,5 @@ export default {
 
   "articles.read_time_minutes": { is: "mín lestur", en: "min read" },
   "articles.read_more":         { is: "Lesa grein", en: "Read article" },
+  "articles.featured":          { is: "Útgefin grein", en: "Featured article" },
 };

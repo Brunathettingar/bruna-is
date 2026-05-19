@@ -504,64 +504,9 @@
 }
 
 /* ===========================================================
-   Articles
+   Articles — page-family rules live in articles.css (scoped to
+   .articles-page). .article-card lives in blocks.css.
    =========================================================== */
-.articles {
-  padding: 88px 0 100px;
-  background: var(--bg);
-}
-.article-featured {
-  display: grid; grid-template-columns: 1.2fr 1fr; gap: 0;
-  border: 1px solid var(--line);
-  margin-bottom: 56px;
-}
-.article-featured .pic {
-  position: relative;
-  overflow: hidden;
-  height: 100%; min-height: 360px;
-}
-.article-featured .pic > img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center;
-}
-.article-featured .body {
-  padding: 48px 56px;
-  display: flex; flex-direction: column; justify-content: center;
-}
-.article-featured .tag {
-  font-size: 11px; letter-spacing: 2px;
-  color: var(--accent); font-weight: 600;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  display: inline-flex; align-items: center; gap: 12px;
-}
-.article-featured .tag::before {
-  content: "Útgefin grein";
-  background: var(--accent); color: var(--bg);
-  padding: 4px 10px; font-size: 10px;
-}
-.article-featured h2 {
-  font-size: 32px; font-weight: 600;
-  letter-spacing: -0.5px; line-height: 1.2;
-  margin-bottom: 14px;
-}
-.article-featured p {
-  font-size: 15.5px; color: var(--text-soft);
-  line-height: 1.65; margin-bottom: 20px;
-}
-.article-featured .meta {
-  font-size: 12.5px; color: var(--muted);
-  display: flex; gap: 18px;
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
-}
-.article-featured .meta strong {
-  color: var(--text); font-weight: 600;
-}
-.article-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
-}
 
 /* ===========================================================
    Services detail page — alternating feature blocks

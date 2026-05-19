@@ -2,6 +2,7 @@
   "tags": ["articles", "articles-en"],
   "layout": "layouts/article.njk",
   "permalink": "/en/greinar/{{ page.fileSlug }}/",
+  "bodyClass": "articles-page",
   "eleventyNavigation": {
     "parent": "articles-en"
   }

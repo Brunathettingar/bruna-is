@@ -3,6 +3,7 @@ layout: layouts/page.njk
 title: "Articles"
 description: "Articles on fire sealing, fire protection, fireproofing and documentation for buildings in Iceland."
 permalink: /en/greinar/
+bodyClass: articles-page
 eleventyNavigation:
   key: articles-en
   order: 6
@@ -32,14 +33,17 @@ cta:
   <div class="container">
     {%- if featured %}
     <a class="article-featured" href="{{ featured.url }}">
-      <div class="pic">
-        <img src="{{ featured.data.image }}" alt="" width="1600" height="900">
+      <div class="article-featured__media">
+        <img class="article-featured__media-img" src="{{ featured.data.image }}" alt="" width="1600" height="900">
       </div>
-      <div class="body">
-        <div class="tag">{{ featured.data.category }}</div>
+      <div class="article-featured__body">
+        <div class="article-featured__tag">
+          <span class="article-featured__tag-pill">{{ "articles.featured" | i18n(lang) }}</span>
+          {{ featured.data.category }}
+        </div>
         <h2>{{ featured.data.title | safe }}</h2>
         <p>{{ featured.data.summary | safe }}</p>
-        <div class="meta">
+        <div class="article-featured__meta">
           <span>{{ featured.data.date | dateDisplay(lang) }}</span>
           <span><strong>{{ featured.data.readTimeMinutes }} {{ "articles.read_time_minutes" | i18n(lang) }}</strong></span>
           <span>{{ featured.data.author }}</span>

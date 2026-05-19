@@ -22,7 +22,7 @@
   .page-hero h1 { font-size: 36px; letter-spacing: -1px; }
 
   /* All section paddings shrink */
-  .statement, .leading, .process, .accreds, .sectors, .customers, .services-page, .value-band, .cta-band, .articles {
+  .statement, .leading, .process, .accreds, .sectors, .customers, .services-page, .value-band, .cta-band {
     padding: 56px 0;
   }
 
@@ -45,7 +45,6 @@
   .process-grid,
   .sectors-grid,
   .accreds-grid,
-  .article-grid,
   .customers-row,
   .stats {
     grid-template-columns: 1fr 1fr;
@@ -55,7 +54,7 @@
   /* Headings shrink */
   .statement h2, .cta-band h2, .leading h2,
   .accreds h2, .process .head h2, .sectors .head h2, .services-intro h2,
-  .value-band h2, .articles h2 {
+  .value-band h2 {
     font-size: 30px;
     letter-spacing: -0.5px;
     line-height: 1.2;
@@ -66,14 +65,6 @@
     grid-template-columns: 1fr;
   }
   .service-feature .pic {
-    min-height: 240px;
-  }
-
-  /* Article featured stacks */
-  .article-featured {
-    grid-template-columns: 1fr;
-  }
-  .article-featured .pic {
     min-height: 240px;
   }
 
@@ -94,7 +85,6 @@
   .process-grid,
   .sectors-grid,
   .accreds-grid,
-  .article-grid,
   .customers-row,
   .stats {
     grid-template-columns: 1fr;
