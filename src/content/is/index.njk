@@ -2,13 +2,14 @@
 layout: layouts/page.njk
 title: "Lausnir"
 description: "Brunaþéttingar skipuleggur, stjórnar og framkvæmir brunaþéttingar og tæknieinangrun á íslenskum mannvirkjum — vottuð kerfi frá Roxtec, Hilti og Promat."
+bodyClass: home-page
 eleventyNavigation:
   key: home-is
   order: 1
 heroHeading: "Brunaþéttingar &amp;<br>tæknieinangrun."
 statement:
   label: "Hvað við gerum"
-  heading: "Sérgrein okkar er <span class=\"ul\">tæknieinangrun og brunavarnir</span> mannvirkja — brunaþéttingar, brunavarnir, pípueinangrun og loftræsieinangrun."
+  heading: "Sérgrein okkar er <span class=\"statement__highlight\">tæknieinangrun og brunavarnir</span> mannvirkja — brunaþéttingar, brunavarnir, pípueinangrun og loftræsieinangrun."
   lead: "Brunaþéttingar er sérhæft fyrirtæki í tæknieinangrun og brunaþéttingum sem þjónar verktökum, eigendum og rekstraraðilum mannvirkja um land allt. <strong>Við bjóðum ekki upp á brunatæknihönnun</strong> — það er sérgrein brunaverkfræðinga. Við mælum sérstaklega með <strong>Tensio Architects</strong>."
 explainer:
   left:
@@ -42,7 +43,7 @@ process:
     - { num: "04", heading: "Skráning og skýrslugjöf",      body: "[TBD — íslenska]" }
 leading:
   label: "Skráning og skýrslugjöf"
-  heading: "Skráning er <span class=\"ul\">hjartað í þjónustunni</span>."
+  heading: "Skráning er <span class=\"leading__highlight\">hjartað í þjónustunni</span>."
   paragraphs:
     - "[TBD — íslensk lýsing á skráningarferli og skýrslukerfi.]"
   stats:
@@ -74,22 +75,22 @@ cta:
 
 <section class="hero">
   <img class="hero__image" src="/img/iceland_svartsengi.jpg" alt="" width="1600" height="900" loading="eager" fetchpriority="high">
-  <div class="scrim"></div>
-  <div class="container">
+  <div class="hero__scrim"></div>
+  <div class="hero__container container">
     <h1>
       {{ heroHeading | safe }}
-      <span class="accent-bar"></span>
+      <span class="hero__accent-bar"></span>
     </h1>
   </div>
 </section>
 
 <section class="statement">
   <div class="container">
-    <div class="row">
-      <div><span class="label">{{ statement.label }}</span></div>
+    <div class="statement__row">
+      <div><span class="statement__label">{{ statement.label }}</span></div>
       <div>
         <h2>{{ statement.heading | safe }}</h2>
-        <p class="lead">{{ statement.lead | safe }}</p>
+        <p class="statement__lead">{{ statement.lead | safe }}</p>
       </div>
     </div>
   </div>
@@ -97,15 +98,15 @@ cta:
 
 <section class="explainer">
   <div class="container">
-    <div class="row">
+    <div class="explainer__row">
       <div>
         <h3>{{ explainer.left.heading }}</h3>
         {%- for p in explainer.left.paragraphs %}
         <p>{{ p | safe }}</p>
         {%- endfor %}
-        <div class="bullet-row">
+        <div class="explainer__chips">
           {%- for c in explainer.left.chips %}
-          <span class="chip{% if c.style %} {{ c.style }}{% endif %}">{{ c.label }}</span>
+          <span class="explainer__chip{% if c.style == 'blue' %} explainer__chip--blue{% endif %}">{{ c.label }}</span>
           {%- endfor %}
         </div>
       </div>
@@ -114,9 +115,9 @@ cta:
         {%- for p in explainer.right.paragraphs %}
         <p>{{ p | safe }}</p>
         {%- endfor %}
-        <div class="bullet-row">
+        <div class="explainer__chips">
           {%- for c in explainer.right.chips %}
-          <span class="chip{% if c.style %} {{ c.style }}{% endif %}">{{ c.label }}</span>
+          <span class="explainer__chip{% if c.style == 'blue' %} explainer__chip--blue{% endif %}">{{ c.label }}</span>
           {%- endfor %}
         </div>
         <p>{{ explainer.right.footer | safe }}</p>
@@ -130,11 +131,11 @@ cta:
     <div class="pillar-grid">
       {%- for s in pillars %}
       <a class="pillar" href="{{ s.url }}">
-        <div class="pic{% if s.data.imageContain %} pic--contain{% endif %}">
+        <div class="pillar__media{% if s.data.imageContain %} pillar__media--contain{% endif %}">
           <img class="pillar__image{% if s.data.imageContain %} pillar__image--contain{% endif %}" src="{{ s.data.image }}" alt="" width="1200" height="800">
-          <div class="ico">{% include "partials/icons/" + s.data.icon + ".njk" %}</div>
+          <div class="pillar__ico">{% include "partials/icons/" + s.data.icon + ".njk" %}</div>
         </div>
-        <div class="body">
+        <div class="pillar__body">
           <h3>{{ s.data.title | safe }}</h3>
           <p>{{ s.data.summary | safe }}</p>
           <ul>
@@ -144,7 +145,7 @@ cta:
             {%- endif %}
             {%- endfor %}
           </ul>
-          <span class="more">{{ "ui.view_services" | i18n(lang) }} →</span>
+          <span class="pillar__more">{{ "ui.view_services" | i18n(lang) }} →</span>
         </div>
       </a>
       {%- endfor %}
@@ -172,23 +173,23 @@ cta:
 
 <section class="leading">
   <div class="container">
-    <div class="row">
+    <div class="leading__row">
       <div class="copy">
-        <div class="label">{{ leading.label }}</div>
+        <div class="leading__label">{{ leading.label }}</div>
         <h2>{{ leading.heading | safe }}</h2>
         {%- for p in leading.paragraphs %}
         <p>{{ p | safe }}</p>
         {%- endfor %}
-        <div class="stats">
+        <div class="leading__stats">
           {%- for s in leading.stats %}
-          <div class="stat"><div class="num">{{ s.num }}</div><div class="lbl">{{ s.lbl }}</div></div>
+          <div class="stat"><div class="leading__stat-num">{{ s.num }}</div><div class="leading__stat-label">{{ s.lbl }}</div></div>
           {%- endfor %}
         </div>
       </div>
-      <div class="pic">
+      <div class="leading__media">
         <img class="leading__image" src="{{ leading.image }}" alt="" width="1200" height="900">
-        <div class="badge">
-          <strong>{{ leading.badgeStrong }}</strong>
+        <div class="leading__badge">
+          <strong class="leading__badge-emphasis">{{ leading.badgeStrong }}</strong>
           {{ leading.badgeBody | safe }}
         </div>
       </div>
@@ -198,14 +199,14 @@ cta:
 
 <section class="sectors">
   <div class="container">
-    <div class="head">
-      <div class="label">{{ sectorsCallout.label }}</div>
-      <h2>{{ sectorsCallout.heading | safe }}</h2>
+    <div class="sectors__head">
+      <div class="sectors__label">{{ sectorsCallout.label }}</div>
+      <h2 class="sectors__title">{{ sectorsCallout.heading | safe }}</h2>
     </div>
     <div class="sectors-grid">
       {%- for s in sectorsCallout.items %}
       <div class="sector">
-        <div class="ico">{% include "partials/icons/" + s.icon + ".njk" %}</div>
+        <div class="sector__ico">{% include "partials/icons/" + s.icon + ".njk" %}</div>
         <h4>{{ s.heading }}</h4>
         <p>{{ s.body | safe }}</p>
       </div>
@@ -216,10 +217,10 @@ cta:
 
 <section class="customers">
   <div class="container">
-    <div class="label">{{ customers.label }}</div>
+    <div class="customers__label">{{ customers.label }}</div>
     <div class="customers-row">
       {%- for p in partners %}
-      <div class="customer-logo{% if p.style %} {{ p.style }}{% endif %}">{{ p.name }}</div>
+      <div class="customer-logo{% if p.style == 'sans' %} customer-logo--sans{% endif %}">{{ p.name }}</div>
       {%- endfor %}
     </div>
   </div>

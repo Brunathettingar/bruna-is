@@ -62,17 +62,35 @@
    CTA band
    =========================================================== */
 .cta-band {
-  padding: 100px 0;
+  padding: 56px 0;
   background: var(--bg-soft);
   border-top: 1px solid var(--line);
 }
+@media (min-width: 64em) {
+  .cta-band { padding: 100px 0; }
+}
 .cta-band .row {
-  display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
   align-items: center;
 }
+@media (min-width: 64em) {
+  .cta-band .row {
+    grid-template-columns: 1.4fr 1fr;
+    gap: 64px;
+  }
+}
 .cta-band h2 {
-  font-size: 44px; font-weight: 600;
-  letter-spacing: -0.8px; line-height: 1.1;
+  font-size: 30px; font-weight: 600;
+  letter-spacing: -0.5px; line-height: 1.2;
+}
+@media (min-width: 64em) {
+  .cta-band h2 {
+    font-size: 44px;
+    letter-spacing: -0.8px;
+    line-height: 1.1;
+  }
 }
 .cta-band h2 .ul {
   position: relative; display: inline;
@@ -216,13 +234,24 @@
 /* Cost-effectiveness callout band before CTA */
 .value-band {
   background: var(--bg-soft);
-  padding: 72px 0;
+  padding: 56px 0;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
+@media (min-width: 64em) {
+  .value-band { padding: 72px 0; }
+}
 .value-band .row {
-  display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
   align-items: center;
+}
+@media (min-width: 64em) {
+  .value-band .row {
+    grid-template-columns: 1fr 1.4fr;
+    gap: 64px;
+  }
 }
 .value-band .label {
   font-size: 12px; letter-spacing: 3px;
@@ -231,8 +260,14 @@
   margin-bottom: 14px;
 }
 .value-band h2 {
-  font-size: 36px; font-weight: 600;
-  letter-spacing: -0.5px; line-height: 1.15;
+  font-size: 30px; font-weight: 600;
+  letter-spacing: -0.5px; line-height: 1.2;
+}
+@media (min-width: 64em) {
+  .value-band h2 {
+    font-size: 36px;
+    line-height: 1.15;
+  }
 }
 .value-band h2 .ul {
   position: relative; display: inline;
