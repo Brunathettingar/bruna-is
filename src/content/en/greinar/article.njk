@@ -8,8 +8,8 @@ permalink: "/en/greinar/{{ article.slug }}/"
 eleventyComputed:
   title: "{{ article.title.en }}"
   description: "{{ article.summary.en }}"
+  ogImage: "{{ article.image }}"
 ogType: "article"
-ogImage: "{{ article.image }}"
 ---
 <section class="page-hero page-hero--article">
   <div class="bg" style="background-image: url('{{ article.image }}');"></div>
