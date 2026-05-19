@@ -3,6 +3,14 @@ import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import { I18nPlugin, HtmlBasePlugin } from "@11ty/eleventy";
 import i18nPlugin from "eleventy-plugin-i18n";
 import translations from "./src/_data/i18n.js";
+import { appendFileSync, mkdirSync, writeFileSync } from "node:fs";
+import { dirname } from "node:path";
+
+const MISS_LOG = "_site/.translation-misses.log";
+function recordMiss(key, lang) {
+  try { mkdirSync(dirname(MISS_LOG), { recursive: true }); appendFileSync(MISS_LOG, `${lang}\t${key}\n`); } catch {}
+}
+try { mkdirSync(dirname(MISS_LOG), { recursive: true }); writeFileSync(MISS_LOG, ""); } catch {}
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
@@ -55,10 +63,11 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("t", function (key, data) {
     const lang = this.ctx?.lang || this.page?.lang || "is";
     const entry = translations[key];
-    if (!entry) return key;
+    if (!entry) { recordMiss(key, lang); return key; }
     if (entry[lang] !== undefined) {
       return data ? interpolate(entry[lang], data) : entry[lang];
     }
+    recordMiss(key, lang);
     // Fallback: try Icelandic, then English, then the key itself.
     return entry.is ?? entry.en ?? key;
   });
