@@ -16,20 +16,20 @@ ogType: "article"
 <section class="service-detail">
   <div class="container">
     <article class="service-feature">
-      <div class="pic{% if imageContain %} contain{% endif %}">
-        <img src="{{ image }}" alt="" width="1200" height="900">
+      <div class="service-feature__media{% if imageContain %} service-feature__media--contain{% endif %}">
+        <img class="service-feature__media-img" src="{{ image }}" alt="" width="1200" height="900">
       </div>
-      <div class="copy">
-        <span class="num-badge">{{ number }} / {{ category }}</span>
+      <div class="service-feature__copy">
+        <span class="service-feature__num">{{ number }} / {{ category }}</span>
         <h2>{{ title | safe }}</h2>
-        <p class="lead">{{ summary | safe }}</p>
-        <div class="insight">
+        <p class="service-feature__lead">{{ summary | safe }}</p>
+        <div class="service-feature__insight">
           <strong>{{ insightStrong }}</strong>
           {{ insight | safe }}
         </div>
-        <ul class="bullets">
+        <ul class="service-feature__bullets">
           {%- for b in bullets %}
-          <li>{{ b | safe }}</li>
+          <li class="service-feature__bullet">{{ b | safe }}</li>
           {%- endfor %}
         </ul>
       </div>

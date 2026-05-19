@@ -154,14 +154,14 @@ cta:
 
 <section class="process">
   <div class="container">
-    <div class="head">
-      <div class="label">{{ process.label }}</div>
-      <h2>{{ process.heading | safe }}</h2>
+    <div class="process__head">
+      <div class="process__label">{{ process.label }}</div>
+      <h2 class="process__title">{{ process.heading | safe }}</h2>
     </div>
     <div class="process-grid">
       {%- for step in process.steps %}
       <div class="process-step">
-        <div class="num">{{ step.num }}</div>
+        <div class="process-step__num">{{ step.num }}</div>
         <h4>{{ step.heading }}</h4>
         <p>{{ step.body | safe }}</p>
       </div>

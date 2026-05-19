@@ -136,6 +136,83 @@
   display: flex; justify-content: space-between;
 }
 
+/* ===========================================================
+   Process strip — end-to-end workflow.
+   Used on the home page and the services landing, so this is
+   cross-page (lives here, not in services.css).
+   =========================================================== */
+.process {
+  padding: 56px 0;
+  background: var(--bg-soft);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+@media (min-width: 64em) {
+  .process { padding: 100px 0; }
+}
+.process__head {
+  text-align: center; margin-bottom: 64px;
+}
+.process__label {
+  font-size: 12px; letter-spacing: 3px;
+  color: var(--accent); font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.process__title {
+  font-size: 30px; font-weight: 600;
+  letter-spacing: -0.5px; line-height: 1.2;
+}
+@media (min-width: 64em) {
+  .process__title {
+    font-size: 38px;
+    letter-spacing: -0.6px;
+  }
+}
+.process-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+}
+@media (min-width: 30em) {
+  .process-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 64em) {
+  .process-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+}
+.process-step {
+  padding: 40px 32px 44px;
+  position: relative;
+}
+@media (min-width: 64em) {
+  .process-step { border-right: 1px solid var(--line); }
+  .process-step:last-child { border-right: none; }
+}
+.process-step__num {
+  font-family: var(--serif);
+  font-size: 14px; color: var(--accent);
+  font-weight: 600; letter-spacing: 1px;
+  margin-bottom: 18px;
+  display: flex; align-items: center; gap: var(--space-2);
+}
+.process-step__num::after {
+  content: ""; flex: 1; height: 1px; background: var(--line);
+}
+.process-step h4 {
+  font-size: 19px; font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: -0.2px;
+}
+.process-step p {
+  font-size: 14px; color: var(--muted);
+  line-height: 1.6;
+}
+
 /* Cost-effectiveness callout band before CTA */
 .value-band {
   background: var(--bg-soft);

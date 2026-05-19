@@ -22,7 +22,7 @@
   .page-hero h1 { font-size: 36px; letter-spacing: -1px; }
 
   /* All section paddings shrink */
-  .statement, .leading, .process, .accreds, .sectors, .customers, .services-page, .value-band, .cta-band {
+  .statement, .leading, .accreds, .sectors, .customers, .value-band, .cta-band {
     padding: 56px 0;
   }
 
@@ -31,7 +31,6 @@
   .explainer .row,
   .leading .row,
   .accreds .row,
-  .services-intro,
   .value-band .row,
   .cta-band .row {
     grid-template-columns: 1fr;
@@ -42,7 +41,6 @@
     grid-template-columns: 1fr;
   }
 
-  .process-grid,
   .sectors-grid,
   .accreds-grid,
   .customers-row,
@@ -53,19 +51,11 @@
 
   /* Headings shrink */
   .statement h2, .cta-band h2, .leading h2,
-  .accreds h2, .process .head h2, .sectors .head h2, .services-intro h2,
+  .accreds h2, .sectors .head h2,
   .value-band h2 {
     font-size: 30px;
     letter-spacing: -0.5px;
     line-height: 1.2;
-  }
-
-  /* Service feature blocks stack */
-  .service-feature {
-    grid-template-columns: 1fr;
-  }
-  .service-feature .pic {
-    min-height: 240px;
   }
 
   /* Footer collapses to 1-column */
@@ -82,7 +72,6 @@
 }
 
 @media (max-width: 30em) {
-  .process-grid,
   .sectors-grid,
   .accreds-grid,
   .customers-row,

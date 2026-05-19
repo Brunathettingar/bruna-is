@@ -3,6 +3,7 @@ layout: layouts/page.njk
 title: "Þjónusta"
 description: "Sjö þjónustusvið Brunaþéttinga — brunaþéttingar, brunavarnir, pípueinangrun, loftræsing, vatnstankar, merkingar, álklæðningar og ráðgjöf."
 permalink: /thjonusta/
+bodyClass: services-page
 eleventyNavigation:
   key: services-is
   order: 2
@@ -41,7 +42,7 @@ cta:
   <div class="container">
     <div class="services-intro">
       <div>
-        <div class="label">{{ intro.label }}</div>
+        <div class="services-intro__label">{{ intro.label }}</div>
         <h2>{{ intro.heading | safe }}</h2>
       </div>
       <div>
@@ -52,21 +53,21 @@ cta:
     </div>
 
     {%- for s in services %}
-    <article class="service-feature{% if loop.index0 % 2 == 1 %} flip{% endif %}">
-      <div class="pic{% if s.data.imageContain %} contain{% endif %}">
-        <img src="{{ s.data.image }}" alt="" width="1200" height="900">
+    <article class="service-feature{% if loop.index0 % 2 == 1 %} service-feature--flipped{% endif %}">
+      <div class="service-feature__media{% if s.data.imageContain %} service-feature__media--contain{% endif %}">
+        <img class="service-feature__media-img" src="{{ s.data.image }}" alt="" width="1200" height="900">
       </div>
-      <div class="copy">
-        <span class="num-badge">{{ s.data.number }} / {{ s.data.category }}</span>
+      <div class="service-feature__copy">
+        <span class="service-feature__num">{{ s.data.number }} / {{ s.data.category }}</span>
         <h2><a href="{{ s.url }}">{{ s.data.title | safe }}</a></h2>
-        <p class="lead">{{ s.data.summary | safe }}</p>
-        <div class="insight">
+        <p class="service-feature__lead">{{ s.data.summary | safe }}</p>
+        <div class="service-feature__insight">
           <strong>{{ s.data.insightStrong }}</strong>
           {{ s.data.insight | safe }}
         </div>
-        <ul class="bullets">
+        <ul class="service-feature__bullets">
           {%- for b in s.data.bullets %}
-          <li>{{ b | safe }}</li>
+          <li class="service-feature__bullet">{{ b | safe }}</li>
           {%- endfor %}
         </ul>
       </div>

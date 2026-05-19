@@ -1,6 +1,7 @@
 {
   "tags": ["services", "services-en"],
   "layout": "layouts/service.njk",
+  "bodyClass": "services-page",
   "permalink": "/en/thjonusta/{{ page.fileSlug }}/",
   "eleventyNavigation": {
     "parent": "services-en"
