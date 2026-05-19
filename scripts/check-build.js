@@ -99,5 +99,9 @@ if (existsSync(miss)) {
   if (lines.length) console.warn(`[check-build] WARN: ${lines.length} translation fallbacks (see ${miss})`);
 }
 
+// Run CSS architecture assertions. Imports the module so process.exitCode
+// from check-css.js carries forward to the build exit.
+await import("./check-css.js");
+
 if (process.exitCode) { console.error("[check-build] build verification failed"); process.exit(1); }
 ok(`all assertions passed (${htmlFiles.length} HTML files)`);
