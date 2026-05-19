@@ -1,18 +1,50 @@
 ---
 layout: layouts/page.njk
 title: "About"
-description: "A specialised fire sealing company in Iceland serving contractors, building owners and operators since 2011."
+description: "Specialist fire-sealing and technical-insulation contractor serving owners and builders across Iceland since 2011."
 eleventyNavigation:
   key: about-en
   order: 5
+kicker: "A specialist fire-sealing and technical-insulation contractor serving Iceland since 2011."
+story:
+  label: "Our story"
+  heading: "Founded to <span class=\"ul\">seal correctly</span> — and document it."
+  paragraphs:
+    - "Brunaþéttingar was founded in 2011 by four fire-sealing tradesmen who saw the gap between how the work was done and how it should be done."
+    - "Today the company runs ~150 projects a year, from single-flat retrofits to the largest hospitals in the country, with a small permanent crew and a documentation system that ties every seal back to a drawing and a certification."
+    - "We don't do fire engineering — we install what fire engineers spec, and we report it back end-to-end."
+  signatureQuote: "&quot;Every seal goes on a drawing. Every drawing goes in the report. That's the whole company.&quot;"
+  signatureAttribution: "— Founder, Brunaþéttingar ehf."
+  timelineHeading: "Timeline"
+philosophy:
+  label: "Our principles"
+  heading: "Six guiding lights for every project."
+  lead: "These are the rules we follow, regardless of project size or schedule pressure."
+team:
+  label: "The team"
+  heading: "A small team that knows every project."
+  extraTile:
+    initials: "+15"
+    name: "15 more staff"
+    role: "Fire-sealing installers"
+    bio: "Crews based across the country."
+cta:
+  heading: "Ready to start your project? <span class=\"ul\">Get in touch.</span>"
+  primaryHref: "/en/verdreiknir/"
+  primaryLabel: "Get a quote"
+  secondaryHref: "#contact"
+  secondaryLabel: "Send a message"
 ---
+{%- set milestones = collections['milestones-' + lang] | sort(false, false, 'data.year') %}
+{%- set principles = collections['principles-' + lang] | sort(false, false, 'data.order') %}
+{%- set teamMembers = collections['team-' + lang] | sort(false, false, 'data.order') %}
+
 <section class="page-hero">
   <img class="page-hero__image" src="/img/iceland_hellisheidi.jpg" alt="" width="1600" height="900">
   <div class="scrim"></div>
   <div class="container">
-    <div class="crumbs"><a href="/en/">Home</a> &nbsp;/&nbsp; <span>About</span></div>
-    <h1>About Brunaþéttingar.</h1>
-    <p class="kicker">A specialised fire sealing and technical insulation company serving contractors, building owners and operators in Iceland since 2011.</p>
+    <h1>Um Brunaþéttingar.</h1>
+    <p class="kicker">{{ kicker | safe }}</p>
   </div>
 </section>
 
@@ -20,22 +52,22 @@ eleventyNavigation:
   <div class="container">
     <div class="row">
       <div class="copy">
-        <div class="label">Our story</div>
-        <h2>Founded to <span class="ul">seal fire properly</span> — and document it.</h2>
-        <p>Brunaþéttingar was founded in 2011 when two industry workers kept seeing the same problem: penetrations sealed without a report, certifications lost in paperwork, and fire authority inspections being repeated because of missing records.</p>
-        <p>Our story is a story of documentation. From day one we have insisted that every single seal be tracked, photographed and delivered to the owner in a digital report. When new buildings rise in Iceland we want someone — 30 years from now — to be able to look up the certification of this exact cable seal without ripping open a wall.</p>
-        <p>Today we are a team of 22, with projects in the capital region, on Reykjanes, the South Coast and the East Fjords, and we serve everything from new commercial buildings to the largest industrial projects in the country.</p>
+        <div class="label">{{ story.label }}</div>
+        <h2>{{ story.heading | safe }}</h2>
+        {%- for p in story.paragraphs %}
+        <p>{{ p | safe }}</p>
+        {%- endfor %}
         <div class="signature">
-          "Fire sealing is not just the work — it's the report that comes with the work."
-          <small>— Founder, Brunaþéttingar ehf.</small>
+          {{ story.signatureQuote | safe }}
+          <small>{{ story.signatureAttribution }}</small>
         </div>
       </div>
       <div class="timeline">
-        <h4>Timeline</h4>
+        <h4>{{ story.timelineHeading }}</h4>
         {%- for m in milestones %}
         <div class="timeline-row">
-          <div class="yr">{{ m.year }}</div>
-          <div class="ev">{{ m.event[lang] }}</div>
+          <div class="yr">{{ m.data.year }}</div>
+          <div class="ev">{{ m.data.event | safe }}</div>
         </div>
         {%- endfor %}
       </div>
@@ -46,16 +78,16 @@ eleventyNavigation:
 <section class="philosophy" id="stefna">
   <div class="container">
     <div class="head">
-      <div class="label">Our vision</div>
-      <h2>Six guiding principles for every project.</h2>
-      <p>Our vision is simple: do every project right the first time and document it so the next generation can follow up. These are the rules our crews follow on site and the rules our clients can rely on.</p>
+      <div class="label">{{ philosophy.label }}</div>
+      <h2>{{ philosophy.heading | safe }}</h2>
+      <p>{{ philosophy.lead | safe }}</p>
     </div>
     <div class="principles">
       {%- for p in principles %}
       <div class="principle">
-        <span class="num">{{ p.number }}</span>
-        <h3>{{ p.title[lang] }}</h3>
-        <p>{{ p.description[lang] | safe }}</p>
+        <span class="num">{{ p.data.number }}</span>
+        <h3>{{ p.data.title | safe }}</h3>
+        <p>{{ p.data.description | safe }}</p>
       </div>
       {%- endfor %}
     </div>
@@ -65,42 +97,30 @@ eleventyNavigation:
 <section class="team">
   <div class="container">
     <div class="head">
-      <div class="label">The team</div>
-      <h2>A small team that knows every project.</h2>
+      <div class="label">{{ team.label }}</div>
+      <h2>{{ team.heading | safe }}</h2>
     </div>
     <div class="team-grid">
-      {%- for member in team %}
+      {%- for member in teamMembers %}
       <div class="team-card">
-        <div class="avatar{% if member.avatar == 'orange' %} orange{% endif %}">{{ member.initials }}</div>
+        <div class="avatar{% if member.data.avatar == 'orange' %} orange{% endif %}">{{ member.data.initials }}</div>
         <div class="body">
-          <h4>{{ member.name }}</h4>
-          <div class="role">{{ member.role[lang] }}</div>
-          <div class="meta">{{ member.bio[lang] }}</div>
+          <h4>{{ member.data.name }}</h4>
+          <div class="role">{{ member.data.role }}</div>
+          <div class="meta">{{ member.data.bio | safe }}</div>
         </div>
       </div>
       {%- endfor %}
       <div class="team-card">
-        <div class="avatar orange">+15</div>
+        <div class="avatar orange">{{ team.extraTile.initials }}</div>
         <div class="body">
-          <h4>15 more team members</h4>
-          <div class="role">Fire-sealing installers</div>
-          <div class="meta">Certified installers across the country — capital region, Reykjanes, South Coast and East Iceland.</div>
+          <h4>{{ team.extraTile.name }}</h4>
+          <div class="role">{{ team.extraTile.role }}</div>
+          <div class="meta">{{ team.extraTile.bio | safe }}</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="cta-band">
-  <div class="container">
-    <div class="row">
-      <h2>Ready to start your project? <span class="ul">Let's talk.</span></h2>
-      <div class="actions">
-        <a class="btn primary" href="/en/verdreiknir/"><span>Get a quote</span> <span class="arrow">→</span></a>
-        <a class="btn ghost" href="#contact"><span>Send an enquiry</span> <span class="arrow">→</span></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-{% include "partials/schema-about.njk" %}
+{% include "partials/cta-band.njk" %}

@@ -1,18 +1,50 @@
 ---
 layout: layouts/page.njk
 title: "Um okkur"
-description: "[TBD — íslensk lýsing] Sérhæft brunaþéttingafyrirtæki sem þjónar verktökum og eigendum mannvirkja á Íslandi síðan 2011."
+description: "Sérhæft brunaþéttinga- og tæknieinangrunarfyrirtæki sem þjónar verktökum og eigendum mannvirkja á Íslandi síðan 2011."
 eleventyNavigation:
   key: about-is
   order: 5
+kicker: "Sérhæft brunaþéttinga- og tæknieinangrunarfyrirtæki á Íslandi síðan 2011."
+story:
+  label: "Okkar saga"
+  heading: "Stofnað til að <span class=\"ul\">brunaþétta rétt</span> — og skrá það."
+  paragraphs:
+    - "[TBD — fyrsta málsgrein um sögu fyrirtækisins.]"
+    - "[TBD — önnur málsgrein.]"
+    - "[TBD — þriðja málsgrein.]"
+  signatureQuote: "[TBD — íslensk tilvitnun]"
+  signatureAttribution: "— Stofnandi Brunaþéttinga ehf."
+  timelineHeading: "Tímalína"
+philosophy:
+  label: "Okkar stefna"
+  heading: "Sex leiðarljós fyrir hvert verkefni."
+  lead: "[TBD — íslenska]"
+team:
+  label: "Teymið"
+  heading: "Lítið teymi sem þekkir hvert verkefni."
+  extraTile:
+    initials: "+15"
+    name: "15 starfsmenn til viðbótar"
+    role: "Brunaþéttingamenn"
+    bio: "[TBD — íslenska]"
+cta:
+  heading: "Tilbúin að hefja verkefnið? <span class=\"ul\">Hafðu samband.</span>"
+  primaryHref: "/verdreiknir/"
+  primaryLabel: "Fá verðmat"
+  secondaryHref: "#contact"
+  secondaryLabel: "Senda fyrirspurn"
 ---
+{%- set milestones = collections['milestones-' + lang] | sort(false, false, 'data.year') %}
+{%- set principles = collections['principles-' + lang] | sort(false, false, 'data.order') %}
+{%- set teamMembers = collections['team-' + lang] | sort(false, false, 'data.order') %}
+
 <section class="page-hero">
   <img class="page-hero__image" src="/img/iceland_hellisheidi.jpg" alt="" width="1600" height="900">
   <div class="scrim"></div>
   <div class="container">
-    <div class="crumbs"><a href="/">Heim</a> &nbsp;/&nbsp; <span>Um okkur</span></div>
     <h1>Um Brunaþéttingar.</h1>
-    <p class="kicker">[TBD — íslenska] Sérhæft brunaþéttinga- og tæknieinangrunarfyrirtæki á Íslandi síðan 2011.</p>
+    <p class="kicker">{{ kicker | safe }}</p>
   </div>
 </section>
 
@@ -20,22 +52,22 @@ eleventyNavigation:
   <div class="container">
     <div class="row">
       <div class="copy">
-        <div class="label">Okkar saga</div>
-        <h2>Stofnað til að <span class="ul">brunaþétta rétt</span> — og skrá það.</h2>
-        <p>[TBD — íslenska]</p>
-        <p>[TBD — íslenska]</p>
-        <p>[TBD — íslenska]</p>
+        <div class="label">{{ story.label }}</div>
+        <h2>{{ story.heading | safe }}</h2>
+        {%- for p in story.paragraphs %}
+        <p>{{ p | safe }}</p>
+        {%- endfor %}
         <div class="signature">
-          [TBD — íslensk tilvitnun]
-          <small>— Stofnandi Brunaþéttinga ehf.</small>
+          {{ story.signatureQuote | safe }}
+          <small>{{ story.signatureAttribution }}</small>
         </div>
       </div>
       <div class="timeline">
-        <h4>Tímalína</h4>
+        <h4>{{ story.timelineHeading }}</h4>
         {%- for m in milestones %}
         <div class="timeline-row">
-          <div class="yr">{{ m.year }}</div>
-          <div class="ev">{{ m.event[lang] }}</div>
+          <div class="yr">{{ m.data.year }}</div>
+          <div class="ev">{{ m.data.event | safe }}</div>
         </div>
         {%- endfor %}
       </div>
@@ -46,16 +78,16 @@ eleventyNavigation:
 <section class="philosophy" id="stefna">
   <div class="container">
     <div class="head">
-      <div class="label">Okkar stefna</div>
-      <h2>Sex leiðarljós fyrir hvert verkefni.</h2>
-      <p>[TBD — íslenska]</p>
+      <div class="label">{{ philosophy.label }}</div>
+      <h2>{{ philosophy.heading | safe }}</h2>
+      <p>{{ philosophy.lead | safe }}</p>
     </div>
     <div class="principles">
       {%- for p in principles %}
       <div class="principle">
-        <span class="num">{{ p.number }}</span>
-        <h3>{{ p.title[lang] }}</h3>
-        <p>{{ p.description[lang] | safe }}</p>
+        <span class="num">{{ p.data.number }}</span>
+        <h3>{{ p.data.title | safe }}</h3>
+        <p>{{ p.data.description | safe }}</p>
       </div>
       {%- endfor %}
     </div>
@@ -65,42 +97,30 @@ eleventyNavigation:
 <section class="team">
   <div class="container">
     <div class="head">
-      <div class="label">Teymið</div>
-      <h2>Lítið teymi sem þekkir hvert verkefni.</h2>
+      <div class="label">{{ team.label }}</div>
+      <h2>{{ team.heading | safe }}</h2>
     </div>
     <div class="team-grid">
-      {%- for member in team %}
+      {%- for member in teamMembers %}
       <div class="team-card">
-        <div class="avatar{% if member.avatar == 'orange' %} orange{% endif %}">{{ member.initials }}</div>
+        <div class="avatar{% if member.data.avatar == 'orange' %} orange{% endif %}">{{ member.data.initials }}</div>
         <div class="body">
-          <h4>{{ member.name }}</h4>
-          <div class="role">{{ member.role[lang] }}</div>
-          <div class="meta">{{ member.bio[lang] }}</div>
+          <h4>{{ member.data.name }}</h4>
+          <div class="role">{{ member.data.role }}</div>
+          <div class="meta">{{ member.data.bio | safe }}</div>
         </div>
       </div>
       {%- endfor %}
       <div class="team-card">
-        <div class="avatar orange">+15</div>
+        <div class="avatar orange">{{ team.extraTile.initials }}</div>
         <div class="body">
-          <h4>15 starfsmenn til viðbótar</h4>
-          <div class="role">Brunaþéttingamenn</div>
-          <div class="meta">[TBD — íslenska]</div>
+          <h4>{{ team.extraTile.name }}</h4>
+          <div class="role">{{ team.extraTile.role }}</div>
+          <div class="meta">{{ team.extraTile.bio | safe }}</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="cta-band">
-  <div class="container">
-    <div class="row">
-      <h2>Tilbúin að hefja verkefnið? <span class="ul">Hafðu samband.</span></h2>
-      <div class="actions">
-        <a class="btn primary" href="/verdreiknir/"><span>Fá verðmat</span> <span class="arrow">→</span></a>
-        <a class="btn ghost" href="#contact"><span>Senda fyrirspurn</span> <span class="arrow">→</span></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-{% include "partials/schema-about.njk" %}
+{% include "partials/cta-band.njk" %}
