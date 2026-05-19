@@ -2,9 +2,11 @@
 layout: layouts/page.njk
 title: "Articles"
 description: "Articles on fire sealing, fire protection, fireproofing and documentation for buildings in Iceland."
+permalink: /en/greinar/
 eleventyNavigation:
   key: articles-en
   order: 6
+  parent: false
 ---
 {%- set featured = articles | selectattr("featured") | first %}
 {%- set rest = articles | rejectattr("featured") %}

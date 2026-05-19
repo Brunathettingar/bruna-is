@@ -2,9 +2,11 @@
 layout: layouts/page.njk
 title: "Greinar"
 description: "[TBD — íslensk lýsing] Greinar um brunaþéttingar, brunavarnir og skráningar fyrir mannvirki á Íslandi."
+permalink: /greinar/
 eleventyNavigation:
   key: articles-is
   order: 6
+  parent: false
 ---
 {%- set featured = articles | selectattr("featured") | first %}
 {%- set rest = articles | rejectattr("featured") %}
