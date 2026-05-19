@@ -7,8 +7,8 @@
         <span>{{ "utility.tagline" | i18n(lang) }}</span>
       </div>
       <div class="right">
-        <a href="tel:+3548504405">(+354) 850-4405</a>
-        <a href="mailto:bruna@bruna.is">bruna@bruna.is</a>
+        <a href="tel:{{ meta.contact.phone.e164 }}">{{ meta.contact.phone.display }}</a>
+        <a href="mailto:{{ meta.contact.email }}">{{ meta.contact.email }}</a>
         <span class="lang">
           <a href="{{ page.url | alternateUrl(lang) }}" lang="{{ otherLang }}" hreflang="{{ otherLang }}">{{ ("lang.label." + otherLang) | i18n(lang) }}</a>
           <a href="{{ page.url }}" class="active" lang="{{ lang }}">{{ ("lang.label." + lang) | i18n(lang) }}</a>

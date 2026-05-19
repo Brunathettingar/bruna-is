@@ -24,6 +24,16 @@ const shared = {
   // need the prefix included here.
   url: "https://brunathettingar.github.io/bruna-is",
   ogImage: "/assets/img/og-default.jpg",
+  logo: "/assets/img/logo.svg",
+  contact: {
+    email: "bruna@bruna.is",
+    phone: {
+      // E.164 — canonical form for schema:telephone and tel: links
+      e164: "+3548504405",
+      // Human-readable — used in visible UI
+      display: "(+354) 850-4405",
+    },
+  },
 };
 
 export default { ...shared, byLocale };

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- PLACEHOLDER brand logo — replace with real brand mark before launch (G10).
+     Used as Organization.logo in JSON-LD; should be a true brand mark. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 64" width="240" height="64">
+  <rect width="240" height="64" rx="6" fill="#c53030"/>
+  <text x="120" y="42" font-family="Helvetica, Arial, sans-serif" font-weight="700"
+        font-size="26" fill="#ffffff" text-anchor="middle">Brunaþéttingar</text>
+</svg>
