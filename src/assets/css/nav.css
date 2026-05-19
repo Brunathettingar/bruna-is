@@ -1,5 +1,32 @@
-/* Hamburger toggle — desktop nav uses the mockup's `nav.primary` styles in main.css.
-   This file only adds the mobile disclosure pattern that the mockup is missing. */
+/* Desktop nav (moved from main.css by G12/Stage 1) + mobile disclosure pattern. */
+
+nav.primary ul {
+  list-style: none; display: flex; gap: 32px;
+  align-items: center;
+}
+nav.primary a {
+  font-size: 14px; font-weight: 500;
+  color: var(--text-soft);
+  position: relative; padding: 8px 0;
+  transition: color 0.15s;
+}
+nav.primary a:hover, nav.primary a.active {
+  color: var(--accent);
+}
+nav.primary a.active::after {
+  content: ""; position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 2px; background: var(--accent);
+}
+nav.primary .cta {
+  background: var(--accent); color: #fff;
+  padding: 10px 22px;
+  font-size: 13.5px; font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: background 0.15s;
+}
+nav.primary .cta:hover { background: var(--accent-dark); color: #fff; }
+nav.primary .cta::after { display: none; }
 
 .site-header__toggle {
   display: none;
