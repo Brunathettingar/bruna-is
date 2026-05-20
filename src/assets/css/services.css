@@ -11,12 +11,12 @@
 /* ===========================================================
    Page wrapper
    =========================================================== */
-.services-page {
+.services-page__content {
   padding: var(--space-14) 0;
   background: var(--bg);
 }
 @media (min-width: 64em) {
-  .services-page {
+  .services-page__content {
     padding: var(--space-6) 0 6.25rem;
   }
 }
