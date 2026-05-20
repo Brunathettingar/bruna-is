@@ -8,12 +8,12 @@
    Verðreiknir / Quote calculator
    =========================================================== */
 .quoter-page .quoter-section {
-  padding: 56px 0;
+  padding: var(--space-14) 0;
   background: var(--bg);
 }
 @media (min-width: 64em) {
   .quoter-page .quoter-section {
-    padding: 56px 0 100px;
+    padding: var(--space-14) 0 6.25rem;
   }
 }
 
@@ -21,45 +21,45 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-8);
-  margin-bottom: 56px;
+  margin-bottom: var(--space-14);
   align-items: start;
 }
 @media (min-width: 64em) {
   .quoter-page .quoter-intro {
     grid-template-columns: 1fr 1fr;
-    gap: 64px;
+    gap: var(--space-16);
   }
 }
 
 .quoter-page .quoter-intro__label {
-  font-size: 12px; letter-spacing: 3px;
+  font-size: var(--text-sm); letter-spacing: var(--ls-loose-3);
   color: var(--accent); font-weight: 600;
   text-transform: uppercase;
-  margin-bottom: 14px;
+  margin-bottom: 0.875rem;
 }
 .quoter-page .quoter-intro h2 {
-  font-size: 30px;
-  letter-spacing: -0.5px;
+  font-size: 1.875rem;
+  letter-spacing: var(--ls-tight-1);
   line-height: 1.2;
   font-weight: 600;
 }
 @media (min-width: 64em) {
   .quoter-page .quoter-intro h2 {
-    font-size: 38px;
-    letter-spacing: -0.6px;
+    font-size: var(--text-5xl);
+    letter-spacing: -0.0375rem;
     line-height: 1.1;
   }
 }
 .quoter-page .quoter-intro p {
-  font-size: 15.5px; color: var(--text-soft);
-  line-height: 1.7; margin-bottom: 14px;
+  font-size: 0.96875rem; color: var(--text-soft);
+  line-height: var(--lh-loose); margin-bottom: 0.875rem;
 }
 .quoter-page .quoter-intro__notice {
-  border-left: 3px solid var(--brand-blue);
+  border-left: 0.1875rem solid var(--brand-blue);
   background: var(--brand-blue-soft);
   padding: var(--space-4) var(--space-5);
-  font-size: 13.5px; color: var(--brand-blue);
-  margin-top: 14px;
+  font-size: 0.84375rem; color: var(--brand-blue);
+  margin-top: 0.875rem;
 }
 
 /* Form panel */
@@ -74,12 +74,12 @@
 @media (min-width: 64em) {
   .quoter-page .quoter-header {
     display: grid;
-    grid-template-columns: 1.7fr 1.3fr 1fr 0.7fr 0.7fr 1.2fr 0.6fr 1.1fr 36px;
-    gap: 12px;
+    grid-template-columns: 1.7fr 1.3fr 1fr 0.7fr 0.7fr 1.2fr 0.6fr 1.1fr var(--space-9);
+    gap: var(--space-3);
     padding: var(--space-4) var(--space-6);
     background: var(--bg-soft);
     border-bottom: 1px solid var(--line);
-    font-size: 11px; letter-spacing: 1.2px;
+    font-size: var(--text-xs); letter-spacing: 0.075rem;
     text-transform: uppercase;
     color: var(--muted);
     font-weight: 600;
@@ -102,9 +102,9 @@
 }
 @media (min-width: 64em) {
   .quoter-page .quoter-row {
-    grid-template-columns: 1.7fr 1.3fr 1fr 0.7fr 0.7fr 1.2fr 0.6fr 1.1fr 36px;
-    gap: 12px;
-    padding: 18px 24px;
+    grid-template-columns: 1.7fr 1.3fr 1fr 0.7fr 0.7fr 1.2fr 0.6fr 1.1fr var(--space-9);
+    gap: var(--space-3);
+    padding: 1.125rem var(--space-6);
     border: none;
     border-bottom: 1px solid var(--line);
     margin-bottom: 0;
@@ -116,11 +116,11 @@
   width: 100%;
   border: 1px solid var(--line);
   background: var(--bg);
-  padding: 10px 12px;
-  font-size: 14px;
+  padding: 0.625rem var(--space-3);
+  font-size: var(--text-base);
   font-family: var(--sans);
   color: var(--text);
-  border-radius: 0;
+  border-radius: var(--radius-none);
 }
 .quoter-page .quoter-row select:focus,
 .quoter-page .quoter-row input[type="number"]:focus {
@@ -129,22 +129,22 @@
 }
 .quoter-page .quoter-row__subtotal {
   text-align: right;
-  font-size: 15px; font-weight: 600;
+  font-size: 0.9375rem; font-weight: 600;
   color: var(--text);
   font-variant-numeric: tabular-nums;
 }
 .quoter-page .quoter-row__subtotal-empty {
   color: var(--muted-2); font-weight: 400;
-  font-size: 13px;
+  font-size: var(--text-md);
 }
 .quoter-page .quoter-row__remove {
-  width: 32px; height: 32px;
+  width: var(--space-8); height: var(--space-8);
   border: 1px solid var(--line);
   background: var(--bg);
   color: var(--muted);
-  font-size: 18px; line-height: 1;
+  font-size: var(--text-xl); line-height: var(--lh-flat);
   cursor: pointer;
-  transition: border-color 0.15s, color 0.15s;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
 }
 .quoter-page .quoter-row__remove:hover {
   border-color: var(--accent);
@@ -152,7 +152,7 @@
 }
 
 .quoter-page .quoter-actions {
-  padding: 18px 24px;
+  padding: 1.125rem var(--space-6);
   border-bottom: 1px solid var(--line);
   background: var(--bg-soft);
 }
@@ -160,11 +160,11 @@
   background: transparent;
   border: 1px dashed var(--line);
   color: var(--text-soft);
-  padding: 12px 18px;
-  font-size: 13.5px; font-weight: 600;
-  letter-spacing: 0.3px;
+  padding: var(--space-3) 1.125rem;
+  font-size: 0.84375rem; font-weight: 600;
+  letter-spacing: 0.01875rem;
   cursor: pointer;
-  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
 }
 .quoter-page .quoter-actions__add:hover {
   border-color: var(--accent);
@@ -174,7 +174,7 @@
 }
 
 .quoter-page .quoter-total {
-  padding: 28px 24px;
+  padding: var(--space-7) var(--space-6);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -191,43 +191,43 @@
   }
 }
 .quoter-page .quoter-total__label {
-  font-size: 11px; letter-spacing: 2px;
+  font-size: var(--text-xs); letter-spacing: 0.125rem;
   color: var(--alpha-on-dark-low);
   text-transform: uppercase;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: var(--space-1);
 }
 .quoter-page .quoter-total__amount {
   font-family: var(--serif);
-  font-size: 38px; font-weight: 600;
-  letter-spacing: -0.5px;
+  font-size: var(--text-5xl); font-weight: 600;
+  letter-spacing: var(--ls-tight-1);
   color: var(--accent);
   font-variant-numeric: tabular-nums;
-  line-height: 1;
+  line-height: var(--lh-flat);
 }
 .quoter-page .quoter-total__hint {
-  font-size: 12px; color: var(--alpha-on-dark-low);
-  margin-top: 6px;
-  letter-spacing: 0.5px;
+  font-size: var(--text-sm); color: var(--alpha-on-dark-low);
+  margin-top: 0.375rem;
+  letter-spacing: var(--ls-loose-1);
 }
 
 /* Customer info form */
 .quoter-page .quoter-customer {
-  padding: 36px 24px 32px;
+  padding: var(--space-9) var(--space-6) var(--space-8);
   border-top: 1px solid var(--line-dark);
   background: var(--bg-dark);
   color: var(--bg);
 }
 .quoter-page .quoter-customer h3 {
-  font-size: 18px; font-weight: 600;
-  margin-bottom: 18px;
-  letter-spacing: -0.2px;
+  font-size: var(--text-xl); font-weight: 600;
+  margin-bottom: 1.125rem;
+  letter-spacing: -0.0125rem;
 }
 .quoter-page .quoter-customer__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
 }
 @media (min-width: 64em) {
   .quoter-page .quoter-customer__grid {
@@ -239,14 +239,14 @@
   background: var(--bg-dark-soft);
   border: 1px solid var(--line-dark);
   color: var(--bg);
-  padding: 12px 14px;
-  font-size: 14px;
+  padding: var(--space-3) 0.875rem;
+  font-size: var(--text-base);
   font-family: var(--sans);
   width: 100%;
 }
 .quoter-page .quoter-customer input::placeholder,
 .quoter-page .quoter-customer textarea::placeholder {
-  color: rgba(255,255,255,0.4);
+  color: var(--alpha-on-dark-input-placeholder);
 }
 .quoter-page .quoter-customer input:focus,
 .quoter-page .quoter-customer textarea:focus {
@@ -254,7 +254,7 @@
   border-color: var(--accent);
 }
 .quoter-page .quoter-customer textarea {
-  min-height: 80px; resize: vertical;
+  min-height: var(--space-20); resize: vertical;
   font-family: var(--sans);
 }
 .quoter-page .quoter-customer__submit-row {
@@ -262,8 +262,8 @@
   flex-direction: column;
   align-items: stretch;
   gap: var(--space-3);
-  margin-top: 22px;
-  padding-top: 20px;
+  margin-top: 1.375rem;
+  padding-top: var(--space-5);
   border-top: 1px solid var(--line-dark);
 }
 @media (min-width: 64em) {
@@ -275,7 +275,7 @@
   }
 }
 .quoter-page .quoter-customer__note {
-  font-size: 12px; color: var(--alpha-on-dark-low);
+  font-size: var(--text-sm); color: var(--alpha-on-dark-low);
   max-width: 60%;
 }
 .quoter-page .quoter-customer__submit {
@@ -283,26 +283,26 @@
   color: var(--bg);
   border: none;
   padding: var(--space-4) var(--space-8);
-  font-size: 14px; font-weight: 600;
-  letter-spacing: 0.5px;
+  font-size: var(--text-base); font-weight: 600;
+  letter-spacing: var(--ls-loose-1);
   cursor: pointer;
-  transition: background 0.15s;
-  display: inline-flex; align-items: center; gap: 12px;
+  transition: background var(--transition-fast);
+  display: inline-flex; align-items: center; gap: var(--space-3);
 }
 .quoter-page .quoter-customer__submit:hover {
   background: var(--accent-dark);
 }
-.quoter-page .quoter-customer__submit-arrow { font-size: 16px; }
+.quoter-page .quoter-customer__submit-arrow { font-size: var(--text-lg); }
 
 /* Confirmation banner */
 .quoter-page .quoter-confirm {
   display: none;
-  margin-top: 16px;
+  margin-top: var(--space-4);
   padding: var(--space-4) var(--space-5);
-  background: rgba(94, 187, 122, 0.12);
-  border-left: 3px solid #5fb37a;
-  color: #c8efd4;
-  font-size: 14px;
+  background: var(--success-bg-on-dark);
+  border-left: 0.1875rem solid var(--success);
+  color: var(--success-text-on-dark);
+  font-size: var(--text-base);
   line-height: 1.5;
 }
 .quoter-page .quoter-confirm[data-visible="true"] {
