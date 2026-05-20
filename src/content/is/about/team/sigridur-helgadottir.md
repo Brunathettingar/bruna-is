@@ -4,5 +4,5 @@ initials: "SH"
 avatar: "orange"
 order: 2
 role: "Verkefnastjóri"
-bio: "[TBD — íslenska]"
+bio: "Stýrir stærstu verkefnum okkar á höfuðborgarsvæðinu."
 ---

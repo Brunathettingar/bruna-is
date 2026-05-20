@@ -4,5 +4,5 @@ initials: "PH"
 avatar: "blue"
 order: 7
 role: "Útibússtjóri · Austurland"
-bio: "[TBD — íslenska]"
+bio: "Stýrir verkefnum á Reyðarfirði og Egilsstöðum."
 ---

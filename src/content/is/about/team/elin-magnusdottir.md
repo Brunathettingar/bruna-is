@@ -4,5 +4,5 @@ initials: "EM"
 avatar: "orange"
 order: 6
 role: "Brunaþéttingamaður"
-bio: "[TBD — íslenska]"
+bio: "Sérfræðingur í þrýstimálningu og burðarvirkjavörn."
 ---

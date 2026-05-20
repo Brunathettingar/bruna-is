@@ -4,5 +4,5 @@ initials: "BG"
 avatar: "blue"
 order: 5
 role: "Brunaþéttingamaður"
-bio: "[TBD — íslenska]"
+bio: "Sérfræðingur í mátanlegum kapalgegnumtökum."
 ---

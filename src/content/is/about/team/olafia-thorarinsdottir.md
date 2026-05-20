@@ -4,5 +4,5 @@ initials: "ÓT"
 avatar: "orange"
 order: 4
 role: "Ráðgjafi · Efnisval"
-bio: "[TBD — íslenska]"
+bio: "Sérfræðingur í þrýstikerfi og burðarvirkjavörn."
 ---

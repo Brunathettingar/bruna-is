@@ -5,11 +5,15 @@ category: "Vatnstankar"
 order: 4
 featured: false
 image: "/img/iceland_krafla.jpg"
-summary: "[TBD — íslenska]"
+summary: "Einangrun á vatnstönkum og heitavatnsgeymslum til að þeir tapi ekki hita. Þetta er ein <strong>hagkvæmasta lausnin</strong> okkar — fjárfestingin greiðist oft til baka á mánuðum með lægri orkureikningi."
 insightStrong: "Borgar sig á 6–18 mánuðum"
-insight: "[TBD — íslenska]"
+insight: "Óeinangraður vatnstankur tapar 15–25% af hita sínum á sólarhring. Einföld einangrun stöðvar nær allt það tap — fjárfestingin skilar sér mjög hratt."
 bullets:
-  - "[TBD — íslenska]"
+  - "Heitavatnstankar — koma í veg fyrir hitatap"
+  - "Kaldavatnstankar — vörn gegn þéttingu og ryki"
+  - "Iðnaðartankar og kjallarageymslur"
+  - "Frágengið með Isogenopak eða álklæðningu"
+  - "Árlegur orkusparnaðarútreikningur fylgir hverju verkefni"
 ---
 
-[TBD — lengri lýsing á einangrun vatnstanka kemur hér.]
+Ítarlegri lýsing á einangrun vatnstanka kemur hér.

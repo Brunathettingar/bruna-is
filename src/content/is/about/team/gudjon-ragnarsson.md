@@ -4,5 +4,5 @@ initials: "GR"
 avatar: "blue"
 order: 3
 role: "Skráningarstjóri"
-bio: "[TBD — íslenska]"
+bio: "Þróar og rekur stafræna skráningarkerfi okkar."
 ---

@@ -6,15 +6,15 @@ order: 1
 featured: true
 icon: pillar-fireproofing
 image: "/img/server_room.jpg"
-summary: "[TBD — íslenska] Heildaræðar brunavarnir fyrir byggingar."
+summary: "Heildaræðar brunavarnir fyrir byggingar — allar tegundir óvirkra brunaþéttinga, þrýstimálning á burðarstál, brunaplötur og þéttingar á gegnumtökum og samskeytum. Vottað í EI 60, EI 120 og EI 240 (og R 30 til R 240 fyrir burðarvirkjavörn)."
 insightStrong: "Aukinn ávinningur"
-insight: "[TBD — íslenska] Brunaþéttiefni eru hljóðísogandi."
+insight: "Brunaþéttikítti er mjög hljóðísogandi — sömu þéttingar sem stöðva eld og reyk dempa einnig hljóðflutning milli rýma. Ein lausn, tvær virkni."
 bullets:
-  - "[TBD — Þéttingar á gegnumtökum, samskeytum og rifum]"
-  - "[TBD — Brunaþéttiefni, froður og púðar (Roxtec, Hilti, Promat)]"
-  - "[TBD — Þrýstimálning fyrir burðarstál]"
-  - "[TBD — Brunaþéttiplötur og brunaeinangrun]"
-  - "[TBD — Reykjarþéttingar og loftþrýstiprófun]"
+  - "Þéttingar á gegnumtökum, samskeytum og rifum"
+  - "Brunaþéttikítti, froður og púðar (Roxtec, Hilti, Promat)"
+  - "Þrýstimálning fyrir burðarstál"
+  - "Brunaplötur, brunaeinangrun og brunahurðir"
+  - "Reykþéttingar og loftþrýstiprófun"
 ---
 
-[TBD — lengri lýsing á brunaþéttingum og óvirkum brunavörnum kemur hér.]
+Ítarlegri lýsing á brunaþéttingum og óvirkum brunavörnum kemur hér.
