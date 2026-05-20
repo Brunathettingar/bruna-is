@@ -14,12 +14,12 @@
    Page wrapper
    =========================================================== */
 .articles-page .articles {
-  padding: 56px 0;
+  padding: var(--space-14) 0;
   background: var(--bg);
 }
 @media (min-width: 64em) {
   .articles-page .articles {
-    padding: 88px 0 100px;
+    padding: var(--space-22) 0 6.25rem;
   }
 }
 
@@ -31,7 +31,7 @@
   grid-template-columns: 1fr;
   gap: 0;
   border: 1px solid var(--line);
-  margin-bottom: 56px;
+  margin-bottom: var(--space-14);
 }
 @media (min-width: 64em) {
   .articles-page .article-featured {
@@ -43,11 +43,11 @@
   position: relative;
   overflow: hidden;
   height: 100%;
-  min-height: 240px;
+  min-height: 15rem;
 }
 @media (min-width: 64em) {
   .articles-page .article-featured__media {
-    min-height: 360px;
+    min-height: 22.5rem;
   }
 }
 
@@ -58,47 +58,47 @@
 }
 
 .articles-page .article-featured__body {
-  padding: 48px 56px;
+  padding: var(--space-12) var(--space-14);
   display: flex; flex-direction: column; justify-content: center;
 }
 
 .articles-page .article-featured__tag {
-  font-size: 11px; letter-spacing: 2px;
+  font-size: var(--text-xs); letter-spacing: 0.125rem;
   color: var(--accent); font-weight: 600;
   text-transform: uppercase;
-  margin-bottom: 16px;
-  display: inline-flex; align-items: center; gap: 12px;
+  margin-bottom: var(--space-4);
+  display: inline-flex; align-items: center; gap: var(--space-3);
 }
 
 .articles-page .article-featured__tag-pill {
   background: var(--accent);
   color: var(--bg);
-  padding: 4px 10px;
-  font-size: 10px;
+  padding: var(--space-1) 0.625rem;
+  font-size: 0.625rem;
 }
 
 .articles-page .article-featured h2 {
-  font-size: 30px;
-  letter-spacing: -0.5px;
+  font-size: 1.875rem;
+  letter-spacing: var(--ls-tight-1);
   line-height: 1.2;
   font-weight: 600;
-  margin-bottom: 14px;
+  margin-bottom: 0.875rem;
 }
 @media (min-width: 64em) {
   .articles-page .article-featured h2 {
-    font-size: 32px;
+    font-size: var(--text-4xl);
   }
 }
 
 .articles-page .article-featured p {
-  font-size: 15.5px; color: var(--text-soft);
-  line-height: 1.65; margin-bottom: 20px;
+  font-size: 0.96875rem; color: var(--text-soft);
+  line-height: 1.65; margin-bottom: var(--space-5);
 }
 
 .articles-page .article-featured__meta {
-  font-size: 12.5px; color: var(--muted);
-  display: flex; gap: 18px;
-  padding-top: 18px;
+  font-size: 0.78125rem; color: var(--muted);
+  display: flex; gap: 1.125rem;
+  padding-top: 1.125rem;
   border-top: 1px solid var(--line);
 }
 .articles-page .article-featured__meta strong {
@@ -121,7 +121,7 @@
 @media (min-width: 64em) {
   .articles-page .article-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
+    gap: var(--space-7);
   }
 }
 
@@ -129,7 +129,7 @@
    Listing headings (responsive shrink lived in responsive.css)
    =========================================================== */
 .articles-page .articles h2 {
-  font-size: 30px;
-  letter-spacing: -0.5px;
+  font-size: 1.875rem;
+  letter-spacing: var(--ls-tight-1);
   line-height: 1.2;
 }
