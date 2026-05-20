@@ -60,7 +60,7 @@
   font-size: var(--text-lg); color: var(--text-soft);
   line-height: var(--lh-loose); margin-bottom: 0.875rem;
 }
-.sectors-page .sectors-intro p strong { color: var(--text); }
+.sectors-page .sectors-intro strong { color: var(--text); }
 
 /* ===========================================================
    Sector grid + card
