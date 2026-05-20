@@ -10,11 +10,12 @@ html { scroll-behavior: smooth; }
 /* Off-screen container for the inline SVG <defs> sprite. */
 .svg-defs { position: absolute; width: 0; height: 0; }
 
-/* Brand wordmark — token-driven; classes are referenced from the inline
-   <text> in the SVG defs in `partials/svg-defs.njk`. Driven through
-   .bruna / .pett classes so fills inherit from tokens. */
-.bruna { font-family: var(--font-body); font-weight: 700; font-size: 3rem; letter-spacing: var(--ls-tight-2); fill: var(--accent); }
-.pett  { font-family: var(--font-body); font-weight: 600; font-size: 2.875rem; letter-spacing: var(--ls-tight-1); fill: var(--brand-blue); }
+/* Brand wordmark — token-driven; classes wrap the path groups in
+   `partials/svg-defs.njk` (.bruna = orange "BRUNA", .pett = dark blue
+   "þéttingar"). Fill is inheritable, so child paths pick up the group's
+   color. Footer overrides `.pett` to white for legibility on dark bg. */
+.bruna { fill: var(--accent); }
+.pett  { fill: var(--brand-blue); }
 
 .brand--footer { margin-bottom: 1.375rem; }
 
