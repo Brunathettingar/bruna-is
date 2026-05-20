@@ -1,42 +1,42 @@
-<footer id="contact">
+<footer id="contact" class="site-footer">
   <div class="container">
-    <div class="top">
-      <div class="col">
+    <div class="site-footer__top">
+      <div class="site-footer__col">
         <a href="{{ '/' | locale_url }}" class="brand brand--footer">
           <svg class="logo" viewBox="0 0 360 60" aria-hidden="true"><use href="#logo-wordmark"/></svg>
           <small class="tag">{{ "brand.tagline" | i18n(lang) | safe }}</small>
         </a>
-        <p>{{ meta.byLocale[lang].description }}</p>
+        <p class="site-footer__col-text">{{ meta.byLocale[lang].description }}</p>
       </div>
-      <div class="col">
-        <h5>{{ "footer.solutions_heading" | i18n(lang) }}</h5>
-        <ul>
-          <li><a href="{{ '/thjonusta/' | locale_url }}">{{ "nav.services" | i18n(lang) }}</a></li>
-          <li><a href="{{ '/geirar/' | locale_url }}">{{ "nav.sectors" | i18n(lang) }}</a></li>
-          <li><a href="{{ '/verdreiknir/' | locale_url }}">{{ "nav.quote" | i18n(lang) }}</a></li>
+      <div class="site-footer__col">
+        <h5 class="site-footer__col-title">{{ "footer.solutions_heading" | i18n(lang) }}</h5>
+        <ul class="site-footer__col-list">
+          <li><a class="site-footer__col-link" href="{{ '/thjonusta/' | locale_url }}">{{ "nav.services" | i18n(lang) }}</a></li>
+          <li><a class="site-footer__col-link" href="{{ '/geirar/' | locale_url }}">{{ "nav.sectors" | i18n(lang) }}</a></li>
+          <li><a class="site-footer__col-link" href="{{ '/verdreiknir/' | locale_url }}">{{ "nav.quote" | i18n(lang) }}</a></li>
         </ul>
       </div>
-      <div class="col">
-        <h5>{{ "footer.company_heading" | i18n(lang) }}</h5>
-        <ul>
-          <li><a href="{{ '/about/' | locale_url }}">{{ "nav.about" | i18n(lang) }}</a></li>
-          <li><a href="{{ '/about/' | locale_url }}#stefna">{{ "footer.vision" | i18n(lang) }}</a></li>
-          <li><a href="{{ '/greinar/' | locale_url }}">{{ "nav.articles" | i18n(lang) }}</a></li>
+      <div class="site-footer__col">
+        <h5 class="site-footer__col-title">{{ "footer.company_heading" | i18n(lang) }}</h5>
+        <ul class="site-footer__col-list">
+          <li><a class="site-footer__col-link" href="{{ '/about/' | locale_url }}">{{ "nav.about" | i18n(lang) }}</a></li>
+          <li><a class="site-footer__col-link" href="{{ '/about/' | locale_url }}#stefna">{{ "footer.vision" | i18n(lang) }}</a></li>
+          <li><a class="site-footer__col-link" href="{{ '/greinar/' | locale_url }}">{{ "nav.articles" | i18n(lang) }}</a></li>
         </ul>
       </div>
-      <div class="col">
-        <h5>{{ "footer.contact_heading" | i18n(lang) }}</h5>
-        <ul>
-          <li><a href="tel:{{ meta.contact.phone.e164 }}">{{ meta.contact.phone.display }}</a></li>
-          <li><a href="mailto:{{ meta.contact.email }}">{{ meta.contact.email }}</a></li>
+      <div class="site-footer__col">
+        <h5 class="site-footer__col-title">{{ "footer.contact_heading" | i18n(lang) }}</h5>
+        <ul class="site-footer__col-list">
+          <li><a class="site-footer__col-link" href="tel:{{ meta.contact.phone.e164 }}">{{ meta.contact.phone.display }}</a></li>
+          <li><a class="site-footer__col-link" href="mailto:{{ meta.contact.email }}">{{ meta.contact.email }}</a></li>
           <li>105 Reykjavík, {{ meta.byLocale[lang].addressCountry }}</li>
         </ul>
       </div>
     </div>
-    <div class="bottom">
-      <span>© {{ buildYear }} Brunaþéttingar ehf. &nbsp;·&nbsp; {{ "footer.copyright" | i18n(lang) }}</span>
+    <div class="site-footer__bottom">
+      <span class="site-footer__bottom-text">© {{ buildYear }} Brunaþéttingar ehf. &nbsp;·&nbsp; {{ "footer.copyright" | i18n(lang) }}</span>
       <span>
-        <a href="/sitemap.xml">{{ "footer.sitemap" | i18n(lang) }}</a>
+        <a class="site-footer__bottom-link" href="/sitemap.xml">{{ "footer.sitemap" | i18n(lang) }}</a>
       </span>
     </div>
   </div>

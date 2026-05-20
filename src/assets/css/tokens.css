@@ -72,6 +72,8 @@
   --alpha-scrim-low:   rgba(10, 13, 18, 0.4);
   --alpha-scrim-faint: rgba(10, 13, 18, 0.2);
   --alpha-scrim-hi:    rgba(10, 13, 18, 0.7);
+  /* Middle stop in page-hero scrim gradient (0.55 sits between -med 0.6 and -low 0.4) */
+  --alpha-scrim-mid:   rgba(10, 13, 18, 0.55);
   --alpha-scrim-deep:  rgba(10, 13, 18, 0.92);
 
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;

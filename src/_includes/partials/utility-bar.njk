@@ -1,19 +1,19 @@
 {%- set alternates = page.url | locale_links %}
 <div class="utility">
   <div class="container">
-    <div class="row">
-      <div class="left">
-        <span class="pill">{{ "ui.certified" | i18n(lang) }}</span>
-        <span>{{ "utility.tagline" | i18n(lang) }}</span>
+    <div class="utility__row">
+      <div class="utility__left">
+        <span class="utility__pill">{{ "ui.certified" | i18n(lang) }}</span>
+        <span class="utility__tagline">{{ "utility.tagline" | i18n(lang) }}</span>
       </div>
-      <div class="right">
-        <a href="tel:{{ meta.contact.phone.e164 }}">{{ meta.contact.phone.display }}</a>
-        <a href="mailto:{{ meta.contact.email }}">{{ meta.contact.email }}</a>
-        <span class="lang">
+      <div class="utility__right">
+        <a class="utility__contact" href="tel:{{ meta.contact.phone.e164 }}">{{ meta.contact.phone.display }}</a>
+        <a class="utility__contact" href="mailto:{{ meta.contact.email }}">{{ meta.contact.email }}</a>
+        <span class="utility__lang">
           {%- for link in alternates %}
-          <a href="{{ link.url }}" lang="{{ link.lang }}" hreflang="{{ link.lang }}">{{ ("lang.label." + link.lang) | i18n(lang) }}</a>
+          <a class="utility__lang-link" href="{{ link.url }}" lang="{{ link.lang }}" hreflang="{{ link.lang }}">{{ ("lang.label." + link.lang) | i18n(lang) }}</a>
           {%- endfor %}
-          <a href="{{ page.url }}" class="active" lang="{{ lang }}">{{ ("lang.label." + lang) | i18n(lang) }}</a>
+          <a class="utility__lang-link utility__lang-link--active" href="{{ page.url }}" lang="{{ lang }}">{{ ("lang.label." + lang) | i18n(lang) }}</a>
         </span>
       </div>
     </div>
