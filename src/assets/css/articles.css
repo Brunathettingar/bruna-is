@@ -133,3 +133,127 @@
   letter-spacing: var(--ls-tight-1);
   line-height: 1.2;
 }
+
+/* ===========================================================
+   Article detail page — used by src/_includes/layouts/article.njk
+   Markup: page-hero--article + article-body > container >
+           content-prose > [article-meta + markdown-rendered content]
+   =========================================================== */
+
+/* Centered, editorial-feel hero for article detail */
+.articles-page .page-hero--article {
+  text-align: center;
+}
+.articles-page .page-hero--article h1 {
+  max-width: 42rem;
+  margin-inline: auto;
+}
+.articles-page .page-hero--article .page-hero__kicker {
+  margin-inline: auto;
+}
+
+.articles-page .article-body {
+  padding: var(--space-12) 0 var(--space-20);
+  background: var(--bg);
+}
+@media (min-width: 64em) {
+  .articles-page .article-body {
+    padding: var(--space-16) 0 var(--space-24);
+  }
+}
+
+.articles-page .content-prose {
+  max-width: 42rem;
+  margin-inline: auto;
+}
+
+/* Article meta row — date · read time · author */
+.articles-page .article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  letter-spacing: var(--ls-loose-1);
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: var(--space-5);
+  margin-bottom: var(--space-10);
+  border-bottom: 1px solid var(--line);
+}
+@media (min-width: 64em) {
+  .articles-page .article-meta {
+    gap: var(--space-5);
+  }
+}
+
+/* Long-form typography for markdown-rendered prose */
+.articles-page .content-prose h2 {
+  font-size: 1.625rem;
+  font-weight: 600;
+  letter-spacing: var(--ls-tight-1);
+  line-height: var(--lh-tight);
+  margin-top: var(--space-10);
+  margin-bottom: var(--space-4);
+  color: var(--text);
+}
+@media (min-width: 64em) {
+  .articles-page .content-prose h2 {
+    font-size: var(--text-3xl);
+  }
+}
+.articles-page .content-prose h3 {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  letter-spacing: -0.025rem;
+  line-height: var(--lh-snug);
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-3);
+  color: var(--text);
+}
+.articles-page .content-prose p {
+  font-size: var(--text-xl);
+  line-height: var(--lh-loose);
+  color: var(--text-soft);
+  margin-bottom: var(--space-5);
+}
+.articles-page .content-prose ul,
+.articles-page .content-prose ol {
+  font-size: var(--text-xl);
+  line-height: var(--lh-loose);
+  color: var(--text-soft);
+  margin-bottom: var(--space-5);
+  padding-inline-start: var(--space-6);
+}
+.articles-page .content-prose li {
+  margin-bottom: var(--space-2);
+}
+.articles-page .content-prose strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.articles-page .content-prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+.articles-page .content-prose a:hover {
+  color: var(--accent-dark);
+}
+.articles-page .content-prose blockquote {
+  border-inline-start: 0.1875rem solid var(--accent);
+  padding-inline-start: var(--space-5);
+  margin-block: var(--space-6);
+  font-style: italic;
+  color: var(--text-soft);
+}
+/* Tighten last child of blockquote so it doesn't trail extra space.
+   Scoped under .articles-page directly (not via .content-prose) to
+   stay within the 2-level depth budget. */
+.articles-page blockquote p:last-child { margin-bottom: 0; }
+.articles-page .content-prose code {
+  background: var(--bg-soft);
+  padding: 0.125rem var(--space-1);
+  border-radius: 0.25rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.875em;
+}
