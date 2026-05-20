@@ -26,6 +26,7 @@
   --bg-soft: #f6f7f9;
   --bg-dark: #0a0d12;
   --bg-dark-soft: #14181f;
+  --bg-contain: #f1f3f6;
   --text: #0e1116;
   --text-soft: #2a2f38;
   --muted: #5a626f;
@@ -37,8 +38,12 @@
   --accent-soft: #fde7d2;
   --brand-blue: #1453a8;
   --brand-blue-soft: #d6e2f3;
+  --brand-blue-deep: #0f3a78;
+  --accent-deep:     #c45e0a;
   --success: #5fb37a;
   --success-soft: rgba(94, 187, 122, 0.12);
+  --success-bg-on-dark:   rgba(94, 187, 122, 0.12);
+  --success-text-on-dark: #c8efd4;
 
   --alpha-on-dark-hi:    rgba(255, 255, 255, 0.78);
   --alpha-on-dark-med:   rgba(255, 255, 255, 0.65);
@@ -48,6 +53,26 @@
   --alpha-scrim-med:     rgba(10, 13, 18, 0.6);
   --alpha-scrim-soft:    rgba(10, 13, 18, 0.25);
   --alpha-hl-blue:       rgba(20, 83, 168, 0.20);
+
+  /* Fixed-color text used on dark surfaces (utility bar, footer body) */
+  --text-on-dark-soft: #c8ccd3;
+
+  /* Additional alpha-on-dark stops for overlays / borders / placeholders */
+  --alpha-on-dark-overlay:           rgba(255, 255, 255, 0.5);
+  --alpha-on-dark-strong:            rgba(255, 255, 255, 0.7);
+  --alpha-on-dark-near:              rgba(255, 255, 255, 0.95);
+  --alpha-on-dark-line-faint:        rgba(255, 255, 255, 0.18);
+  --alpha-on-dark-line-soft:         rgba(255, 255, 255, 0.3);
+  --alpha-on-dark-input-placeholder: rgba(255, 255, 255, 0.4);
+
+  /* Subtle radial highlight on dark gradient surfaces */
+  --alpha-on-light-radial-highlight: rgba(255, 255, 255, 0.08);
+
+  /* Additional scrim depths (used by hero/page-hero overlays) */
+  --alpha-scrim-low:   rgba(10, 13, 18, 0.4);
+  --alpha-scrim-faint: rgba(10, 13, 18, 0.2);
+  --alpha-scrim-hi:    rgba(10, 13, 18, 0.7);
+  --alpha-scrim-deep:  rgba(10, 13, 18, 0.92);
 
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --font-serif: "Iowan Old Style", "Palatino", Georgia, serif;
@@ -124,6 +149,9 @@
   --content-width: 60ch;
   --nav-height: 4.5rem;
   --utility-height: 2.5rem;
+
+  /* Hairline — 1px separator divs (matches the 1px border carve-out) */
+  --hairline: 1px;
 
   --z-base: 1;
   --z-sticky: 50;
