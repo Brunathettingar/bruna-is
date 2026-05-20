@@ -141,7 +141,7 @@ cta:
           <ul>
             {%- for b in s.data.bullets %}
             {%- if loop.index <= 4 %}
-            <li>{{ b | safe }}</li>
+            <li class="pillar__bullet">{{ b | safe }}</li>
             {%- endif %}
             {%- endfor %}
           </ul>
