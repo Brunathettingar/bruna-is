@@ -10,7 +10,7 @@ eleventyNavigation:
   parent: false
 kicker: "Practical guidance from our fire-sealing team."
 cta:
-  heading: "Ready to start your project? <span class=\"ul\">Get in touch.</span>"
+  heading: "Ready to start your project? <span class=\"cta-band__highlight\">Get in touch.</span>"
   primaryHref: "/en/verdreiknir/"
   primaryLabel: "Get a quote"
   secondaryHref: "#contact"
@@ -55,14 +55,14 @@ cta:
     <div class="article-grid">
       {%- for article in rest %}
       <a class="article-card" href="{{ article.url }}">
-        <div class="pic">
-          <img src="{{ article.data.image }}" alt="" width="1200" height="900">
-          <span class="tag">{{ article.data.category }}</span>
+        <div class="article-card__media">
+          <img class="article-card__media-img" src="{{ article.data.image }}" alt="" width="1200" height="900">
+          <span class="article-card__tag">{{ article.data.category }}</span>
         </div>
-        <div class="body">
+        <div class="article-card__body">
           <h3>{{ article.data.title | safe }}</h3>
           <p>{{ article.data.summary | safe }}</p>
-          <div class="meta">
+          <div class="article-card__meta">
             <span>{{ article.data.date | dateDisplay(lang) }}</span>
             <span>{{ article.data.readTimeMinutes }} {{ "articles.read_time_minutes" | i18n(lang) }}</span>
           </div>
