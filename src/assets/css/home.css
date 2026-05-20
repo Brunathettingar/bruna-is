@@ -102,9 +102,17 @@
   }
 }
 .home-page .statement__label {
-  font-size: var(--text-sm); letter-spacing: var(--ls-loose-3);
-  color: var(--accent); font-weight: 600;
-  text-transform: uppercase;
+  font-size: var(--text-3xl);
+  letter-spacing: var(--ls-tight-1);
+  color: var(--accent);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
+}
+@media (min-width: 64em) {
+  .home-page .statement__label {
+    font-size: var(--text-4xl);
+    letter-spacing: var(--ls-tight-2);
+  }
 }
 .home-page .statement h2 {
   font-family: var(--sans);
@@ -361,7 +369,9 @@
 .home-page .leading__media {
   position: relative;
   aspect-ratio: 4 / 5;
-  overflow: hidden;
+  /* No overflow:hidden — the badge intentionally extends past the left
+     edge (left: -2rem). The image uses object-fit:cover and inset:0 so
+     it stays clipped to the parent box without needing overflow. */
 }
 .home-page .leading__image {
   position: absolute; inset: 0;
@@ -382,8 +392,10 @@
 }
 .home-page .leading__badge-emphasis {
   display: block;
+  margin-bottom: var(--space-2);
   font-size: 1.625rem;
   font-weight: 600;
+  line-height: var(--lh-tight);
   letter-spacing: var(--ls-tight-1);
 }
 
