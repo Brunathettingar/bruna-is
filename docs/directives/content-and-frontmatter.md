@@ -47,15 +47,13 @@ The permalink shape for each collection is set by the directory data file (see �
 | The body is prose and the layout owns the structure. | The page composes multiple structured sections with their own data shapes (hero, statement, pillars, leading, customers strip). |
 | All variation between instances fits in flat frontmatter keys. | Variation requires nested arrays-of-objects, conditional sections, or loops. |
 
-Approximate ratio in this project: 50+ `.md` files (per-locale collection entries) vs ~12 `.njk` files (listing pages, structured singletons, sitemaps, 404s, robots).
-
 Do not write a `.md` with a body that just contains a large `<section class="...">` block of HTML — if the page needs HTML structure, it's a `.njk`.
 
 ## 4. Directory data files
 
-Every collection has a directory data file: `<dir>/<dir>.json` (preferred for static config) or `<dir>/<dir>.11tydata.js` (only when computation is required).
+Every collection has a directory data file: `<dir>/<dir>.json` (preferred for static config) or `<dir>/<dir>.11tydata.js` (only when computation is required). Two shapes exist depending on whether the collection's entries render their own pages.
 
-These files apply shared frontmatter to every page in the directory. Required keys for a collection:
+### Shape A — entries render detail pages (services, sectors, articles)
 
 ```json
 {
@@ -68,6 +66,17 @@ These files apply shared frontmatter to every page in the directory. Required ke
   }
 }
 ```
+
+### Shape B — data-only subcollections (no rendered detail pages)
+
+```json
+{
+  "tags": ["<collection>", "<collection>-<locale>"],
+  "permalink": false
+}
+```
+
+Use this shape when the subcollection exists only to populate a list rendered by another page. The about-page subcollections (`milestones`, `principles`, `team` under `src/content/{is,en}/about/`) are the canonical example: `permalink: false` suppresses page emission, so `layout`, `bodyClass`, and `eleventyNavigation.parent` are unnecessary. The parent page (`about/index.njk`) loops the collection via `collections.team`, etc.
 
 Concrete example — `src/content/is/thjonusta/thjonusta.json`:
 
@@ -149,65 +158,75 @@ EN parallels are identical structure with `-en` suffix. When adding a new nav pa
 
 ### Home page (`index.njk` per locale) — `.njk`
 
-The home page composes multiple structured sections. Required keys:
+The home page is a one-off composition — too many section-specific shapes to tabularize honestly. Read `src/content/is/index.njk` to see every key in context; the inventory below is descriptive, not a schema contract.
 
-| Field | Type | Purpose |
-|---|---|---|
-| `layout` | `"layouts/page.njk"` | Layout chain. |
-| `title` | string | Browser tab title, fallback for OG. |
-| `description` | string | `<meta name="description">`. |
-| `bodyClass` | `"home-page"` | CSS page-family scope. |
-| `eleventyNavigation.key` | `"home-is"` / `"home-en"` | Nav membership. |
-| `eleventyNavigation.order` | `1` | Nav position. |
-| `heroHeading` | string | Hero H1 (may contain `<br>` for line breaks). |
-| `statement.label` / `.heading` / `.lead` | object | "What we do" block. |
-| `pillars[]` | array | Service pillar cards. |
-| `leading[]` | array | Leading-projects section. |
-| `customers[]` | array | Customer logos row. |
+Page-level keys:
 
-Section keys (`statement`, `pillars`, etc.) are page-specific — they're read by the home `.njk` template, not by any layout. Adding a new section means adding both the frontmatter key and the template rendering.
+- `layout: "layouts/page.njk"`
+- `title`, `description` — meta + OG fallback chain
+- `bodyClass: "home-page"` — CSS page-family scope
+- `eleventyNavigation.key: "home-is"` / `"home-en"`, `order: 1`
+- `heroHeading` — H1, may contain `<br>` / inline emphasis
+
+Section objects (each consumed by the corresponding block in `index.njk`):
+
+- `statement` — `{label, heading, lead}` for the "What we do" block.
+- `explainer` — `{left, right}` where each side has `{heading, paragraphs[], chips[]}` and the right side may include `footer`. Chips have `{label, style}` where `style` is `"blue"` or `null`.
+- `process` — `{label, heading, steps[]}` where each step has `{num, heading, body}`.
+- `leading` — `{label, heading, paragraphs[], stats[], badgeStrong, badgeBody, image}` where each stat has `{num, lbl}`.
+- `sectorsCallout` — `{label, heading, items[]}` where each item has `{icon, heading, body}`. The `icon` value is a partial filename under `partials/icons/` (see [`templates-and-layouts.md`](./templates-and-layouts.md) §8).
+- `customers` — `{label}`. The list itself comes from `src/_data/partners.js` (the `partners` global).
+- `cta` — `{heading, primaryHref, primaryLabel, secondaryHref, secondaryLabel}`. Rendered by `partials/cta-band.njk`.
+
+The featured-services list (the "pillars" grid) is **not** in frontmatter. It is derived in the template from `collections.featuredServicesIs` / `featuredServicesEn` — see [`eleventy-config.md`](./eleventy-config.md) §6.
+
+Adding a new section means editing both the frontmatter shape and the template that renders it.
 
 ### Service detail (`thjonusta/<slug>.md`) — `.md`
 
-| Field | Type | Required | Purpose |
+| Field | Type | Required by layout | Required by other consumer |
 |---|---|---|---|
-| `title` | string | yes | H1 + OG title. May contain inline HTML (`<br>`, `<strong>`) — rendered with `\| safe`. |
-| `image` | string | yes | Hero/feature image path: `/img/<name>.jpg`. |
-| `summary` | string | yes | Lead paragraph + meta description. |
-| `number` | string | yes | Service number badge (`"01"`, `"02"`, …). |
-| `category` | string | yes | Category label next to number. |
-| `order` | int | yes | Sort order inside the collection. |
-| `featured` | bool | yes | Whether to include in home page's featured services. |
-| `icon` | string | yes | Icon symbol id from `svg-defs.njk` (`pillar-fireproofing`). |
-| `insightStrong` | string | yes | Bold lead of insight callout. |
-| `insight` | string | yes | Insight callout body. May contain inline HTML. |
-| `bullets[]` | array of string | yes | Service-feature bullet list. Items may contain inline HTML. |
-| `imageContain` | bool | no | Set true to render the feature image in `object-fit: contain` mode (off-white plate). Default cover. |
+| `title` | string | yes (`service.njk`) | — |
+| `image` | string | yes (`service.njk`) | — |
+| `summary` | string | yes (`service.njk`) | — |
+| `insightStrong` | string | yes (`service.njk`) | — |
+| `insight` | string | yes (`service.njk`) | — |
+| `bullets[]` | array of string | yes (`service.njk`) | — |
+| `number` | string | — | yes for the home pillar grid (read in `index.njk`) — service number badge (`"01"`, …) |
+| `category` | string | — | yes for the service-feature header (rendered by `service.njk` as part of `{{ number }} / {{ category }}`) |
+| `order` | int | — | yes for `featuredServicesIs/En` sort (`eleventy-config.md` §6) |
+| `featured` | bool | — | yes for `featuredServicesIs/En` membership |
+| `icon` | string | — | yes for the home pillar grid (partial filename under `partials/icons/`) |
+| `imageContain` | bool | no — defaults to cover-fit | — |
+
+Strings marked "may contain inline HTML" follow §11; the consuming template renders them with `| safe`.
 
 ### Sector detail (`geirar/<slug>.md`) — `.md`
 
-| Field | Type | Required | Purpose |
+| Field | Type | Required by layout | Required by other consumer |
 |---|---|---|---|
-| `title` | string | yes | H1. |
-| `image` | string | yes | Hero image path. |
-| `description` | string | yes | Hero kicker + meta description. |
-| `order` | int | yes | Sort order. |
-| `featured` | bool | yes | Whether to feature on home page. |
-| `number` | string | yes | Card badge number. |
-| `tagLabels[]` | array of string | no | Pills shown beneath the sector body. |
+| `title` | string | yes (`sector.njk`) | — |
+| `image` | string | yes (`sector.njk`) | — |
+| `description` | string | yes (`sector.njk`) | — |
+| `order` | int | — | yes for `featuredSectorsIs/En` sort |
+| `featured` | bool | — | yes for `featuredSectorsIs/En` membership |
+| `number` | string | — | yes if the sector appears in any list that renders a card badge |
+| `tagLabels[]` | array of string | no — pills under the body | — |
 
 ### Article (`greinar/<slug>.md`) — `.md`
 
-| Field | Type | Required | Purpose |
+| Field | Type | Required by layout | Required by other consumer |
 |---|---|---|---|
-| `title` | string | yes | H1 + OG title. |
-| `image` | string | yes | Hero image path. |
-| `summary` | string | yes | Lead paragraph + meta description. |
-| `date` | YAML date | yes | Publication date (`2026-04-02`). |
-| `featured` | bool | yes | Whether to surface as the featured article. |
-| `category` | string | yes | Category label. |
-| `readTimeMinutes` | int | yes | Estimated read time (combines with `articles.read_time_minutes` translation). |
-| `author` | string | yes | Author display name. |
+| `title` | string | yes (`article.njk`) | — |
+| `image` | string | yes (`article.njk`) | — |
+| `summary` | string | yes (`article.njk`) | — |
+| `date` | YAML date | yes (`article.njk`) — render + JSON-LD | — |
+| `readTimeMinutes` | int | yes (`article.njk`) | — |
+| `author` | string | yes (`article.njk`) — render + JSON-LD | — |
+| `featured` | bool | — | yes for `featuredArticleIs/En` membership |
+| `category` | string | — | yes wherever articles surface in a list (currently the articles index) |
+
+`article.njk` derives `eleventyComputed.ogImage` from `image` at the layout level — see §9. Article `.md` files do not declare `eleventyComputed.ogImage` themselves.
 
 ### About page (`about/index.njk`) — `.njk`
 
@@ -235,22 +254,17 @@ The `cta` block is consumed by `partials/cta-band.njk` — see [`templates-and-l
 
 ## 8. Image fields
 
-Image fields use absolute paths from the site root:
+Image frontmatter values are absolute paths from the site root:
 
 ```yaml
 image: "/img/server_room.jpg"
 ```
 
-Source files live in `src/img/`. The path resolves to two things at build time:
-
-1. **The raw file at `/img/server_room.jpg`** (via the `src/img` passthrough copy). This is the URL referenced by `<meta property="og:image">`, JSON-LD `image` fields, and any other consumer that needs a stable unhashed URL.
-2. **A responsive `<picture>` block** automatically when the path appears inside an `<img src="...">` tag in a template. The `eleventy-img` plugin transforms it. See [`eleventy-config.md`](./eleventy-config.md) §5.
-
-Do not use relative paths (`../../img/foo.jpg`) — always absolute from site root. Do not paste image markup as `<picture>` by hand — write `<img src="..." alt="" width="..." height="...">` and let the plugin transform.
+Source files live in `src/img/`. For how the path resolves at build time (raw passthrough vs. responsive transform), see [`eleventy-config.md`](./eleventy-config.md) §5 — that document owns the image pipeline rules.
 
 ## 9. `eleventyComputed` for OG image derivation
 
-Leaf layouts derive `ogImage` from the page's own `image` field:
+Leaf layouts (`service.njk`, `sector.njk`, `article.njk`) declare:
 
 ```yaml
 ---
@@ -261,7 +275,9 @@ ogType: "article"
 ---
 ```
 
-This makes the hero image double as the social-share image without requiring the content author to declare `ogImage` twice. Override in frontmatter only if the social image needs to differ from the hero.
+so the page's `image` doubles as the social-share image without the content author declaring `ogImage` twice. The full precedence in `partials/seo-meta.njk`: explicit `ogImage` → `image` (via `eleventyComputed`) → `meta.ogImage` (the site-wide default, `/assets/img/og-default.jpg`). `.njk` pages that set neither (`home`, listings, about, quoter) fall through to the site default — which is correct behavior, not a missing field.
+
+Override `ogImage` in frontmatter only if the social image needs to differ from the hero.
 
 ## 10. Translatable strings versus frontmatter
 
@@ -290,6 +306,8 @@ Rules:
 - Templates rendering the field append `| safe` to pass the HTML through unescaped — see [`templates-and-layouts.md`](./templates-and-layouts.md) §4.
 
 YAML escapes double quotes as `\"`. JSON keys don't need this — Eleventy parses both YAML and JSON frontmatter.
+
+HTML-in-frontmatter only works for fields the template renders with `| safe`. In particular, the CTA band partial renders `cta.heading` with `| safe` (HTML highlights are permitted there) but renders `cta.primaryLabel` and `cta.secondaryLabel` without `| safe` — embedded HTML in the button labels will display as escaped text. If a label needs emphasis, either move the emphasis to the heading or update `partials/cta-band.njk` to apply `| safe` to the label.
 
 ---
 

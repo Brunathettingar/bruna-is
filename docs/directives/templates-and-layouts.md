@@ -16,11 +16,11 @@ base.njk          ← <html>, <head>, CSS chain, WebSite JSON-LD, body wrapper
        └─ article.njk   ← page-hero, article-meta, prose, Article JSON-LD
 ```
 
-Every public page uses `layouts/page.njk` (directly or through a leaf). `base.njk` is never used directly except as the parent of `page.njk`.
+Every **HTML content** page uses `layouts/page.njk` (directly or through a leaf). `base.njk` is never used directly except as the parent of `page.njk`. Non-HTML / non-content templates — `sitemap.njk`, `robots.njk`, `404.njk` — render directly without a layout (no chrome required, or chrome would interfere with the output format).
 
 | Layout | Required frontmatter | Optional frontmatter |
 |---|---|---|
-| `base.njk` | `lang` (via `requireLang`) | `title`, `description`, `bodyClass`, `ogImage`, `ogImageAlt`, `ogType` |
+| `base.njk` | `lang` (required — `requireLang` throws if absent) | `title`, `description`, `bodyClass`, `ogImage`, `ogImageAlt`, `ogType` |
 | `page.njk` | (inherits) | `eleventyNavigation.parent` (enables breadcrumb), `bodyClass` |
 | `service.njk` | `title`, `image`, `summary`, `number`, `category`, `insightStrong`, `insight`, `bullets[]` | `imageContain` |
 | `sector.njk` | `title`, `image`, `description` | `tagLabels[]` |
@@ -28,14 +28,13 @@ Every public page uses `layouts/page.njk` (directly or through a leaf). `base.nj
 
 Leaf layouts may set `eleventyComputed.ogImage: "{{ image }}"` to expose the page image as the OG image automatically.
 
+When neither `ogImage` nor `eleventyComputed.ogImage` is set on a page, `partials/seo-meta.njk` falls back to `meta.ogImage` (`/assets/img/og-default.jpg`). This is the path most `.njk` pages take — see [`content-and-frontmatter.md`](./content-and-frontmatter.md) §9 for the precedence.
+
 When adding a new leaf layout, extend `page.njk` (`layout: layouts/page.njk` in its frontmatter), never `base.njk` directly. Page chrome (skip link, utility bar, header, footer, breadcrumb) is owned by `page.njk`.
 
 ## 2. Partial conventions
 
-Partials live in `src/_includes/partials/` and are included with `{% include "partials/<name>.njk" %}`. Use a partial when:
-
-- The same markup appears on **two or more** pages or layouts, OR
-- A single block of markup is ≥ 5 lines of structural HTML and has a single semantic identity (e.g. the SEO meta block, the CTA band).
+Partials live in `src/_includes/partials/` and are included with `{% include "partials/<name>.njk" %}`. Use a partial when the same markup appears in **two or more** templates. Inline it otherwise — even if long. The exception: a markup block with a name that survives outside its callsite (`seo-meta`, `cta-band`, `svg-defs`) earns a partial even if used once, because the name itself is the contract.
 
 Do not partial out:
 
@@ -59,7 +58,10 @@ Current partials (do not rename without updating every include site):
 | `breadcrumb.njk` | Renders the `eleventyNavigationBreadcrumb` chain when the page has `eleventyNavigation.parent`. |
 | `seo-meta.njk` | Open Graph + Twitter card meta tags. Computed value chain — see §6. |
 | `cta-band.njk` | Optional CTA section rendered if frontmatter declares `cta:` block. |
-| `svg-defs.njk` | Inline `<svg>` with `<defs>` containing all icon symbols. See §8. |
+| `svg-defs.njk` | Off-screen `<svg>` sprite containing the brand wordmark. See §8 Pattern A. |
+| `icons/*.njk` | Per-icon `<svg>` partials (pillar and sector icons) included by data-driven name. See §8 Pattern B. |
+| `schema-about.njk` | `AboutPage` JSON-LD block. **Currently unused** — wire from `src/content/{is,en}/about/index.njk` if the about page should emit AboutPage structured data, or delete the file. |
+| `schema-organization.njk` | `Organization` JSON-LD block. **Currently unused** — wire from `base.njk` (so every page emits one Organization node) if global structured data is wanted, or delete the file. |
 
 ## 3. No logic in templates
 
@@ -152,32 +154,40 @@ Conventions:
 
 If a new structured-data type is needed (e.g. `Product`, `BreadcrumbList`, `Organization`), follow the same template shape: open with `@context` and `@type`, escape every dynamic string, include `inLanguage`, use `meta.url`-prefixed absolute paths for any URL field.
 
-## 8. The SVG sprite pattern
+## 8. Inline SVG — two patterns
 
-`partials/svg-defs.njk` is included once at the top of `<body>` in `base.njk`. It contains a single off-screen `<svg class="svg-defs">` element with `<defs>` holding every icon symbol referenced by the site:
+Inline SVG ships through two parallel mechanisms. Use the right one for the role.
 
-```njk
-<svg class="svg-defs"><defs>
-  <symbol id="logo-wordmark" viewBox="0 0 2500 375">...</symbol>
-  <symbol id="pillar-fireproofing" viewBox="...">...</symbol>
-  <!-- one symbol per inline icon -->
-</defs></svg>
-```
+### Pattern A — `<symbol>` sprite for the wordmark
 
-Templates reference the symbol via `<use href="#...">`:
+`partials/svg-defs.njk` is included once at the top of `<body>` in `base.njk`. It contains one off-screen `<svg>` with a `<defs>` block holding the brand wordmark as a `<symbol id="logo-wordmark">`. Consumers reference it via `<use href="#logo-wordmark"/>`:
 
 ```njk
 <svg class="logo" viewBox="0 0 2500 375" aria-hidden="true"><use href="#logo-wordmark"/></svg>
 ```
 
-Rules:
+This sprite mechanism is the right answer for a single shape reused on every page (header, footer, og:image fallback). The wordmark is currently the only inhabitant.
 
-- **One source of truth per icon.** Never paste the same icon path inline in multiple templates. Add the symbol to `svg-defs.njk` and reference it.
-- **`viewBox` lives on the `<symbol>`, `<svg>` is the consumer.** Consumers may set a different `viewBox` only when intentionally cropping; otherwise use the symbol's.
-- **`fill`/`stroke` are inherited.** Use semantic classes (`.bruna { fill: var(--accent); }`) on `<svg>` or `<g>` containers in CSS, not inline `fill="…"` on the symbol.
-- **`aria-label` on the consumer when the icon conveys meaning; `aria-hidden="true"` when decorative.**
+### Pattern B — per-icon partial for pillar and sector icons
 
-When adding a new icon, add the `<symbol>` to `svg-defs.njk` with a `pillar-`/`icon-` prefixed `id`, then reference it with `<use href="#...">`. Do not introduce a separate `<img>` for icons.
+Pillar and sector icons each live in their own file under `src/_includes/partials/icons/` (`pillar-fireproofing.njk`, `pillar-pipe.njk`, `pillar-ventilation.njk`, `pillar-fireguard.njk`, `sector-commercial.njk`, `sector-energy.njk`, `sector-hospital.njk`, `sector-industry.njk`). Consumers data-drive the include:
+
+```njk
+<div class="pillar__ico">{% include "partials/icons/" + s.data.icon + ".njk" %}</div>
+```
+
+The icon partial contains a complete `<svg>` with the path data baked in. The frontmatter field (`icon: pillar-fireproofing`) is the partial filename without `.njk`. See `src/content/is/index.njk` for both callsites (pillars loop and sectorsCallout loop).
+
+### Which to use
+
+- **One shape, every page:** add to `svg-defs.njk` as a new `<symbol>` and reference via `<use href="#…"/>`.
+- **One of N variants chosen by data:** add a partial under `partials/icons/` named for the data value and include it dynamically. Do not add new pillar/sector icons as `<symbol>`s — the home page's `{% include %}` lookup would 404 silently (`check-build.js` does not catch this).
+
+Shared rules:
+
+- **One source of truth per icon.** Never paste the same path inline in multiple templates.
+- **`fill`/`stroke` are inherited.** Use semantic classes (`.bruna { fill: var(--accent); }`) on `<svg>` or `<g>` containers in CSS, not inline `fill="…"` on the markup.
+- **`aria-hidden="true"` when decorative; `aria-label` on the consumer when the icon conveys meaning.**
 
 ## 9. No inline styles, no `<style>` blocks
 
@@ -214,11 +224,7 @@ A short list of patterns to copy when extending templates:
 {%- for link in page.url | locale_links %}…{%- endfor %}
 ```
 
-Avoid:
-
-- `{{ varName | default("...") }}` for fallback chains spanning multiple values. Use `{%- set var = (a or b or c) | escape %}` instead so the precedence is explicit and the escape applies to all branches.
-- `{% raw %}` blocks — there's no legitimate reason for this project to escape Nunjucks tags in templates. If you need to render literal `{{` in HTML, that's content (Markdown), not template logic.
-- Deep `{% block %}` / `{% extends %}` chains beyond the canonical three (base → page → leaf). Add a partial instead.
+Avoid `{{ var | default("...") }}` for multi-value fallbacks (use the `set`-and-paren pattern above so escape applies to every branch — §4).
 
 ---
 

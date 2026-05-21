@@ -50,7 +50,7 @@ No bundler. No CSS preprocessor. No JS framework. No client-side router. The out
 │       └── i18n.md
 ├── mockup/                     → pre-Eleventy design archive (HTML, CSS, images)
 └── src/
-    ├── _data/                  → global data (meta.js, i18n.js)
+    ├── _data/                  → global data (meta.js, i18n.js, partners.js)
     ├── _includes/
     │   ├── layouts/            → layout templates (base, page, service, sector, article)
     │   └── partials/           → reusable fragments (header, footer, seo-meta, ...)
@@ -109,7 +109,9 @@ Full layout rules: [`directives/templates-and-layouts.md`](./directives/template
 | `breadcrumb.njk` | Renders the `eleventyNavigationBreadcrumb` chain. Included by `page.njk` when the current page has `eleventyNavigation.parent`. |
 | `seo-meta.njk` | Open Graph + Twitter meta tags. Uses a paren-around-chain pattern to bind escaped values once. |
 | `cta-band.njk` | Optional CTA section. Renders if frontmatter declares a `cta:` block. |
-| `svg-defs.njk` | Off-screen `<svg><defs>` sprite with every icon. Referenced via `<use href="#name">`. |
+| `svg-defs.njk` | Off-screen `<svg>` sprite containing the brand wordmark. |
+| `icons/*.njk` | Per-icon `<svg>` partials (pillar and sector). Included by data-driven name — see [`templates-and-layouts.md`](./directives/templates-and-layouts.md) §8. |
+| `schema-about.njk`, `schema-organization.njk` | JSON-LD partials currently not included from any template. Wire them in or delete. |
 
 ## 6. Content model
 
@@ -129,14 +131,14 @@ Frontmatter schemas per page type: [`directives/content-and-frontmatter.md`](./d
 
 ## 7. Custom collections
 
-Defined in `eleventy.config.js`. Two families:
+Defined in `eleventy.config.js`. Two families: **nav** (one collection per locale) and **featured** (three collections per locale, one per content type).
 
 | Collection | Purpose |
 |---|---|
 | `navIs`, `navEn` | Primary-nav membership per locale. Filters `data.eleventyNavigation.order != null`; selects locale by URL prefix. |
 | `featuredServicesIs`, `featuredServicesEn` | Services with `featured: true`, sorted by `order` asc. |
 | `featuredSectorsIs`, `featuredSectorsEn` | Sectors with `featured: true`, sorted by `order` asc. |
-| `featuredArticleIs`, `featuredArticleEn` | The single most recent article with `featured: true`. |
+| `featuredArticleIs`, `featuredArticleEn` | Single most recent article with `featured: true` (sliced to 1). |
 
 Naming convention: `<thing><Locale>` with PascalCase suffix. Sort is always explicit (never relies on default order).
 
@@ -169,22 +171,16 @@ Full rules: [`directives/i18n.md`](./directives/i18n.md).
 
 ## 9. Image pipeline
 
-Two paths, both required:
+Two coexisting paths: `eleventyImageTransformPlugin` rewrites every `<img src="/img/…">` into a responsive `<picture>` (AVIF/WebP/JPEG at 400/800/1200/auto); `src/img/` is passthrough-copied to `_site/img/` so the raw originals stay at stable URLs for `og:image`, JSON-LD `image`, and JSON-LD `logo` consumers.
 
-**Responsive transform** — `eleventyImageTransformPlugin` converts every `<img src="/img/...">` into a `<picture>` with AVIF/WebP/JPEG variants at widths 400/800/1200/auto. Lazy-loading and async decoding are applied via `htmlOptions`. In `npm start` mode, transforms are lazy (`transformOnRequest: true`); in `npm run build`, they're precomputed.
-
-**Raw passthrough** — `src/img/` is passthrough-copied to `_site/img/` so the originals remain at stable, unhashed URLs. These feed `og:image` meta tags, JSON-LD `image` fields, and any other consumer that needs a non-responsive URL.
-
-The post-build asset-resolution check verifies every URL referenced by icons, OG images, and JSON-LD logos resolves under `_site/`.
-
-Source files: prefer JPEG for photographs, SVG for logos and icons. SVGs ship as-is via the passthrough.
+Full rules — formats, widths, `transformOnRequest`, and the asset-resolution check — in [`directives/eleventy-config.md`](./directives/eleventy-config.md) §5.
 
 ## 10. CSS architecture
 
 Plain CSS in 11 stylesheets, loaded in fixed order from `base.njk`:
 
 ```
-tokens → reset → layout → nav → blocks → home → services → sectors → articles → about → quoter
+tokens → reset → layout → nav → blocks → quoter → about → sectors → articles → services → home
 ```
 
 Design tokens (colors, type, spacing, radii, shadows, motion, breakpoints) live in `tokens.css`. Outside `tokens.css`: no raw hex codes, no `rgba()`, no `px` (except `1px solid` borders).
@@ -254,11 +250,11 @@ GitHub Actions workflow at `.github/workflows/deploy.yml`. Trigger: push to `mai
 1. Checkout
 2. Setup Node 22 with npm cache
 3. `npm ci`
-4. `npx @11ty/eleventy`
+4. `npm run build` — runs `npx @11ty/eleventy && node scripts/check-build.js`
 5. Upload `_site/` as a Pages artifact
 6. Deploy to GitHub Pages
 
-The workflow does **not** run `check-build.js` today — that's a local pre-push convention. If CI-side enforcement becomes important, swap step 4 for `npm run build`.
+`check-build.js` runs on every push, so every assertion in §12 gates deployment.
 
 The `pathPrefix: "/bruna-is/"` in `eleventy.config.js` makes path-style URLs resolve under the GH Pages project subpath. `meta.url` is the full deployed URL with prefix baked in, used for canonical/og:url/JSON-LD absolute fields.
 
@@ -271,7 +267,7 @@ The `pathPrefix: "/bruna-is/"` in `eleventy.config.js` makes path-style URLs res
 | New collection | Defined in `eleventy.config.js`, sort explicit, `<thing><Locale>` naming. | [`eleventy-config.md`](./directives/eleventy-config.md) §6 |
 | New page | Add IS + EN sibling in the same commit. `bodyClass` required. | [`content-and-frontmatter.md`](./directives/content-and-frontmatter.md) §9 |
 | New layout | Extend `page.njk` (never `base.njk` directly). Max chain depth = 3. | [`templates-and-layouts.md`](./directives/templates-and-layouts.md) §1 |
-| New partial | Used ≥ 2 places or ≥ 5 structural lines. Named for what it renders. | [`templates-and-layouts.md`](./directives/templates-and-layouts.md) §2 |
+| New partial | Used in ≥ 2 templates, or named after a contract that survives its callsite. | [`templates-and-layouts.md`](./directives/templates-and-layouts.md) §2 |
 | Translatable chrome | Dictionary key in `_data/i18n.js`. Page-specific copy in frontmatter. | [`i18n.md`](./directives/i18n.md) §8 |
 | Image asset | Drop in `src/img/`, reference as `/img/<name>.<ext>`. Write `<img>`, never `<picture>`. | [`eleventy-config.md`](./directives/eleventy-config.md) §5 |
 | CSS rule | One stylesheet per page family; tokens for all values; BEM naming; ≤ 2 levels after scope. | [`css-architecture.md`](./directives/css-architecture.md) |
@@ -279,48 +275,12 @@ The `pathPrefix: "/bruna-is/"` in `eleventy.config.js` makes path-style URLs res
 
 ## 15. Upstream documentation
 
-When something is ambiguous and the directives don't cover it, check upstream:
+The directives cover the policy. For framework-internal questions the directives don't address, two upstream resources are load-bearing because this project depends on the documented behavior:
 
-### Eleventy v3
+- `eleventy-plugin-i18n` (Adam Duncan): https://github.com/adamduncan/eleventy-plugin-i18n — read this if you touch the `i18nOverride` (the override exists because upstream's lookup is broken for dotted keys).
+- `eleventy-img` HTML transform: https://www.11ty.dev/docs/plugins/image/#eleventy-transform — read this if you touch the dual image pipeline.
 
-- Docs home: https://www.11ty.dev/docs/
-- Config: https://www.11ty.dev/docs/config/
-- Data cascade: https://www.11ty.dev/docs/data-cascade/
-- Directory data files: https://www.11ty.dev/docs/data-template-dir/
-- Frontmatter: https://www.11ty.dev/docs/data-frontmatter/
-- Computed data: https://www.11ty.dev/docs/data-computed/
-- Permalinks: https://www.11ty.dev/docs/permalinks/
-- Layouts: https://www.11ty.dev/docs/layouts/
-- Layout chaining: https://www.11ty.dev/docs/layout-chaining/
-- Filters: https://www.11ty.dev/docs/filters/
-- Collections: https://www.11ty.dev/docs/collections/
-- Collections API: https://www.11ty.dev/docs/collections-api/
-- Plugins: https://www.11ty.dev/docs/plugins/
-
-### Eleventy plugins
-
-- `eleventy-img` (HTML transform): https://www.11ty.dev/docs/plugins/image/#eleventy-transform
-- `eleventy-navigation`: https://www.11ty.dev/docs/plugins/navigation/
-- Built-in `I18nPlugin`: https://www.11ty.dev/docs/plugins/i18n/
-- `HtmlBasePlugin`: https://www.11ty.dev/docs/plugins/html-base/
-- `eleventy-plugin-i18n` (Adam Duncan): https://github.com/adamduncan/eleventy-plugin-i18n
-
-### Nunjucks
-
-- Docs home: https://mozilla.github.io/nunjucks/
-- Templating: https://mozilla.github.io/nunjucks/templating.html
-- Whitespace control: https://mozilla.github.io/nunjucks/templating.html#whitespace-control
-
-### Standards
-
-- BEM: https://getbem.com/introduction/
-- MDN CSS logical properties: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values
-- MDN responsive images guide: https://developer.mozilla.org/en-US/docs/Web/HTML/Responsive_images
-- Schema.org: https://schema.org/
-- ARIA Authoring Practices: https://www.w3.org/WAI/ARIA/apg/
-- WCAG 2.2 quick reference: https://www.w3.org/WAI/WCAG22/quickref/
-- Open Graph protocol: https://ogp.me/
-- GitHub Pages: https://docs.github.com/en/pages
+For everything else, Eleventy docs are one click from https://www.11ty.dev/docs/.
 
 ---
 

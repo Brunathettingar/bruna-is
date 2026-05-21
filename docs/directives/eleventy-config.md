@@ -2,7 +2,7 @@
 
 This document defines the rules for the Eleventy build configuration, plugins, filters, collections, and image pipeline. Treat it as the single source of truth. Deviations require a documented rationale where the deviation lives.
 
-The framework is Eleventy v3 (ESM, `"type": "module"`) on Node 22. No bundler, no transpilation, no JS framework. Plain Nunjucks templates, plain CSS, vanilla ES modules. Three runtime npm dependencies plus `eleventy-plugin-i18n`.
+The framework is Eleventy v3 (ESM, `"type": "module"`) on Node 22. No bundler, no transpilation, no JS framework. Plain Nunjucks templates, plain CSS, vanilla ES modules. Four runtime npm dependencies (see `package.json`).
 
 ---
 
@@ -34,10 +34,7 @@ eleventyConfig.addPlugin(i18nPlugin, { ... });
 eleventyConfig.addPlugin(function i18nOverride(ec) { ... });
 ```
 
-Order matters for two reasons:
-
-1. **i18n override after the upstream plugin.** The custom override calls `ec.addFilter("i18n", ...)` after `eleventy-plugin-i18n` has already registered its own filter. A top-level `addFilter` would be overwritten by the upstream plugin's later execution. Wrapping the override in an inline plugin guarantees correct sequencing.
-2. **HtmlBasePlugin before content rendering.** `HtmlBasePlugin` rewrites path-style attributes (`href="/foo/"`, `src="/foo/"`) at build time to prepend the `pathPrefix`. It must be registered as a plugin so it runs during the transform phase.
+Order matters in two places: `i18nOverride` must run after `eleventy-plugin-i18n` so its `addFilter("i18n", …)` shadows the upstream filter (the inline-plugin wrapper guarantees the sequencing — see the comment block above `i18nOverride` in `eleventy.config.js` for the full rationale). `HtmlBasePlugin` is registered before content rendering so its path-prefix rewriter runs in the transform phase.
 
 What each plugin owns:
 
@@ -80,11 +77,7 @@ eleventyConfig.addPlugin(HtmlBasePlugin);
 
 `HtmlBasePlugin` only rewrites **path-style** URLs (`/foo/`, `src="/img/foo.jpg"`). It does **not** rewrite absolute URLs already containing `meta.url`. That's why JSON-LD blocks emit `{{ meta.url }}{{ image }}` — they need the prefix baked in.
 
-**Do not strip `pathPrefix` in pursuit of a custom domain.** If the project moves to an apex domain (e.g. `brunathettingar.is`):
-
-1. Set `meta.pathPrefix: "/"` and `meta.url: "https://brunathettingar.is"` (no trailing slash).
-2. Optionally remove `HtmlBasePlugin` (it's a no-op when `pathPrefix === "/"`).
-3. Update `scripts/check-build.js` `PREFIX` constant.
+**Do not strip `pathPrefix` casually.** The deploy URL, `HtmlBasePlugin`'s path rewriting, and `scripts/check-build.js`'s `PREFIX` constant all derive from this single value; changing it touches three files at once.
 
 ## 4. Filters
 
@@ -101,7 +94,7 @@ Custom filters live inside the main `eleventyConfig` function. Each filter is sm
 Filter conventions:
 
 - **Pure functions.** No side effects, no async, no file I/O.
-- **Defensive on input.** Filters that take dates check `if (!date) return ""` and `if (isNaN(d)) return ""`. Don't throw on missing data unless the missing data is a contract violation (which `requireLang` is).
+- **Defensive on data, loud on contract violations.** Filters that read content fields (dates, strings) return `""` on missing input — content can legitimately be incomplete. `requireLang` throws because missing `lang` is a build-config bug, not a content gap.
 - **Small.** A filter is ≤ ~15 lines. If it's growing, the logic belongs in a `_data/*.js` module, not a template-time filter.
 - **Named for the verb.** `jsonEscape`, `dateDisplay`, `requireLang` — present-tense verb-object. Avoid `getX`/`makeX` prefixes; templates read as `{{ value | filter }}`.
 
@@ -193,7 +186,8 @@ for (const lang of ["is", "en"]) {
       .filter((item) => item.data.featured === true)
       .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
   );
-  // featuredSectors${suffix}, featuredArticle${suffix} ...
+  eleventyConfig.addCollection(`featuredSectors${suffix}`, /* same shape, tag `sectors-${lang}` */);
+  eleventyConfig.addCollection(`featuredArticle${suffix}`, /* same shape, tag `articles-${lang}`, sort by date desc, slice(0, 1) */);
 }
 ```
 
@@ -222,7 +216,7 @@ eleventyConfig.addPassthroughCopy("src/img");
 ```
 
 - **`src/assets`** → `_site/assets/` (CSS, JS, fonts, favicon, OG defaults).
-- **`.nojekyll`** at the repo root → `_site/.nojekyll`. Tells GitHub Pages not to run Jekyll on the output. Without this, files/directories starting with `_` (which Jekyll treats as private) wouldn't ship.
+- **`.nojekyll`** at the repo root → `_site/.nojekyll`. Disables Jekyll on GitHub Pages so underscore-prefixed paths ship.
 - **`src/img`** → `_site/img/`. The raw-passthrough leg of the dual image strategy (§5).
 
 The dev server watches transformed assets so live-reload fires on CSS/JS edits:
@@ -235,12 +229,13 @@ eleventyConfig.setServerOptions({
 
 ## 8. Global data
 
-Two `_data/` modules:
+Three `_data/` modules:
 
 | File | Type | Role |
 |---|---|---|
-| `_data/meta.js` | ESM default export | Site metadata. Has `byLocale[is\|en]` for translatable fields and a top-level `shared` for URLs, deploy coordinates, contact info. |
+| `_data/meta.js` | ESM default export | Site metadata. `byLocale[is\|en]` for translatable fields; top-level shared values for URLs, deploy coordinates, contact info. |
 | `_data/i18n.js` | ESM default export | UI string dictionary — see [`i18n.md`](./i18n.md) §7. |
+| `_data/partners.js` | ESM default export | Brand-name list for the home customer band. Not translatable — items have `{name, style}` where `style` flips the logo font (`"sans"` vs default serif). |
 
 Plus an inline-registered global:
 
@@ -290,27 +285,19 @@ When you add a new build invariant (a new always-true post-build property), add 
 
 ```yaml
 - run: npm ci
-- run: npx @11ty/eleventy
+- run: npm run build
 - uses: actions/upload-pages-artifact@v4
   with: { path: _site }
 ```
 
-Notes:
+`npm run build` chains `npx @11ty/eleventy && node scripts/check-build.js`, so every assertion in §9 runs in CI and a failing check blocks deployment.
 
-- The deploy workflow does **not** run `check-build.js` today. Production safety relies on running `npm run build` locally before pushing. (If CI-side enforcement becomes important, swap `npx @11ty/eleventy` for `npm run build`.)
 - `.nojekyll` ships via passthrough (§7).
 - Node version: 22. Bumping requires testing locally first.
 
 ## 11. ESM and config style
 
-The config file is ESM (`"type": "module"` in `package.json`). Constraints:
-
-- Use `import` / `export`, never `require`.
-- Top-level `import { ... } from "@11ty/eleventy"` works for the built-in `I18nPlugin` and `HtmlBasePlugin`. The image transform plugin imports from `"@11ty/eleventy-img"`.
-- Side-effecting top-level code (e.g. zeroing the translation-miss log file) runs at module-load time — acceptable for setup that happens once per build.
-- The config function takes `eleventyConfig` and returns nothing. The top-level `export const config = { ... }` declares directory paths and `pathPrefix`.
-
-Do not introduce a tooling layer (tsc, esbuild) on the config. The file is plain JavaScript, executed by Node 22.
+The config file is plain ESM JavaScript (`"type": "module"`), executed directly by Node 22. Use `import`/`export`. No tooling layer (no tsc, no esbuild).
 
 ---
 
