@@ -243,3 +243,27 @@ html { scroll-behavior: smooth; }
   color: var(--alpha-on-dark-hi);
   max-width: 60ch;
 }
+
+/* ===========================================================
+   Swup page-swap transition
+   Swup adds `html.is-animating` for the duration of the swap;
+   the .transition-fade class on <main id="main-content"> in
+   page.njk is the animation selector. The 200ms duration is
+   the literal Swup reads off the element to know when the
+   swap is complete — keeping it inline (rather than via
+   --transition-base) makes the contract obvious.
+   =========================================================== */
+.transition-fade {
+  transition: opacity 200ms ease;
+}
+html.is-animating .transition-fade {
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .transition-fade {
+    transition: none;
+  }
+  html.is-animating .transition-fade {
+    opacity: 1;
+  }
+}
