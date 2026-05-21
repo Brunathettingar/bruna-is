@@ -5,7 +5,7 @@ layout: layouts/base.njk
 <div class="page-wrapper">
   {% include "partials/utility-bar.njk" %}
   {% include "partials/header.njk" %}
-  <main id="main-content">
+  <main id="main-content" class="transition-fade">
     {%- if eleventyNavigation and eleventyNavigation.parent %}
     {% include "partials/breadcrumb.njk" %}
     {%- endif %}
