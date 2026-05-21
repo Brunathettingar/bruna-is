@@ -130,6 +130,17 @@ export default function (eleventyConfig) {
   // guards this contract.
   eleventyConfig.addPassthroughCopy("src/img");
 
+  // Swup is loaded as a UMD global rather than via ESM/import because this
+  // project has no bundler — the ESM build pulls `delegate-it` and
+  // `path-to-regexp` from npm, which won't resolve in the browser. The UMD
+  // bundles inline their dependencies and expose `window.Swup` /
+  // `window.SwupHeadPlugin`. `base.njk` loads them as classic scripts before
+  // the module entry so the globals exist by the time `main.js` runs.
+  eleventyConfig.addPassthroughCopy({
+    "node_modules/swup/dist/Swup.umd.js": "assets/js/vendor/swup.js",
+    "node_modules/@swup/head-plugin/dist/index.umd.js": "assets/js/vendor/swup-head-plugin.js",
+  });
+
   eleventyConfig.setServerOptions({
     watch: ["_site/assets/**/*.css", "_site/assets/**/*.js"],
   });
