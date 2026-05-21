@@ -243,7 +243,7 @@ function buildMailBody(form, lang) {
   return lines.join("\n");
 }
 
-export function initQuoteCalculator() {
+export function initQuoteCalculator({ signal } = {}) {
   const form = document.querySelector("form.quoter");
   if (!form) return;
 
@@ -257,13 +257,13 @@ export function initQuoteCalculator() {
     const row = buildRow(counter, lang);
     rowsEl.appendChild(row);
     row.querySelectorAll("select, input").forEach((el) => {
-      el.addEventListener("input", () => recalc(form, lang));
-      el.addEventListener("change", () => recalc(form, lang));
+      el.addEventListener("input", () => recalc(form, lang), { signal });
+      el.addEventListener("change", () => recalc(form, lang), { signal });
     });
     if (!skipRecalc) recalc(form, lang);
   };
 
-  if (addBtn) addBtn.addEventListener("click", addRow);
+  if (addBtn) addBtn.addEventListener("click", addRow, { signal });
 
   rowsEl.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-quoter-remove]");
@@ -271,7 +271,7 @@ export function initQuoteCalculator() {
     const row = btn.closest(".quoter-row");
     if (row) row.remove();
     recalc(form, lang);
-  });
+  }, { signal });
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -310,7 +310,7 @@ export function initQuoteCalculator() {
       banner.dataset.visible = "true";
       banner.scrollIntoView({ behavior: "smooth", block: "center" });
     }
-  });
+  }, { signal });
 
   // Seed two rows so the form isn't empty on load — batch the recalc.
   addRow({ skipRecalc: true });
