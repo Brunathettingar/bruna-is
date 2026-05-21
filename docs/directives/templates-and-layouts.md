@@ -244,7 +244,7 @@ Avoid `{{ var | default("...") }}` for multi-value fallbacks (use the `set`-and-
 Conventions enforced by review (no automated check):
 
 - §1 layout chain depth (max 3 — base → page → leaf).
-- §2 partials named by what they render, used in ≥ 2 places or ≥ 5 structural lines.
+- §2 partials named by what they render, used in ≥ 2 places (or single-use only when the partial's name is the contract, e.g. `seo-meta`, `cta-band`, `svg-defs`).
 - §3 no computation in templates.
 - §4 `| safe` discipline.
 - §6 paren-around-chain shape in seo-meta.

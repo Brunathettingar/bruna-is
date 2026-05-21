@@ -34,7 +34,7 @@ No bundler. No CSS preprocessor. No JS framework. No client-side router. The out
 ```
 .
 ├── eleventy.config.js          → build configuration: plugins, filters, collections
-├── package.json                → 3 runtime deps + scripts (start, build, debug)
+├── package.json                → 4 runtime deps + scripts (start, build, debug)
 ├── .github/workflows/
 │   └── deploy.yml              → push to main → build → upload to GitHub Pages
 ├── scripts/

@@ -313,7 +313,7 @@ Conventions enforced by review (no automated check):
 
 - §2 plugin order — `i18nOverride` last in the i18n chain.
 - §3 `pathPrefix` source-of-truth in `meta.js`.
-- §4 filter conventions — small, pure, defensive on input.
+- §4 filter conventions — small, pure, defensive on data, loud on contract violations.
 - §6 collection naming — `<thing><Locale>`, sort is explicit.
 - §8 ESM data files, `byLocale` for per-locale fields.
 
