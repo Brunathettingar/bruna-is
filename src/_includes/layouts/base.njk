@@ -60,6 +60,12 @@
   <body class="{{ bodyClass | default('') }}">
     {%- include "partials/svg-defs.njk" %}
     {{ content | safe }}
+    {#- Swup UMD bundles must load *before* the module script. UMD <script>
+        tags execute on parse; type="module" defers to after DOM parse — so
+        `window.Swup` and `window.SwupHeadPlugin` are guaranteed available by
+        the time main.js runs. See docs/directives/templates-and-layouts.md. #}
+    <script src="/assets/js/vendor/swup.js"></script>
+    <script src="/assets/js/vendor/swup-head-plugin.js"></script>
     <script type="module" src="/assets/js/main.js"></script>
   </body>
 </html>
