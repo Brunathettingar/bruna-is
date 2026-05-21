@@ -99,6 +99,14 @@ if (existsSync(miss)) {
   if (lines.length) console.warn(`[check-build] WARN: ${lines.length} translation fallbacks (see ${miss})`);
 }
 
+// 10. Swup vendor bundles must exist (consumed by base.njk as <script src=...>).
+for (const f of [
+  "assets/js/vendor/swup.js",
+  "assets/js/vendor/swup-head-plugin.js",
+]) {
+  if (!existsSync(join(SITE, f))) fail(`missing Swup vendor file: ${f}`);
+}
+
 // Run CSS architecture assertions. Imports the module so process.exitCode
 // from check-css.js carries forward to the build exit.
 await import("./check-css.js");
