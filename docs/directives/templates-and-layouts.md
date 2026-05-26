@@ -256,3 +256,4 @@ See also:
 - [`i18n.md`](./i18n.md) — the `i18n` filter callsite contract.
 - [`css-architecture.md`](./css-architecture.md) — CSS contract.
 - [`eleventy-config.md`](./eleventy-config.md) — build pipeline, filters, image transform.
+- [`javascript-architecture.md`](./javascript-architecture.md) — the Swup container (`#main-content`) lives in `page.njk`, and the `<script>` tag order in `base.njk` (UMD vendors before the module entry) is owned by that directive.

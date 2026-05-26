@@ -47,6 +47,7 @@ No bundler. No CSS preprocessor. No JS framework. No client-side router. The out
 │       ├── eleventy-config.md
 │       ├── content-and-frontmatter.md
 │       ├── templates-and-layouts.md
+│       ├── javascript-architecture.md
 │       └── i18n.md
 ├── mockup/                     → pre-Eleventy design archive (HTML, CSS, images)
 └── src/
@@ -193,25 +194,24 @@ Full rules: [`directives/css-architecture.md`](./directives/css-architecture.md)
 
 ## 11. JavaScript
 
-Single entry point `src/assets/js/main.js` imports per-feature modules. Each feature module follows the "query, bail, attach" pattern:
+Single entry point `src/assets/js/main.js` imports per-feature modules. Browsers load `main.js` via `<script type="module">` and resolve imports natively — no bundler.
 
-```js
-export function initFeatureName() {
-  const root = document.querySelector('.feature-root');
-  if (!root) return;
-  // attach listeners, manage state via class toggles + ARIA attributes
-}
-```
+Internal navigation goes through **Swup**, which swaps the contents of `#main-content` and lets `@swup/head-plugin` diff `<head>`. `main.js` re-runs every feature's init after each swap. Cleanup of the previous swap's listeners is centralized: `main.js` owns one `AbortController`, aborts it before each re-init, and threads a fresh `signal` into every init function. Each feature module accepts `{ signal }` and passes it to every `addEventListener`, so listeners on persistent targets (`document`, `window`, the header) die atomically on every navigation.
 
-Current feature modules:
+Two attributes outside the swap container vary per page and are copied from the incoming document in a Swup `content:replace` hook: `<html lang>` (screen-reader locale) and `<body class>` (page-family CSS scope class — see §10).
 
-| Module | Controls |
+Feature modules:
+
+| Module | Feature root selector |
 |---|---|
-| `mobileNav.js` | Header mobile-nav disclosure toggle. |
-| `quoteCalculator.js` | The quote-calculator interactive form on `/verdreiknir/`. |
-| `quote-config.js` | Pricing config consumed by the quote calculator. |
+| `mobileNav.js` | `.site-header__toggle` + `#primary-nav` (persistent header) |
+| `quoteCalculator.js` | `form.quoter` on `/verdreiknir/` |
 
-No bundler. Browsers load `main.js` via `<script type="module">` and resolve imports natively.
+`quote-config.js` is pricing data consumed by `quoteCalculator.js`, not a feature module.
+
+Swup and `@swup/head-plugin` ship as UMD globals (no bundler to resolve their ESM dependency trees). The two bundles are passthrough-copied from `node_modules/` to `_site/assets/js/vendor/` and loaded as classic `<script>` tags **before** the module entry in `base.njk`. `check-build.js` step 10 asserts both files exist in the output.
+
+Full rules: [`directives/javascript-architecture.md`](./directives/javascript-architecture.md).
 
 ## 12. Build pipeline
 
@@ -272,6 +272,8 @@ The `pathPrefix: "/bruna-is/"` in `eleventy.config.js` makes path-style URLs res
 | Image asset | Drop in `src/img/`, reference as `/img/<name>.<ext>`. Write `<img>`, never `<picture>`. | [`eleventy-config.md`](./directives/eleventy-config.md) §5 |
 | CSS rule | One stylesheet per page family; tokens for all values; BEM naming; ≤ 2 levels after scope. | [`css-architecture.md`](./directives/css-architecture.md) |
 | Inline styles | Never. Enforced by `check-css.js`. | [`css-architecture.md`](./directives/css-architecture.md) §4 |
+| New JS feature module | Export `initX({ signal })`; query-bails-attaches; thread `{ signal }` into every `addEventListener`; wire into `bootstrap()` in `main.js`. | [`javascript-architecture.md`](./directives/javascript-architecture.md) §2–§3, §8 |
+| Internal navigation | Swup swap of `#main-content` + head-plugin. No full reloads, no client-side router. | [`javascript-architecture.md`](./directives/javascript-architecture.md) §4–§5 |
 
 ## 15. Upstream documentation
 
@@ -291,5 +293,6 @@ For everything else, Eleventy docs are one click from https://www.11ty.dev/docs/
 - Editing a layout or partial? Read [`directives/templates-and-layouts.md`](./directives/templates-and-layouts.md).
 - Touching `eleventy.config.js`? Read [`directives/eleventy-config.md`](./directives/eleventy-config.md).
 - Adding a translation or changing locale behavior? Read [`directives/i18n.md`](./directives/i18n.md).
+- Touching `src/assets/js/` or anything that affects navigation? Read [`directives/javascript-architecture.md`](./directives/javascript-architecture.md).
 
-These five documents plus this overview are the durable docs for the project. Anything else under `docs/` is process artifact and should be deleted when stale.
+These six documents plus this overview are the durable docs for the project. Anything else under `docs/` is process artifact and should be deleted when stale.

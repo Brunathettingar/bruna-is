@@ -7,12 +7,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 The project has durable, hand-written documentation. Read it before making non-trivial changes — don't reinvent these decisions.
 
 - `docs/ARCHITECTURE.md` — descriptive map of the site (stack, source tree, layout chain, build pipeline). Read this first for orientation.
-- `docs/directives/` — prescriptive rules. Five files, each the single source of truth for its concern:
+- `docs/directives/` — prescriptive rules. Six files, each the single source of truth for its concern:
   - `css-architecture.md` — file layout, BEM, token discipline, ≤2 nesting depth
   - `content-and-frontmatter.md` — content tree, directory data, frontmatter schemas
   - `templates-and-layouts.md` — layout inheritance, partial conventions
   - `eleventy-config.md` — plugins, filters, collections, image pipeline, build checks
   - `i18n.md` — locale strategy, plugin stack, the `i18n` filter override
+  - `javascript-architecture.md` — module shape, Swup lifecycle, `{ signal }` threading, UMD vendor passthrough
 
 The directives are the rules. CLAUDE.md just points at them.
 
@@ -38,7 +39,7 @@ Two parallel content trees under `src/content/{is,en}/`. They are structurally i
 
 ## Things that bite
 
-- **Internal navigation uses Swup, not full reloads.** `main.js` boots Swup with `#main-content` as the swap container and `@swup/head-plugin` for head diffs. Every JS init function (`initMobileNav`, `initQuoteCalculator`) accepts `{ signal }` and threads it into every `addEventListener` — `main.js` owns one `AbortController` and aborts it before each re-init, killing the previous navigation's document/window listeners. If you add a new JS module that touches `document`/`window`, take `{ signal }` and pass it to every listener. Also: `SwupHeadPlugin` only touches `<head>`, so a `content:replace` hook in `main.js` copies `<html lang>` and `<body class>` from the incoming document — both vary per page on this site (lang for screen readers, body class for page-family CSS scoping). Don't remove that hook. The UMD bundles are passthrough-copied from `node_modules/` to `_site/assets/js/vendor/` (no bundler) and `check-build.js` asserts they exist.
+- **Internal navigation uses Swup, not full reloads.** `main.js` swaps `#main-content` and re-runs every feature's init after each navigation. Every init takes `{ signal }` and threads it into every `addEventListener` — `main.js` owns one `AbortController` that's aborted before each re-init, killing the previous page's `document`/`window` listeners atomically. A `content:replace` hook copies `<html lang>` and `<body class>` from the incoming document (both vary per page; the head plugin only touches `<head>`). Swup ships as UMD via passthrough copy, loaded as classic `<script>` tags before the module entry; `check-build.js` asserts both vendor files exist. **If you add a new JS module that touches `document`/`window`, take `{ signal }` and pass it to every listener.** Full rules: `docs/directives/javascript-architecture.md`.
 - **The `i18n` filter is custom-overridden.** Upstream `eleventy-plugin-i18n` does `lodash.get(translations, '[key][locale]')`, which mis-parses our dotted keys (`ui.skip_to_content`), and its auto-detect reads `url.split('/')[1]` — returning `'about'` for an IS-at-root page like `/about/`. The fix is the inline `i18nOverride` plugin in `eleventy.config.js`. **Every callsite must pass `lang` explicitly**: `{{ "key" | i18n(lang) }}` or `{{ "key" | i18n({ name }, lang) }}`. If you add an i18n callsite without the `lang` argument, it will silently mis-resolve. See `docs/directives/i18n.md` §3.
 - **Locale parity is enforced.** Every IS page must have an EN sibling with the same filename and stem. `check-build.js` warns on missing parallels. Add IS + EN in the same commit.
 - **Dual image pipeline.** `eleventyImageTransformPlugin` rewrites every `<img src="/img/…">` into a responsive `<picture>` (AVIF/WebP/JPEG at 400/800/1200/auto). Templates write `<img>` — never `<picture>` by hand. `src/img/` is *also* passthrough-copied so `og:image`, `twitter:image`, and JSON-LD `image`/`logo` keep stable unhashed URLs. Both paths must remain; `check-build.js` asserts asset resolution and that `<picture>` actually appears.
@@ -55,6 +56,7 @@ Two parallel content trees under `src/content/{is,en}/`. They are structurally i
 - New CSS rule → pick the right file by the split rule in `directives/css-architecture.md` §2 (one page family → that page family's file; two+ → `blocks.css`; chrome → `layout.css`).
 - New filter or collection → register in `eleventy.config.js`. Collections follow `<thing><Locale>` naming with explicit sort.
 - New image → drop in `src/img/`, reference as `/img/<name>.<ext>` in markup, write `<img>` (never `<picture>`).
+- New JS feature → export `initX({ signal })` from `src/assets/js/<feature>.js`, query-bails-attaches, thread `{ signal }` into every `addEventListener`, wire into `bootstrap()` in `main.js`. See `directives/javascript-architecture.md` §8.
 
 ## Conventions captured in user/global instructions
 

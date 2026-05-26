@@ -335,3 +335,4 @@ See also:
 - [`content-and-frontmatter.md`](./content-and-frontmatter.md) — what feeds collections (`tags`, `featured`, `order`).
 - [`templates-and-layouts.md`](./templates-and-layouts.md) — how filters and collections are consumed in templates.
 - [`css-architecture.md`](./css-architecture.md) — the CSS contract enforced by `check-css.js`.
+- [`javascript-architecture.md`](./javascript-architecture.md) — the Swup UMD passthrough wiring (`assets/js/vendor/swup.js`, `assets/js/vendor/swup-head-plugin.js`) is documented there; touching the passthrough map (§7) means updating that directive's vendor section and `check-build.js` step 10 in lockstep.
