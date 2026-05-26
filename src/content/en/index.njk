@@ -8,9 +8,12 @@ eleventyNavigation:
   order: 1
 heroHeading: "Fire sealing &amp;<br>technical insulation."
 statement:
-  label: "What we do"
   heading: "Our specialty is <span class=\"statement__highlight\">technical insulation and fire protection</span> on buildings — fire sealing, fireproofing, pipe insulation and ventilation insulation."
   lead: "Brunaþéttingar is a specialist contractor in technical insulation and fire sealing, serving contractors, owners and facility operators across Iceland. <strong>We do not offer fire engineering design</strong> — that's a separate discipline. We specifically recommend <strong>Tensio Architects</strong>."
+  cta:
+    text: "Put us to work."
+    caption: "Get an estimate in minutes."
+    href: "/verdreiknir/"
 explainer:
   left:
     heading: "What is technical insulation?"
@@ -87,11 +90,14 @@ cta:
 <section class="statement">
   <div class="container">
     <div class="statement__row">
-      <div><span class="statement__label">{{ statement.label }}</span></div>
       <div>
         <h2>{{ statement.heading | safe }}</h2>
         <p class="statement__lead">{{ statement.lead | safe }}</p>
       </div>
+      <a class="statement__cta" href="{{ statement.cta.href | locale_url }}">
+        <span class="statement__cta-text">{{ statement.cta.text }}<span class="statement__cta-arrow" aria-hidden="true">→</span></span>
+        <span class="statement__cta-caption">{{ statement.cta.caption }}</span>
+      </a>
     </div>
   </div>
 </section>

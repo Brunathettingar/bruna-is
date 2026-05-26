@@ -8,9 +8,12 @@ eleventyNavigation:
   order: 1
 heroHeading: "Brunaþéttingar &amp;<br>tæknieinangrun."
 statement:
-  label: "Hvað við gerum"
   heading: "Sérgrein okkar er <span class=\"statement__highlight\">tæknieinangrun og brunavarnir</span> mannvirkja — brunaþéttingar, brunavarnir, pípueinangrun og loftræsieinangrun."
   lead: "Brunaþéttingar er sérhæft fyrirtæki í tæknieinangrun og brunaþéttingum sem þjónar verktökum, eigendum og rekstraraðilum mannvirkja um land allt. <strong>Við bjóðum ekki upp á brunatæknihönnun</strong> — það er sérgrein brunaverkfræðinga. Við mælum sérstaklega með <strong>Tensio Architects</strong>."
+  cta:
+    text: "Fáðu okkur í verkið."
+    caption: "Áætlað verðmat á nokkrum mínútum."
+    href: "/verdreiknir/"
 explainer:
   left:
     heading: "Hvað er tæknieinangrun?"
@@ -87,11 +90,14 @@ cta:
 <section class="statement">
   <div class="container">
     <div class="statement__row">
-      <div><span class="statement__label">{{ statement.label }}</span></div>
       <div>
         <h2>{{ statement.heading | safe }}</h2>
         <p class="statement__lead">{{ statement.lead | safe }}</p>
       </div>
+      <a class="statement__cta" href="{{ statement.cta.href | locale_url }}">
+        <span class="statement__cta-text">{{ statement.cta.text }}<span class="statement__cta-arrow" aria-hidden="true">→</span></span>
+        <span class="statement__cta-caption">{{ statement.cta.caption }}</span>
+      </a>
     </div>
   </div>
 </section>

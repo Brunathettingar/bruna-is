@@ -97,21 +97,9 @@
 }
 @media (min-width: 64em) {
   .home-page .statement__row {
-    grid-template-columns: 1fr 1.6fr;
-    gap: var(--space-18);
-  }
-}
-.home-page .statement__label {
-  font-size: var(--text-3xl);
-  letter-spacing: var(--ls-tight-1);
-  color: var(--accent);
-  font-weight: var(--fw-semibold);
-  line-height: var(--lh-tight);
-}
-@media (min-width: 64em) {
-  .home-page .statement__label {
-    font-size: var(--text-4xl);
-    letter-spacing: var(--ls-tight-2);
+    grid-template-columns: 1.6fr 1fr;
+    gap: var(--space-14);
+    align-items: center;
   }
 }
 .home-page .statement h2 {
@@ -136,6 +124,56 @@
   font-size: 1.0625rem; color: var(--text-soft);
   line-height: 1.7;
   max-width: 60ch;
+}
+
+/* Right-column action card — confident, dark stamp on the white section.
+   Hover/focus lifts the whole card; the arrow translates; reduced-motion
+   collapses via the --transition-base token override in tokens.css. */
+.home-page .statement__cta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-8);
+  background: var(--bg-dark);
+  color: var(--alpha-on-dark-near);
+  text-decoration: none;
+  transition: transform var(--transition-base);
+}
+.home-page .statement__cta:hover {
+  transform: translateY(-0.125rem);
+}
+.home-page .statement__cta:focus-visible {
+  outline: 0.1875rem solid var(--accent);
+  outline-offset: 0.25rem;
+}
+.home-page .statement__cta-text {
+  font-size: var(--text-4xl);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight-1);
+  color: var(--alpha-on-dark-near);
+}
+@media (min-width: 64em) {
+  .home-page .statement__cta-text {
+    font-size: var(--text-5xl);
+    letter-spacing: var(--ls-tight-2);
+  }
+}
+.home-page .statement__cta-arrow {
+  display: inline-block;
+  margin-inline-start: var(--space-3);
+  color: var(--accent);
+  transition: transform var(--transition-base);
+}
+.home-page .statement__cta:hover .statement__cta-arrow {
+  transform: translateX(0.25rem);
+}
+.home-page .statement__cta-caption {
+  padding-block-start: var(--space-5);
+  border-block-start: 1px solid var(--alpha-on-dark-line-faint);
+  font-size: var(--text-base);
+  line-height: var(--lh-relaxed);
+  color: var(--alpha-on-dark-med);
 }
 
 /* ===========================================================
