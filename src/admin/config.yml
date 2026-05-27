@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: brunathettingar/bruna-is
+  branch: main
+
+# Localhost editing via File System Access API. Ignored in production.
+local_backend: true
+
+# Uploaded images land in src/img (the source dir) so eleventy-img picks
+# them up on the next build. public_folder is the URL they resolve to in
+# markup.
+media_folder: src/img
+public_folder: /img
+
+collections:
+  - name: greinar-is
+    label: Greinar (IS)
+    label_singular: Grein (IS)
+    folder: src/content/is/greinar
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Titill, name: title, widget: string }
+      - { label: Dagsetning, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+      - { label: Birta í forsíðukassa, name: featured, widget: boolean, default: false }
+      - { label: Forsíðumynd, name: image, widget: image, required: false }
+      - { label: Flokkur, name: category, widget: string, required: false }
+      - { label: Útdráttur, name: summary, widget: text, required: false }
+      - { label: Lestími (mín), name: readTimeMinutes, widget: number, value_type: int, min: 1, default: 5 }
+      - { label: Höfundur, name: author, widget: string, default: "Brunaþéttingar" }
+      - { label: Meginmál, name: body, widget: markdown }
+
+  - name: greinar-en
+    label: Articles (EN)
+    label_singular: Article (EN)
+    folder: src/content/en/greinar
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+      - { label: Featured on home, name: featured, widget: boolean, default: false }
+      - { label: Cover image, name: image, widget: image, required: false }
+      - { label: Category, name: category, widget: string, required: false }
+      - { label: Summary, name: summary, widget: text, required: false }
+      - { label: Read time (min), name: readTimeMinutes, widget: number, value_type: int, min: 1, default: 5 }
+      - { label: Author, name: author, widget: string, default: "Brunaþéttingar" }
+      - { label: Body, name: body, widget: markdown }
