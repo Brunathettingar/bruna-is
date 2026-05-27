@@ -52,3 +52,69 @@ collections:
       - { label: Read time (min), name: readTimeMinutes, widget: number, value_type: int, min: 1, default: 5 }
       - { label: Author, name: author, widget: string, default: "Brunaþéttingar" }
       - { label: Body, name: body, widget: markdown }
+
+  - name: thjonusta-is
+    label: Þjónusta (IS)
+    label_singular: Þjónustueining (IS)
+    folder: src/content/is/thjonusta
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Titill, name: title, widget: string }
+      - { label: Númer, name: number, widget: string, hint: "Tvær tölur með núlli að framan (t.d. 01)" }
+      - { label: Flokkur, name: category, widget: string, required: false }
+      - { label: Röðun, name: order, widget: number, value_type: int, min: 0, default: 0 }
+      - { label: Birta í forsíðu (pillar), name: featured, widget: boolean, default: false }
+      - label: Tákn
+        name: icon
+        widget: select
+        options:
+          - pillar-fireguard
+          - pillar-fireproofing
+          - pillar-pipe
+          - pillar-ventilation
+      - { label: Mynd, name: image, widget: image, required: false }
+      - { label: Mynd 'contain', name: imageContain, widget: boolean, default: false, required: false }
+      - { label: Útdráttur, name: summary, widget: text }
+      - { label: Innsýn (feitt), name: insightStrong, widget: string, required: false }
+      - { label: Innsýn (texti), name: insight, widget: text, required: false }
+      - label: Punktar
+        name: bullets
+        widget: list
+        field: { label: Punktur, name: bullet, widget: string }
+      - { label: Meginmál, name: body, widget: markdown }
+
+  - name: thjonusta-en
+    label: Services (EN)
+    label_singular: Service (EN)
+    folder: src/content/en/thjonusta
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Number, name: number, widget: string, hint: "Zero-padded (e.g. 01)" }
+      - { label: Category, name: category, widget: string, required: false }
+      - { label: Order, name: order, widget: number, value_type: int, min: 0, default: 0 }
+      - { label: Featured on home (pillar), name: featured, widget: boolean, default: false }
+      - label: Icon
+        name: icon
+        widget: select
+        options:
+          - pillar-fireguard
+          - pillar-fireproofing
+          - pillar-pipe
+          - pillar-ventilation
+      - { label: Image, name: image, widget: image, required: false }
+      - { label: Image contain, name: imageContain, widget: boolean, default: false, required: false }
+      - { label: Summary, name: summary, widget: text }
+      - { label: Insight (strong), name: insightStrong, widget: string, required: false }
+      - { label: Insight (body), name: insight, widget: text, required: false }
+      - label: Bullets
+        name: bullets
+        widget: list
+        field: { label: Bullet, name: bullet, widget: string }
+      - { label: Body, name: body, widget: markdown }
