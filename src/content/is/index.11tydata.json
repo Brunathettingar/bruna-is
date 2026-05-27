@@ -1,0 +1,163 @@
+{
+  "layout": "layouts/page.njk",
+  "title": "Lausnir",
+  "description": "Brunaþéttingar skipuleggur, stjórnar og framkvæmir brunaþéttingar og tæknieinangrun á íslenskum mannvirkjum — vottuð kerfi frá Roxtec, Hilti og Promat.",
+  "bodyClass": "home-page",
+  "eleventyNavigation": {
+    "key": "home-is",
+    "order": 1
+  },
+  "heroHeading": "Brunaþéttingar &amp;<br>tæknieinangrun.",
+  "statement": {
+    "heading": "Sérgrein okkar er <span class=\"statement__highlight\">tæknieinangrun og brunavarnir</span> mannvirkja — brunaþéttingar, brunavarnir, pípueinangrun og loftræsieinangrun.",
+    "lead": "Brunaþéttingar er sérhæft fyrirtæki í tæknieinangrun og brunaþéttingum sem þjónar verktökum, eigendum og rekstraraðilum mannvirkja um land allt. <strong>Við bjóðum ekki upp á brunatæknihönnun</strong> — það er sérgrein brunaverkfræðinga. Við mælum sérstaklega með <strong>Tensio Architects</strong>.",
+    "cta": {
+      "text": "Fáðu okkur í verkið.",
+      "caption": "Áætlað verðmat á nokkrum mínútum.",
+      "href": "/verdreiknir/"
+    }
+  },
+  "explainer": {
+    "left": {
+      "heading": "Hvað er tæknieinangrun?",
+      "paragraphs": [
+        "<strong>Tæknieinangrun</strong> er hugtak yfir einangrun tækjabúnaðar, byggingaþjónustu og burðarvirkis.",
+        "Þar sem venjuleg einangrun heldur hita í veggnum, heldur tæknieinangrun honum í rörinu, á burðarstálinu, í kringum stokkinn."
+      ],
+      "chips": [
+        {
+          "label": "Hitaeinangrun",
+          "style": "blue"
+        },
+        {
+          "label": "Hljóðvist",
+          "style": "blue"
+        },
+        {
+          "label": "Brunaeinangrun",
+          "style": null
+        },
+        {
+          "label": "Brunaþéttingar",
+          "style": null
+        }
+      ]
+    },
+    "right": {
+      "heading": "Okkar þjónusta",
+      "paragraphs": [
+        "Við bjóðum <strong>heildaræðar tæknieinangrun</strong> fyrir mannvirki.",
+        "Verkin skiptast í fjögur svið:"
+      ],
+      "chips": [
+        {
+          "label": "Brunaþéttingar",
+          "style": null
+        },
+        {
+          "label": "Brunavarnir",
+          "style": null
+        },
+        {
+          "label": "Pípueinangrun",
+          "style": null
+        },
+        {
+          "label": "Loftræsieinangrun",
+          "style": null
+        }
+      ],
+      "footer": "Við notum vottuð kerfi frá Roxtec, Hilti, Promat, 3M, <strong>Isogenopak</strong> og <strong>WrapTec</strong>."
+    }
+  },
+  "process": {
+    "label": "Heildarverkferli",
+    "heading": "Frá fyrstu teikningu til lokaúttektar — eitt teymi, eitt ferli.",
+    "steps": [
+      {
+        "num": "01",
+        "heading": "Brunatæknihönnun og ráðgjöf",
+        "body": "Við bjóðum ekki upp á brunatæknihönnun — sjáum þér fyrir réttu fagaðilana."
+      },
+      {
+        "num": "02",
+        "heading": "Skipulagning",
+        "body": "Efnisval, magntaka af teikningum og verkáætlun."
+      },
+      {
+        "num": "03",
+        "heading": "Verkefnastjórn og uppsetning",
+        "body": "Eitt teymi, einn verkefnastjóri, vottuð uppsetning."
+      },
+      {
+        "num": "04",
+        "heading": "Skráning og skýrslugjöf",
+        "body": "Ljósmyndaskrá, staðsetning á teikningu og vottunarnúmer fyrir hverja þéttingu."
+      }
+    ]
+  },
+  "leading": {
+    "label": "Skráning og skýrslugjöf",
+    "heading": "Skráning er <span class=\"leading__highlight\">hjartað í þjónustunni</span>.",
+    "paragraphs": [
+      "Hver þétting sem við setjum upp fær ljósmynd, staðsetningu á teikningu og vottunarnúmer. Lokaskýrslan er hluti af verkinu, ekki eftiráhugsun."
+    ],
+    "stats": [
+      {
+        "num": "14",
+        "lbl": "ár í brunaþéttingum"
+      },
+      {
+        "num": "42.000+",
+        "lbl": "vottaðar þéttingar"
+      },
+      {
+        "num": "600+",
+        "lbl": "skráðar skýrslur"
+      },
+      {
+        "num": "100%",
+        "lbl": "úttektir staðnar í fyrsta sinn"
+      }
+    ],
+    "badgeStrong": "Tvær gerðir af skýrslum",
+    "badgeBody": "Stutt afhendingaryfirlit og heildarrekjanleikaskýrsla — bæði fylgja hverju verkefni.",
+    "image": "/img/iceland_karahnjukar.jpg"
+  },
+  "sectorsCallout": {
+    "label": "Geirar",
+    "heading": "Þar sem áreiðanleiki er ekki valkostur.",
+    "items": [
+      {
+        "icon": "sector-commercial",
+        "heading": "Atvinnuhúsnæði",
+        "body": "Skrifstofur, verslun og þjónustuhúsnæði."
+      },
+      {
+        "icon": "sector-industry",
+        "heading": "Iðnaður og verksmiðjur",
+        "body": "Þungaiðnaður, virkjanir og vinnslustöðvar."
+      },
+      {
+        "icon": "sector-hospital",
+        "heading": "Sjúkrahús og opinberar byggingar",
+        "body": "Ströng skráning, engin truflun á rekstri."
+      },
+      {
+        "icon": "sector-energy",
+        "heading": "Orka og veitur",
+        "body": "Jarðvarmi, vatnsorka og dreifing."
+      }
+    ]
+  },
+  "customers": {
+    "label": "Samstarfsaðilar og framleiðendur"
+  },
+  "cta": {
+    "heading": "Tilbúin að hefja verkefnið? <span class=\"cta-band__highlight\">Hafðu samband.</span>",
+    "primaryHref": "/verdreiknir/",
+    "primaryLabel": "Fá verðmat",
+    "secondaryHref": "#contact",
+    "secondaryLabel": "Senda fyrirspurn"
+  }
+}
