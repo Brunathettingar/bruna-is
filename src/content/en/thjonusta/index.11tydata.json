@@ -1,0 +1,37 @@
+{
+  "layout": "layouts/page.njk",
+  "title": "Services",
+  "description": "Seven service lines — fire sealing, passive fire protection, pipe insulation, ventilation insulation, water tank insulation, pipe markings, and aluminium cladding.",
+  "permalink": "/en/thjonusta/",
+  "bodyClass": "services-page",
+  "eleventyNavigation": {
+    "key": "services-en",
+    "order": 2,
+    "parent": false
+  },
+  "heroImage": "/img/iceland_svartsengi.jpg",
+  "kicker": "From fire sealing and fireproofing to pipe insulation, aluminium cladding and pipe markings.",
+  "intro": {
+    "label": "All services",
+    "heading": "One company — seven specialties.",
+    "paragraphs": [
+      "Brunaþéttingar provides <strong>complete technical insulation</strong> for buildings across Iceland.",
+      "Our work spans fire protection, thermal and acoustic insulation, and finish work to industrial standards."
+    ]
+  },
+  "valueBand": {
+    "label": "Economics",
+    "heading": "Technical insulation that <span class=\"value-band__highlight\">pays for itself</span>.",
+    "paragraphs": [
+      "Most of our work pays back in months: heat loss eliminated, condensation prevented, fire compartments documented.",
+      "We provide an annual energy-saving calculation with every project."
+    ]
+  },
+  "cta": {
+    "heading": "Need an on-site survey? <span class=\"cta-band__highlight\">Get in touch.</span>",
+    "primaryHref": "/en/verdreiknir/",
+    "primaryLabel": "Get a quote",
+    "secondaryHref": "tel:+3548504405",
+    "secondaryLabel": "(+354) 850-4405"
+  }
+}

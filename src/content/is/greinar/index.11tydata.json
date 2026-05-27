@@ -1,0 +1,21 @@
+{
+  "layout": "layouts/page.njk",
+  "title": "Greinar",
+  "description": "Greinar um brunaþéttingar, brunavarnir og skráningar fyrir mannvirki á Íslandi.",
+  "permalink": "/greinar/",
+  "bodyClass": "articles-page",
+  "eleventyNavigation": {
+    "key": "articles-is",
+    "order": 6,
+    "parent": false
+  },
+  "heroImage": "/img/documentation.jpg",
+  "kicker": "Hagnýt ráð frá brunaþéttingateymi okkar.",
+  "cta": {
+    "heading": "Tilbúin að hefja verkefnið? <span class=\"cta-band__highlight\">Hafðu samband.</span>",
+    "primaryHref": "/verdreiknir/",
+    "primaryLabel": "Fá verðmat",
+    "secondaryHref": "#contact",
+    "secondaryLabel": "Senda fyrirspurn"
+  }
+}

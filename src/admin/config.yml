@@ -641,3 +641,257 @@ collections:
               - { label: Primary label, name: primaryLabel, widget: string }
               - { label: Secondary href, name: secondaryHref, widget: string }
               - { label: Secondary label, name: secondaryLabel, widget: string }
+
+      - name: greinar-index-is
+        label: Greinar – yfirlit (IS)
+        file: src/content/is/greinar/index.11tydata.json
+        format: json
+        fields:
+          - { label: Layout, name: layout, widget: hidden, default: "layouts/page.njk" }
+          - { label: Titill, name: title, widget: string }
+          - { label: Lýsing (meta), name: description, widget: text }
+          - { label: Permalink, name: permalink, widget: hidden, default: "/greinar/" }
+          - { label: Body class, name: bodyClass, widget: hidden, default: "articles-page" }
+          - label: 11ty navigation
+            name: eleventyNavigation
+            widget: object
+            fields:
+              - { label: Key, name: key, widget: hidden, default: "articles-is" }
+              - { label: Röðun, name: order, widget: number, value_type: int, default: 6 }
+              - { label: Parent, name: parent, widget: hidden, default: false }
+          - { label: Hero mynd, name: heroImage, widget: image }
+          - { label: Kicker, name: kicker, widget: text }
+          - label: CTA borði
+            name: cta
+            widget: object
+            fields:
+              - { label: Yfirskrift (HTML), name: heading, widget: string }
+              - { label: Aðal-slóð, name: primaryHref, widget: string }
+              - { label: Aðal-texti, name: primaryLabel, widget: string }
+              - { label: Auka-slóð, name: secondaryHref, widget: string }
+              - { label: Auka-texti, name: secondaryLabel, widget: string }
+
+      - name: greinar-index-en
+        label: Articles – listing (EN)
+        file: src/content/en/greinar/index.11tydata.json
+        format: json
+        fields:
+          - { label: Layout, name: layout, widget: hidden, default: "layouts/page.njk" }
+          - { label: Title, name: title, widget: string }
+          - { label: Description (meta), name: description, widget: text }
+          - { label: Permalink, name: permalink, widget: hidden, default: "/en/greinar/" }
+          - { label: Body class, name: bodyClass, widget: hidden, default: "articles-page" }
+          - label: 11ty navigation
+            name: eleventyNavigation
+            widget: object
+            fields:
+              - { label: Key, name: key, widget: hidden, default: "articles-en" }
+              - { label: Order, name: order, widget: number, value_type: int, default: 6 }
+              - { label: Parent, name: parent, widget: hidden, default: false }
+          - { label: Hero image, name: heroImage, widget: image }
+          - { label: Kicker, name: kicker, widget: text }
+          - label: CTA band
+            name: cta
+            widget: object
+            fields:
+              - { label: Heading (HTML), name: heading, widget: string }
+              - { label: Primary href, name: primaryHref, widget: string }
+              - { label: Primary label, name: primaryLabel, widget: string }
+              - { label: Secondary href, name: secondaryHref, widget: string }
+              - { label: Secondary label, name: secondaryLabel, widget: string }
+
+      - name: thjonusta-index-is
+        label: Þjónusta – yfirlit (IS)
+        file: src/content/is/thjonusta/index.11tydata.json
+        format: json
+        fields:
+          - { label: Layout, name: layout, widget: hidden, default: "layouts/page.njk" }
+          - { label: Titill, name: title, widget: string }
+          - { label: Lýsing (meta), name: description, widget: text }
+          - { label: Permalink, name: permalink, widget: hidden, default: "/thjonusta/" }
+          - { label: Body class, name: bodyClass, widget: hidden, default: "services-page" }
+          - label: 11ty navigation
+            name: eleventyNavigation
+            widget: object
+            fields:
+              - { label: Key, name: key, widget: hidden, default: "services-is" }
+              - { label: Röðun, name: order, widget: number, value_type: int, default: 2 }
+              - { label: Parent, name: parent, widget: hidden, default: false }
+          - { label: Hero mynd, name: heroImage, widget: image }
+          - { label: Kicker, name: kicker, widget: text }
+          - label: Inngangur (intro)
+            name: intro
+            widget: object
+            fields:
+              - { label: Merkimiði, name: label, widget: string }
+              - { label: Yfirskrift, name: heading, widget: string }
+              - label: Málsgreinar
+                name: paragraphs
+                widget: list
+                field: { label: Málsgrein, name: p, widget: text }
+          - label: Value-band
+            name: valueBand
+            widget: object
+            fields:
+              - { label: Merkimiði, name: label, widget: string }
+              - { label: Yfirskrift (HTML), name: heading, widget: string }
+              - label: Málsgreinar
+                name: paragraphs
+                widget: list
+                field: { label: Málsgrein, name: p, widget: text }
+          - label: CTA borði
+            name: cta
+            widget: object
+            fields:
+              - { label: Yfirskrift (HTML), name: heading, widget: string }
+              - { label: Aðal-slóð, name: primaryHref, widget: string }
+              - { label: Aðal-texti, name: primaryLabel, widget: string }
+              - { label: Auka-slóð, name: secondaryHref, widget: string }
+              - { label: Auka-texti, name: secondaryLabel, widget: string }
+
+      - name: thjonusta-index-en
+        label: Services – listing (EN)
+        file: src/content/en/thjonusta/index.11tydata.json
+        format: json
+        fields:
+          - { label: Layout, name: layout, widget: hidden, default: "layouts/page.njk" }
+          - { label: Title, name: title, widget: string }
+          - { label: Description (meta), name: description, widget: text }
+          - { label: Permalink, name: permalink, widget: hidden, default: "/en/thjonusta/" }
+          - { label: Body class, name: bodyClass, widget: hidden, default: "services-page" }
+          - label: 11ty navigation
+            name: eleventyNavigation
+            widget: object
+            fields:
+              - { label: Key, name: key, widget: hidden, default: "services-en" }
+              - { label: Order, name: order, widget: number, value_type: int, default: 2 }
+              - { label: Parent, name: parent, widget: hidden, default: false }
+          - { label: Hero image, name: heroImage, widget: image }
+          - { label: Kicker, name: kicker, widget: text }
+          - label: Intro
+            name: intro
+            widget: object
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - label: Paragraphs
+                name: paragraphs
+                widget: list
+                field: { label: Paragraph, name: p, widget: text }
+          - label: Value band
+            name: valueBand
+            widget: object
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: Heading (HTML), name: heading, widget: string }
+              - label: Paragraphs
+                name: paragraphs
+                widget: list
+                field: { label: Paragraph, name: p, widget: text }
+          - label: CTA band
+            name: cta
+            widget: object
+            fields:
+              - { label: Heading (HTML), name: heading, widget: string }
+              - { label: Primary href, name: primaryHref, widget: string }
+              - { label: Primary label, name: primaryLabel, widget: string }
+              - { label: Secondary href, name: secondaryHref, widget: string }
+              - { label: Secondary label, name: secondaryLabel, widget: string }
+
+      - name: geirar-index-is
+        label: Geirar – yfirlit (IS)
+        file: src/content/is/geirar/index.11tydata.json
+        format: json
+        fields:
+          - { label: Layout, name: layout, widget: hidden, default: "layouts/page.njk" }
+          - { label: Titill, name: title, widget: string }
+          - { label: Lýsing (meta), name: description, widget: text }
+          - { label: Permalink, name: permalink, widget: hidden, default: "/geirar/" }
+          - { label: Body class, name: bodyClass, widget: hidden, default: "sectors-page" }
+          - label: 11ty navigation
+            name: eleventyNavigation
+            widget: object
+            fields:
+              - { label: Key, name: key, widget: hidden, default: "sectors-is" }
+              - { label: Röðun, name: order, widget: number, value_type: int, default: 3 }
+              - { label: Parent, name: parent, widget: hidden, default: false }
+          - { label: Hero mynd, name: heroImage, widget: image }
+          - { label: Kicker, name: kicker, widget: text }
+          - label: Inngangur (intro)
+            name: intro
+            widget: object
+            fields:
+              - { label: Merkimiði, name: label, widget: string }
+              - { label: Yfirskrift, name: heading, widget: string }
+              - label: Málsgreinar
+                name: paragraphs
+                widget: list
+                field: { label: Málsgrein, name: p, widget: text }
+          - label: Value-band
+            name: valueBand
+            widget: object
+            fields:
+              - { label: Merkimiði, name: label, widget: string }
+              - { label: Yfirskrift (HTML), name: heading, widget: string }
+              - label: Málsgreinar
+                name: paragraphs
+                widget: list
+                field: { label: Málsgrein, name: p, widget: text }
+          - label: CTA borði
+            name: cta
+            widget: object
+            fields:
+              - { label: Yfirskrift (HTML), name: heading, widget: string }
+              - { label: Aðal-slóð, name: primaryHref, widget: string }
+              - { label: Aðal-texti, name: primaryLabel, widget: string }
+              - { label: Auka-slóð, name: secondaryHref, widget: string }
+              - { label: Auka-texti, name: secondaryLabel, widget: string }
+
+      - name: geirar-index-en
+        label: Sectors – listing (EN)
+        file: src/content/en/geirar/index.11tydata.json
+        format: json
+        fields:
+          - { label: Layout, name: layout, widget: hidden, default: "layouts/page.njk" }
+          - { label: Title, name: title, widget: string }
+          - { label: Description (meta), name: description, widget: text }
+          - { label: Permalink, name: permalink, widget: hidden, default: "/en/geirar/" }
+          - { label: Body class, name: bodyClass, widget: hidden, default: "sectors-page" }
+          - label: 11ty navigation
+            name: eleventyNavigation
+            widget: object
+            fields:
+              - { label: Key, name: key, widget: hidden, default: "sectors-en" }
+              - { label: Order, name: order, widget: number, value_type: int, default: 3 }
+              - { label: Parent, name: parent, widget: hidden, default: false }
+          - { label: Hero image, name: heroImage, widget: image }
+          - { label: Kicker, name: kicker, widget: text }
+          - label: Intro
+            name: intro
+            widget: object
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: Heading, name: heading, widget: string }
+              - label: Paragraphs
+                name: paragraphs
+                widget: list
+                field: { label: Paragraph, name: p, widget: text }
+          - label: Value band
+            name: valueBand
+            widget: object
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: Heading (HTML), name: heading, widget: string }
+              - label: Paragraphs
+                name: paragraphs
+                widget: list
+                field: { label: Paragraph, name: p, widget: text }
+          - label: CTA band
+            name: cta
+            widget: object
+            fields:
+              - { label: Heading (HTML), name: heading, widget: string }
+              - { label: Primary href, name: primaryHref, widget: string }
+              - { label: Primary label, name: primaryLabel, widget: string }
+              - { label: Secondary href, name: secondaryHref, widget: string }
+              - { label: Secondary label, name: secondaryLabel, widget: string }

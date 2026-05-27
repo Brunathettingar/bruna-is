@@ -1,27 +1,9 @@
----
-layout: layouts/page.njk
-title: "Greinar"
-description: "Greinar um brunaþéttingar, brunavarnir og skráningar fyrir mannvirki á Íslandi."
-permalink: /greinar/
-bodyClass: articles-page
-eleventyNavigation:
-  key: articles-is
-  order: 6
-  parent: false
-kicker: "Hagnýt ráð frá brunaþéttingateymi okkar."
-cta:
-  heading: "Tilbúin að hefja verkefnið? <span class=\"cta-band__highlight\">Hafðu samband.</span>"
-  primaryHref: "/verdreiknir/"
-  primaryLabel: "Fá verðmat"
-  secondaryHref: "#contact"
-  secondaryLabel: "Senda fyrirspurn"
----
 {%- set articles = collections['articles-' + lang] | sort(false, true, 'data.date') %}
 {%- set featured = collections['featuredArticle' + (lang == 'is' and 'Is' or 'En')] | first %}
 {%- set rest = articles | rejectattr('data.featured') %}
 
 <section class="page-hero">
-  <img class="page-hero__image" src="/img/documentation.jpg" alt="" width="1600" height="900">
+  <img class="page-hero__image" src="{{ heroImage }}" alt="" width="1600" height="900">
   <div class="page-hero__scrim"></div>
   <div class="container">
     <h1>{{ title }}</h1>
