@@ -118,3 +118,43 @@ collections:
         widget: list
         field: { label: Bullet, name: bullet, widget: string }
       - { label: Body, name: body, widget: markdown }
+
+  - name: geirar-is
+    label: Geirar (IS)
+    label_singular: Geiri (IS)
+    folder: src/content/is/geirar
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Titill, name: title, widget: string }
+      - { label: Númer, name: number, widget: string, hint: "Tvær tölur með núlli að framan" }
+      - { label: Röðun, name: order, widget: number, value_type: int, min: 0, default: 0 }
+      - { label: Mynd, name: image, widget: image, required: false }
+      - { label: Lýsing, name: description, widget: text, required: false }
+      - label: Stikuðir
+        name: tagLabels
+        widget: list
+        field: { label: Stikill, name: tag, widget: string }
+      - { label: Meginmál, name: body, widget: markdown }
+
+  - name: geirar-en
+    label: Sectors (EN)
+    label_singular: Sector (EN)
+    folder: src/content/en/geirar
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Number, name: number, widget: string, hint: "Zero-padded (e.g. 02)" }
+      - { label: Order, name: order, widget: number, value_type: int, min: 0, default: 0 }
+      - { label: Image, name: image, widget: image, required: false }
+      - { label: Description, name: description, widget: text, required: false }
+      - label: Tag labels
+        name: tagLabels
+        widget: list
+        field: { label: Tag, name: tag, widget: string }
+      - { label: Body, name: body, widget: markdown }
