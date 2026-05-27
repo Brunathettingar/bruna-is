@@ -1,0 +1,36 @@
+{
+  "layout": "layouts/page.njk",
+  "title": "Geirar",
+  "description": "Geirar sem Brunaþéttingar þjóna á Íslandi — orka, ál, sjávarútvegur, sjúkrahús, skólar, verslun, hótel, lyfjaiðnaður.",
+  "permalink": "/geirar/",
+  "bodyClass": "sectors-page",
+  "eleventyNavigation": {
+    "key": "sectors-is",
+    "order": 3,
+    "parent": false
+  },
+  "heroImage": "/img/iceland_alcoa_reydar.jpg",
+  "kicker": "Brunaþéttingar starfa í öllum helstu atvinnugreinum Íslands.",
+  "intro": {
+    "label": "Iðnaður á Íslandi",
+    "heading": "Frá Hellisheiðarvirkjun til sjúkrahúsa höfuðborgarsvæðisins.",
+    "paragraphs": [
+      "Við hönnum, setjum upp og skráum tæknieinangrun og brunaþéttingar fyrir verkefnin sem halda landinu gangandi.",
+      "Hver geiri hefur sínar kröfur — hita, hreinlæti, skráningu — og við stillum kerfið að hverju þeirra."
+    ]
+  },
+  "valueBand": {
+    "label": "Hver geiri hefur sínar kröfur",
+    "heading": "Eitt fyrirtæki — átta geirar — <span class=\"value-band__highlight\">sjö þjónustusvið</span>.",
+    "paragraphs": [
+      "Verkið okkar skalast frá einstöku gegnumtaki í byggingu upp í heildarstöðvun verksmiðju — sömu staðlar, sama skráning, sama teymi."
+    ]
+  },
+  "cta": {
+    "heading": "Tilbúin að hefja verkefnið? <span class=\"cta-band__highlight\">Hafðu samband.</span>",
+    "primaryHref": "/verdreiknir/",
+    "primaryLabel": "Fá verðmat",
+    "secondaryHref": "tel:+3548504405",
+    "secondaryLabel": "(+354) 850-4405"
+  }
+}

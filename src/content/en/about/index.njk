@@ -1,47 +1,9 @@
----
-layout: layouts/page.njk
-title: "About"
-description: "Specialist fire-sealing and technical-insulation contractor serving owners and builders across Iceland since 2011."
-bodyClass: about-page
-eleventyNavigation:
-  key: about-en
-  order: 5
-kicker: "A specialist fire-sealing and technical-insulation contractor serving Iceland since 2011."
-story:
-  label: "Our story"
-  heading: "Founded to <span class=\"story__highlight\">seal correctly</span> — and document it."
-  paragraphs:
-    - "Brunaþéttingar was founded in 2011 by four fire-sealing tradesmen who saw the gap between how the work was done and how it should be done."
-    - "Today the company runs ~150 projects a year, from single-flat retrofits to the largest hospitals in the country, with a small permanent crew and a documentation system that ties every seal back to a drawing and a certification."
-    - "We don't do fire engineering — we install what fire engineers spec, and we report it back end-to-end."
-  signatureQuote: "&quot;Every seal goes on a drawing. Every drawing goes in the report. That's the whole company.&quot;"
-  signatureAttribution: "— Founder, Brunaþéttingar ehf."
-  timelineHeading: "Timeline"
-philosophy:
-  label: "Our principles"
-  heading: "Six guiding lights for every project."
-  lead: "These are the rules we follow, regardless of project size or schedule pressure."
-team:
-  label: "The team"
-  heading: "A small team that knows every project."
-  extraTile:
-    initials: "+15"
-    name: "15 more staff"
-    role: "Fire-sealing installers"
-    bio: "Crews based across the country."
-cta:
-  heading: "Ready to start your project? <span class=\"cta-band__highlight\">Get in touch.</span>"
-  primaryHref: "/en/verdreiknir/"
-  primaryLabel: "Get a quote"
-  secondaryHref: "#contact"
-  secondaryLabel: "Send a message"
----
 {%- set milestones = collections['milestones-' + lang] | sort(false, false, 'data.year') %}
 {%- set principles = collections['principles-' + lang] | sort(false, false, 'data.order') %}
 {%- set teamMembers = collections['team-' + lang] | sort(false, false, 'data.order') %}
 
 <section class="page-hero">
-  <img class="page-hero__image" src="/img/iceland_hellisheidi.jpg" alt="" width="1600" height="900">
+  <img class="page-hero__image" src="{{ heroImage }}" alt="" width="1600" height="900">
   <div class="page-hero__scrim"></div>
   <div class="container">
     <h1>Um Brunaþéttingar.</h1>

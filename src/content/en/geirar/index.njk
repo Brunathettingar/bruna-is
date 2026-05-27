@@ -1,35 +1,9 @@
----
-layout: layouts/page.njk
-title: "Sectors"
-description: "Sectors Brunaþéttingar serves across Iceland — energy and utilities, aluminium, fishing, hospitals, schools, commercial, hotels, pharma."
-permalink: /en/geirar/
-bodyClass: sectors-page
-eleventyNavigation:
-  key: sectors-en
-  order: 3
-  parent: false
-kicker: "Brunaþéttingar works across every major Icelandic industry."
-intro:
-  label: "Industry in Iceland"
-  heading: "From the Hellisheiði power plant to the capital region's hospitals."
-  paragraphs:
-    - "We design, install and document technical insulation and fire sealing for the projects that keep the country running."
-    - "Each sector has its own demands — temperature, hygiene, documentation — and we tune the system to each."
-valueBand:
-  label: "Each sector has its requirements"
-  heading: "One company — eight sectors — <span class=\"value-band__highlight\">seven service lines</span>."
-  paragraphs:
-    - "Our work scales from a single building penetration to a full plant shutdown — same standards, same documentation, same crew."
-cta:
-  heading: "Ready to start your project? <span class=\"cta-band__highlight\">Get in touch.</span>"
-  primaryHref: "/en/verdreiknir/"
-  primaryLabel: "Get a quote"
-  secondaryHref: "tel:+3548504405"
-  secondaryLabel: "(+354) 850-4405"
----
+{# `sectors-<lang>` is a tag-based collection. Directory data tags every file
+   in src/content/<lang>/geirar/ with that tag, including this index.njk —
+   the `if s.url != page.url` guard inside the loop drops it. #}
 {%- set sectors = collections['sectors-' + lang] | sort(false, false, 'data.order') %}
 <section class="page-hero">
-  <img class="page-hero__image" src="/img/iceland_alcoa_reydar.jpg" alt="" width="1600" height="900">
+  <img class="page-hero__image" src="{{ heroImage }}" alt="" width="1600" height="900">
   <div class="page-hero__scrim"></div>
   <div class="container">
     <h1>{{ title }}</h1>
@@ -53,6 +27,7 @@ cta:
 
     <div class="sector-grid">
       {%- for s in sectors %}
+      {%- if s.url != page.url %}
       <a class="sector-card" href="{{ s.url }}">
         <div class="sector-card__media">
           <img class="sector-card__media-img" src="{{ s.data.image }}" alt="" width="1200" height="900">
@@ -68,6 +43,7 @@ cta:
           </ul>
         </div>
       </a>
+      {%- endif %}
       {%- endfor %}
     </div>
   </div>

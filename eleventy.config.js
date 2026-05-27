@@ -130,6 +130,12 @@ export default function (eleventyConfig) {
   // guards this contract.
   eleventyConfig.addPassthroughCopy("src/img");
 
+  // Sveltia CMS shell. Two static files — index.html and config.yml — must
+  // reach the build output byte-for-byte. They live at /admin/ and are
+  // publicly reachable on GitHub Pages; Sveltia enforces GitHub auth
+  // client-side.
+  eleventyConfig.addPassthroughCopy("src/admin");
+
   // Swup is loaded as a UMD global rather than via ESM/import because this
   // project has no bundler — the ESM build pulls `delegate-it` and
   // `path-to-regexp` from npm, which won't resolve in the browser. The UMD

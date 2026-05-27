@@ -1,27 +1,14 @@
----
-layout: layouts/page.njk
-title: "Greinar"
-description: "Greinar um brunaþéttingar, brunavarnir og skráningar fyrir mannvirki á Íslandi."
-permalink: /greinar/
-bodyClass: articles-page
-eleventyNavigation:
-  key: articles-is
-  order: 6
-  parent: false
-kicker: "Hagnýt ráð frá brunaþéttingateymi okkar."
-cta:
-  heading: "Tilbúin að hefja verkefnið? <span class=\"cta-band__highlight\">Hafðu samband.</span>"
-  primaryHref: "/verdreiknir/"
-  primaryLabel: "Fá verðmat"
-  secondaryHref: "#contact"
-  secondaryLabel: "Senda fyrirspurn"
----
+{# `articles-<lang>` is a tag-based collection. Directory data tags every file
+   in src/content/<lang>/greinar/ with that tag, including this index.njk —
+   so without an explicit url filter the listing renders a phantom card
+   pointing back at itself. The `if article.url != page.url` guard inside
+   each loop drops it. #}
 {%- set articles = collections['articles-' + lang] | sort(false, true, 'data.date') %}
 {%- set featured = collections['featuredArticle' + (lang == 'is' and 'Is' or 'En')] | first %}
 {%- set rest = articles | rejectattr('data.featured') %}
 
 <section class="page-hero">
-  <img class="page-hero__image" src="/img/documentation.jpg" alt="" width="1600" height="900">
+  <img class="page-hero__image" src="{{ heroImage }}" alt="" width="1600" height="900">
   <div class="page-hero__scrim"></div>
   <div class="container">
     <h1>{{ title }}</h1>
@@ -54,6 +41,7 @@ cta:
 
     <div class="article-grid">
       {%- for article in rest %}
+      {%- if article.url != page.url %}
       <a class="article-card" href="{{ article.url }}">
         <div class="article-card__media">
           <img class="article-card__media-img" src="{{ article.data.image }}" alt="" width="1200" height="900">
@@ -68,6 +56,7 @@ cta:
           </div>
         </div>
       </a>
+      {%- endif %}
       {%- endfor %}
     </div>
   </div>

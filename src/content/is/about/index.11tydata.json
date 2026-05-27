@@ -1,0 +1,46 @@
+{
+  "layout": "layouts/page.njk",
+  "title": "Um okkur",
+  "description": "Sérhæft brunaþéttinga- og tæknieinangrunarfyrirtæki sem þjónar verktökum og eigendum mannvirkja á Íslandi síðan 2011.",
+  "bodyClass": "about-page",
+  "eleventyNavigation": {
+    "key": "about-is",
+    "order": 5
+  },
+  "heroImage": "/img/iceland_hellisheidi.jpg",
+  "kicker": "Sérhæft brunaþéttinga- og tæknieinangrunarfyrirtæki á Íslandi síðan 2011.",
+  "story": {
+    "label": "Okkar saga",
+    "heading": "Stofnað til að <span class=\"story__highlight\">brunaþétta rétt</span> — og skrá það.",
+    "paragraphs": [
+      "Brunaþéttingar voru stofnaðar árið 2011 af fjórum brunaþéttingafagmönnum sem sáu bilið milli þess hvernig verkið var unnið og þess hvernig það ætti að vera unnið.",
+      "Í dag rekur fyrirtækið um 150 verkefni á ári, allt frá einstökum íbúðauppfærslum til stærstu sjúkrahúsa landsins, með litlu föstu teymi og skráningarkerfi sem tengir hverja þéttingu við teikningu og vottun.",
+      "Við vinnum ekki brunatæknihönnun — við setjum upp það sem brunaverkfræðingar tilgreina og skilum því skráðu frá enda til enda."
+    ],
+    "signatureQuote": "&quot;Hver þétting fer á teikningu. Hver teikning fer í skýrsluna. Þetta er allt fyrirtækið.&quot;",
+    "signatureAttribution": "— Stofnandi Brunaþéttinga ehf.",
+    "timelineHeading": "Tímalína"
+  },
+  "philosophy": {
+    "label": "Okkar stefna",
+    "heading": "Sex leiðarljós fyrir hvert verkefni.",
+    "lead": "Þetta eru reglurnar sem við fylgjum, óháð stærð verkefnis eða tímalínu."
+  },
+  "team": {
+    "label": "Teymið",
+    "heading": "Lítið teymi sem þekkir hvert verkefni.",
+    "extraTile": {
+      "initials": "+15",
+      "name": "15 starfsmenn til viðbótar",
+      "role": "Brunaþéttingamenn",
+      "bio": "Áhafnir um land allt."
+    }
+  },
+  "cta": {
+    "heading": "Tilbúin að hefja verkefnið? <span class=\"cta-band__highlight\">Hafðu samband.</span>",
+    "primaryHref": "/verdreiknir/",
+    "primaryLabel": "Fá verðmat",
+    "secondaryHref": "#contact",
+    "secondaryLabel": "Senda fyrirspurn"
+  }
+}
