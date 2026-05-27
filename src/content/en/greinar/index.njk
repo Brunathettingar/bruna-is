@@ -1,3 +1,8 @@
+{# `articles-<lang>` is a tag-based collection. Directory data tags every file
+   in src/content/<lang>/greinar/ with that tag, including this index.njk —
+   so without an explicit url filter the listing renders a phantom card
+   pointing back at itself. The `if article.url != page.url` guard inside
+   each loop drops it. #}
 {%- set articles = collections['articles-' + lang] | sort(false, true, 'data.date') %}
 {%- set featured = collections['featuredArticle' + (lang == 'is' and 'Is' or 'En')] | first %}
 {%- set rest = articles | rejectattr('data.featured') %}
@@ -36,6 +41,7 @@
 
     <div class="article-grid">
       {%- for article in rest %}
+      {%- if article.url != page.url %}
       <a class="article-card" href="{{ article.url }}">
         <div class="article-card__media">
           <img class="article-card__media-img" src="{{ article.data.image }}" alt="" width="1200" height="900">
@@ -50,6 +56,7 @@
           </div>
         </div>
       </a>
+      {%- endif %}
       {%- endfor %}
     </div>
   </div>

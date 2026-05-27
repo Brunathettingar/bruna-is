@@ -1,3 +1,6 @@
+{# `services-<lang>` is a tag-based collection. Directory data tags every file
+   in src/content/<lang>/thjonusta/ with that tag, including this index.njk —
+   the `if s.url != page.url` guard inside the loop drops it. #}
 {%- set services = collections['services-' + lang] | sort(false, false, 'data.order') %}
 <section class="page-hero">
   <img class="page-hero__image" src="{{ heroImage }}" alt="" width="1600" height="900">
@@ -23,6 +26,7 @@
     </div>
 
     {%- for s in services %}
+    {%- if s.url != page.url %}
     <article class="service-feature{% if loop.index0 % 2 == 1 %} service-feature--flipped{% endif %}">
       <div class="service-feature__media{% if s.data.imageContain %} service-feature__media--contain{% endif %}">
         <img class="service-feature__media-img" src="{{ s.data.image }}" alt="" width="1200" height="900">
@@ -42,6 +46,7 @@
         </ul>
       </div>
     </article>
+    {%- endif %}
     {%- endfor %}
   </div>
 </section>
