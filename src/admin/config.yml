@@ -271,6 +271,7 @@ collections:
             fields:
               - { label: Key, name: key, widget: hidden, default: "home-is" }
               - { label: Röðun, name: order, widget: number, value_type: int, default: 1 }
+          - { label: Hero mynd, name: heroImage, widget: image }
           - { label: Hero (HTML), name: heroHeading, widget: string }
           - label: Yfirlýsing
             name: statement
@@ -402,6 +403,7 @@ collections:
             fields:
               - { label: Key, name: key, widget: hidden, default: "home-en" }
               - { label: Order, name: order, widget: number, value_type: int, default: 1 }
+          - { label: Hero image, name: heroImage, widget: image }
           - { label: Hero (HTML), name: heroHeading, widget: string }
           - label: Statement
             name: statement
@@ -533,6 +535,7 @@ collections:
             fields:
               - { label: Key, name: key, widget: hidden, default: "about-is" }
               - { label: Röðun, name: order, widget: number, value_type: int, default: 5 }
+          - { label: Hero mynd, name: heroImage, widget: image }
           - { label: Kicker, name: kicker, widget: text }
           - label: Saga
             name: story
@@ -593,6 +596,7 @@ collections:
             fields:
               - { label: Key, name: key, widget: hidden, default: "about-en" }
               - { label: Order, name: order, widget: number, value_type: int, default: 5 }
+          - { label: Hero image, name: heroImage, widget: image }
           - { label: Kicker, name: kicker, widget: text }
           - label: Story
             name: story
