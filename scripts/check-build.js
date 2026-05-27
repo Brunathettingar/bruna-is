@@ -78,8 +78,13 @@ for (const f of htmlFiles) {
 }
 
 // 7. Parallel-slug contract
+// Skip the Sveltia /admin/ shell — single-locale by design, no EN sibling expected.
 const slugs = (loc) => new Set(htmlFiles
-  .filter((f) => f.startsWith(join(SITE, loc === "is" ? "" : "en")) && (loc === "is" ? !f.startsWith(join(SITE, "en")) : true))
+  .filter((f) =>
+    f.startsWith(join(SITE, loc === "is" ? "" : "en"))
+    && (loc === "is" ? !f.startsWith(join(SITE, "en")) : true)
+    && !f.startsWith(join(loc === "is" ? SITE : join(SITE, "en"), "admin/"))
+  )
   .map((f) => relative(loc === "is" ? SITE : join(SITE, "en"), f).replace(/index\.html$/, "")));
 const is = slugs("is"), en = slugs("en");
 for (const s of is) if (!en.has(s)) console.warn(`[check-build] WARN: IS slug ${s} has no EN parallel`);
